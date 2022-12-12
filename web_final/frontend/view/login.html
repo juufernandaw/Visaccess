@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/media-query.css">
+  <script defer src="../public/js/login.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <title>Login</title>
+</head>
+<body>
+  <script type="text/javascript" src="js/script.js"></script>
+  <main class="login">
+    <div class="login__container">
+      <h1 class="login__title">Entrar</h1>
+      <form action="/usuarios/logar" method="POST" class="login__form">
+        <input class="login__input" type="text" name="mail" placeholder="E-mail" />
+        <span class="login__input-border"></span>
+        <input class="login__input" type="password" name="senha" placeholder="Senha"/>
+        <span class="login__input-border"></span>
+        <button class="login__submit" type="submit">Entrar</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
