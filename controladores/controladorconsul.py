@@ -1,5 +1,8 @@
-class ControladorConsulGeral:
-    def __init__(self) -> None:
+from entidades.usuario import Usuario
+
+
+class ControladorConsul:
+    def __init__(self):
         pass
 
     # def verificar_login_senha(self, login, senha):

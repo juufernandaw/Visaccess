@@ -2,6 +2,9 @@ from excecoes.valueErrorException import ValueErrorException
 from excecoes.loginsenhaException import LoginSenhaException
 from excecoes.usuarioinexistenteException import UsuarioInexistenteException
 from telas.telasistema import TelaSistema
+from controladores.controladorconsul import ControladorConsul
+from controladores.controladoragente import ControladorAgente
+from controladores.controladorgerente import ControladorGerente
 
 
 class ControladorSistema:
