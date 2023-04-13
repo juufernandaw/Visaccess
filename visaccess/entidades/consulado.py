@@ -4,8 +4,8 @@ from entidades.agente import Agente
 
 class Consulado:
 
-    def __init__(self, nome):
-        self.__nome = nome
+    def __init__(self, sede: str):
+        self.__sede = sede
         self.__gerente = None
         self.__agentes = list
 
