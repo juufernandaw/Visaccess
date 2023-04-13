@@ -1,4 +1,3 @@
-from entidades.usuario import Usuario
 
 
 class ControladorGerente:
