@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class Usuario(ABC):
+    @abstractmethod
     def __init__(self, nome: str, senha: str, cpf: str):
         self.__nome = nome
         self.__cpf = cpf
