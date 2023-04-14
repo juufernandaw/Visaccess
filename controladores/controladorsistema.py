@@ -36,8 +36,8 @@ class ControladorSistema:
         try:
             login_com_sucesso = None
             lista_opcoes = {1: self.__controlador_consul.abre_tela_inicial,
-                            2: self.__controlador_gerente.abre_tela_inicial,
-                            3: self.__controlador_agente.abre_tela_inicial,
+                            #2: self.__controlador_gerente.abre_tela_inicial,
+                            #3: self.__controlador_agente.abre_tela_inicial,
                             0: self.encerrar_sistema}
             login = None
             senha = None
@@ -56,14 +56,14 @@ class ControladorSistema:
                             senha)
                         if self.__usuario_logado is None:
                             raise UsuarioInexistenteException
-                    elif opcao_escolhida == 2:
-                        login_com_sucesso = self.__controlador_gerente.verificar_login_senha(login, senha)
-                        if not login_com_sucesso:
-                            raise UsuarioInexistenteException
-                    elif opcao_escolhida == 3:
-                        login_com_sucesso = self.__controlador_agente.verificar_login_senha(login, senha)
-                        if not login_com_sucesso:
-                            raise UsuarioInexistenteException
+                    # elif opcao_escolhida == 2:
+                    #     login_com_sucesso = self.__controlador_gerente.verificar_login_senha(login, senha)
+                    #     if not login_com_sucesso:
+                    #         raise UsuarioInexistenteException
+                    # elif opcao_escolhida == 3:
+                    #     login_com_sucesso = self.__controlador_agente.verificar_login_senha(login, senha)
+                    #     if not login_com_sucesso:
+                    #         raise UsuarioInexistenteException
                     if login_com_sucesso is not None:
                         funcao_escolhida = lista_opcoes[opcao_escolhida]
                         return funcao_escolhida()
