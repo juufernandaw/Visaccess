@@ -12,6 +12,7 @@ class TelaSistema:
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado precisa chamar
         # self.init_components() aqui para o caso de chamar essa janela uma 2a vez. Não é possível reusar layouts de
         # janelas depois de fechadas.
+
     def logar(self, opcao_escolhida):
         if opcao_escolhida == 1:
             self.layout_logar_consul()
@@ -63,38 +64,38 @@ class TelaSistema:
     def layout_logar_consul(self):
         sg.ChangeLookAndFeel('DarkTeal4')
         layout = [
-                [sg.Text('Bem Vindo ao Visaccess, Cônsul!', font=("Helvica", 25))],
-                [sg.Text('Digite seu cpf:', font=("Helvica", 15))],
-                [sg.InputText('', key='login')],
-                [sg.Text('Digite sua senha:', font=("Helvica", 15))],
-                [sg.InputText('', key='senha')],
-                [sg.Button('Confirmar'), sg.Button('Retornar')]
-                ]
+            [sg.Text('Bem Vindo ao Visaccess, Cônsul!', font=("Helvica", 25))],
+            [sg.Text('Digite seu cpf:', font=("Helvica", 15))],
+            [sg.InputText('', key='login')],
+            [sg.Text('Digite sua senha:', font=("Helvica", 15))],
+            [sg.InputText('', key='senha')],
+            [sg.Button('Confirmar'), sg.Button('Retornar')]
+        ]
         self.__window = sg.Window('Login').Layout(layout)
 
     def layout_logar_gerente(self):
         sg.ChangeLookAndFeel('DarkTeal4')
         layout = [
-             [sg.Text('Bem Vindo ao Visaccess, Gerente!', font=("Helvica", 25))],
-             [sg.Text('Digite seu cpf:', font=("Helvica", 15))],
-             [sg.InputText('', key='login')],
-             [sg.Text('Digite sua senha:', font=("Helvica", 15))],
-             [sg.InputText('', key='senha')],
-             [sg.Button('Confirmar'), sg.Button('Retornar')]
-         ]
+            [sg.Text('Bem Vindo ao Visaccess, Gerente!', font=("Helvica", 25))],
+            [sg.Text('Digite seu cpf:', font=("Helvica", 15))],
+            [sg.InputText('', key='login')],
+            [sg.Text('Digite sua senha:', font=("Helvica", 15))],
+            [sg.InputText('', key='senha')],
+            [sg.Button('Confirmar'), sg.Button('Retornar')]
+        ]
         self.__window = sg.Window('Login').Layout(layout)
 
     def layout_logar_agente(self):
-            sg.ChangeLookAndFeel('DarkTeal4')
-            layout = [
-                [sg.Text('Bem Vindo ao Visaccess, Agente!', font=("Helvica", 25))],
-                [sg.Text('Digite seu cpf:', font=("Helvica", 15))],
-                [sg.InputText('', key='login')],
-                [sg.Text('Digite sua senha:', font=("Helvica", 15))],
-                [sg.InputText('', key='senha')],
-                [sg.Button('Confirmar'), sg.Button('Retornar')]
-            ]
-            self.__window = sg.Window('Login').Layout(layout)
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+            [sg.Text('Bem Vindo ao Visaccess, Agente!', font=("Helvica", 25))],
+            [sg.Text('Digite seu cpf:', font=("Helvica", 15))],
+            [sg.InputText('', key='login')],
+            [sg.Text('Digite sua senha:', font=("Helvica", 15))],
+            [sg.InputText('', key='senha')],
+            [sg.Button('Confirmar'), sg.Button('Retornar')]
+        ]
+        self.__window = sg.Window('Login').Layout(layout)
 
     def mostrar_msg(self, msg):
         sg.popup("", msg)
