@@ -2,7 +2,8 @@ from abc import ABC, abstractmethod
 
 
 class Usuario(ABC):
-    def __init__(self, nome:str, senha:str, cpf:str):
+    @abstractmethod
+    def __init__(self, nome: str, senha: str, cpf: str):
         self.__nome = nome
         self.__cpf = cpf
         self.__senha = senha
@@ -29,4 +30,4 @@ class Usuario(ABC):
 
     @cpf.setter
     def cpf(self, cpf: str):
-        self.__cpf = cpf    
+        self.__cpf = cpf
