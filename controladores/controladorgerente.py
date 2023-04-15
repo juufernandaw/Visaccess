@@ -32,8 +32,9 @@ class ControladorGerente:
             elif opcao == 5:
                 self.__tela_gerente.mostra_mensagem('Emitir Relatório de Solicitações Aprovadas')
             elif opcao == 0:
-                # AQUI TEM QUE VOLTAR PARA A 1 TELA!
-                exit()
+                # AQUI TEM QUE VOLTAR PARA A TELA LOGIN (ARRUMADO)!
+                self.__controlador_sistema.iniciar_tela_sistema()
+
 
     def abrir_tela_cadastro(self):
         while True:
