@@ -1,9 +1,10 @@
 from entidades.consulado import Consulado
+from persistencia.consuladoDAO import ConsuladoDAO
 
 
 class ControladorConsulado:
 
-    def __init__(self):
+    def __init__(self, consulado_dao: C):
         self.consulado_DAO = []
 
     def incluir_consulado(self, consulado: Consulado):
