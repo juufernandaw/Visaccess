@@ -75,7 +75,7 @@ class ControladorSistema:
         except UsuarioInexistenteException as e:
             self.__tela_sistema.mostrar_msg(e)
             self.iniciar_tela_sistema()
-        pass
+
 
     def encerrar_sistema(self):  # encerrar o sistema
         exit(0)
