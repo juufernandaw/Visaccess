@@ -4,7 +4,7 @@ from persistencia.consuladoDAO import ConsuladoDAO
 
 class ControladorConsulado:
 
-    def __init__(self, consulado_dao: C):
+    def __init__(self, consulado_dao: ConsuladoDAO):
         self.consulado_DAO = []
 
     def incluir_consulado(self, consulado: Consulado):
