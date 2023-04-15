@@ -36,7 +36,7 @@ class TelaConsul:
         if values['5']:
             opcao = 5
         if values['6']:
-            opcao = 5
+            opcao = 6
         if button == 'Voltar':
             opcao = 0
         self.close()
