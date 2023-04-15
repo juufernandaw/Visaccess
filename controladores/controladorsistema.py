@@ -50,21 +50,21 @@ class ControladorSistema:
                 else:
                     login, senha = self.__tela_sistema.logar(
                         opcao_escolhida)  # ele vai entrar no login: consul, gerente e agente
-                    if opcao_escolhida == 1:
+                    if opcao_escolhida == 1:#CONSUL
                         login_com_sucesso = self.__controlador_consul.verificar_login_senha(
                             login,
                             senha)
                         if not login_com_sucesso:
                             raise UsuarioInexistenteException
-                    elif opcao_escolhida == 2:
+                    elif opcao_escolhida == 2:#GERENTE
                         login_com_sucesso, self.__usuario_logado = self.__controlador_gerente.verificar_login_senha(login, senha)
                         if self.__usuario_logado is None:
                             raise UsuarioInexistenteException
-                    # elif opcao_escolhida == 3:
-                    #     login_com_sucesso, self.__usuario_logado = self.__controlador_agente.verificar_login_senha(login, senha)
-                    #     if self.__usuario_logado is None:
-                    #         raise UsuarioInexistenteException
-                    if login_com_sucesso is not None:
+                    elif opcao_escolhida == 3:
+                        login_com_sucesso, self.__usuario_logado = self.__controlador_agente.verificar_login_senha(login, senha)
+                        if self.__usuario_logado is None:
+                            raise UsuarioInexistenteException
+                    if login_com_sucesso == True:
                         funcao_escolhida = lista_opcoes[opcao_escolhida]
                         return funcao_escolhida()
         except ValueErrorException as e:
