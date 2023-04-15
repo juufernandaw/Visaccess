@@ -37,12 +37,12 @@ class ControladorSistema:
             login_com_sucesso = None
             lista_opcoes = {1: self.__controlador_consul.abre_tela_inicial,
                             2: self.__controlador_gerente.iniciar_tela_gerente,
-                            #3: self.__controlador_agente.abre_tela_inicial,
+                            3: self.__controlador_agente.abre_tela_inicial,
                             0: self.encerrar_sistema}
             login = None
             senha = None
             while True:
-                opcao_escolhida = self.__tela_sistema.mostrar_menu_inicial()
+                opcao_escolhida = self.__tela_sistema.mostrar_menu_inicial() #aqui tela inicial
                 if opcao_escolhida != 1 and opcao_escolhida != 2 and opcao_escolhida != 3 and opcao_escolhida != 0:
                     raise ValueErrorException(opcao_escolhida)
                 elif opcao_escolhida == 0:
