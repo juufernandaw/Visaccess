@@ -1,7 +1,6 @@
 from excecoes.loginsenhaException import LoginSenhaException
 from excecoes.valueErrorException import ValueErrorException
 from persistencia.gerente import GerenteDAO
-from telas.telasistema import TelaSistema
 from telas.telagerente import TelaGerente
 
 
@@ -9,7 +8,6 @@ class ControladorGerente:
     def __init__(self, controlador_sistema):
         self.__gerente_dao = GerenteDAO()
         self.__controlador_sistema = controlador_sistema
-        self.__tela_sistema = TelaSistema()
         self.__tela_gerente = TelaGerente()
 
 # ---------- TELA GERENTE ABAIXO -----------------------
