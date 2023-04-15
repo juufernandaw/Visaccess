@@ -40,7 +40,7 @@ class TelaSistema:
             [sg.Radio('Cônsul Geral', "RD13", key='1')],
             [sg.Radio('Gerente', "RD13", key='2')],
             [sg.Radio('Agente', "RD13", key='3')],
-            [sg.Button('Confirmar'), sg.Button('Voltar')]
+            [sg.Button('Confirmar'), sg.Button('Sair')]
         ]
         self.__window = sg.Window('Login').Layout(layout)
 
@@ -55,7 +55,7 @@ class TelaSistema:
         login = values['login']
         senha = values['senha']
         # cobre os casos de voltar, não clicar em nada e fechar janela, ou clicar cancelar
-        if button == 'Retornar':
+        if button == 'Voltar':
             self.close()
         self.close()
         return login, senha
@@ -68,7 +68,7 @@ class TelaSistema:
             [sg.InputText('', key='login')],
             [sg.Text('Digite sua senha:', font=("Helvica", 15))],
             [sg.InputText('', key='senha')],
-            [sg.Button('Confirmar'), sg.Button('Retornar')]
+            [sg.Button('Confirmar'), sg.Button('Voltar')]
         ]
         self.__window = sg.Window('Login').Layout(layout)
 
@@ -80,7 +80,7 @@ class TelaSistema:
             [sg.InputText('', key='login')],
             [sg.Text('Digite sua senha:', font=("Helvica", 15))],
             [sg.InputText('', key='senha')],
-            [sg.Button('Confirmar'), sg.Button('Retornar')]
+            [sg.Button('Confirmar'), sg.Button('Voltar')]
         ]
         self.__window = sg.Window('Login').Layout(layout)
 
@@ -92,7 +92,7 @@ class TelaSistema:
             [sg.InputText('', key='login')],
             [sg.Text('Digite sua senha:', font=("Helvica", 15))],
             [sg.InputText('', key='senha')],
-            [sg.Button('Confirmar'), sg.Button('Retornar')]
+            [sg.Button('Confirmar'), sg.Button('Voltar')]
         ]
         self.__window = sg.Window('Login').Layout(layout)
 

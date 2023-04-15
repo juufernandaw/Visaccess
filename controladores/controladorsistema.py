@@ -36,7 +36,7 @@ class ControladorSistema:
         try:
             login_com_sucesso = None
             lista_opcoes = {1: self.__controlador_consul.abre_tela_inicial,
-                            #2: self.__controlador_gerente.abre_tela_inicial,
+                            2: self.__controlador_gerente.iniciar_tela_gerente,
                             #3: self.__controlador_agente.abre_tela_inicial,
                             0: self.encerrar_sistema}
             login = None
@@ -51,18 +51,18 @@ class ControladorSistema:
                     login, senha = self.__tela_sistema.logar(
                         opcao_escolhida)  # ele vai entrar no login: consul, gerente e agente
                     if opcao_escolhida == 1:
-                        login_com_sucesso, self.__usuario_logado = self.__controlador_consul.verificar_login_senha(
+                        login_com_sucesso = self.__controlador_consul.verificar_login_senha(
                             login,
                             senha)
+                        if not login_com_sucesso:
+                            raise UsuarioInexistenteException
+                    elif opcao_escolhida == 2:
+                        login_com_sucesso, self.__usuario_logado = self.__controlador_gerente.verificar_login_senha(login, senha)
                         if self.__usuario_logado is None:
                             raise UsuarioInexistenteException
-                    # elif opcao_escolhida == 2:
-                    #     login_com_sucesso = self.__controlador_gerente.verificar_login_senha(login, senha)
-                    #     if not login_com_sucesso:
-                    #         raise UsuarioInexistenteException
                     # elif opcao_escolhida == 3:
-                    #     login_com_sucesso = self.__controlador_agente.verificar_login_senha(login, senha)
-                    #     if not login_com_sucesso:
+                    #     login_com_sucesso, self.__usuario_logado = self.__controlador_agente.verificar_login_senha(login, senha)
+                    #     if self.__usuario_logado is None:
                     #         raise UsuarioInexistenteException
                     if login_com_sucesso is not None:
                         funcao_escolhida = lista_opcoes[opcao_escolhida]
