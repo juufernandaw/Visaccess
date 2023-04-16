@@ -89,13 +89,33 @@ class TelaGerente:
         ]
         self.__window = interface_sistema.Window('Adicionar Agente').Layout(layout)
 
+        # tela para excluir/modificar agente:
+    def componentes_tela_excluir_modificar_agentes(self, tipo):
+        layout = [
+            [interface_sistema.Text('CPF'), interface_sistema.InputText('')],
+            [interface_sistema.Button('Confirmar'), interface_sistema.Button('Voltar')]
+        ]
+        self.__window = interface_sistema.Window(tipo).Layout(layout)
+    
+    # lógica para adicionar/excluir/modificar agentes
+    def logica_tela_agentes(self):
+        button, data = self.__window.Read()
+
+        self.close()
+
+        if button in (None, 'Voltar'):
+            return None
+
+        return data
+    
     def tela_adicionar_agentes(self):
         self.componentes_tela_adicionar_agentes()
-        button, name = self.__window.Read()
+        return self.logica_tela_agentes()
 
-        opcao = 1
-        if button in (None, 'Voltar'):
-            opcao = 0
-        
-        self.close()
-        return opcao, name
+    def tela_excluir_agentes(self):
+        self.componentes_tela_excluir_modificar_agentes('Excluir Agente')
+        return self.logica_tela_agentes()
+
+    def tela_modificar_agentes(self):
+        self.componentes_tela_excluir_modificar_agentes('Modificar Agente')
+        return self.logica_tela_agentes()

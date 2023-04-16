@@ -40,25 +40,42 @@ class ControladorGerente:
             if opcao == 1:
                 self.adicionar_agente()
             elif opcao == 2:
-                self.__tela_gerente.mostra_mensagem('Excluir Agente')
+                self.excluir_agente()
             elif opcao == 3:
                 self.__tela_gerente.mostra_mensagem('Listar Agentes')
             elif opcao == 4:
-                self.__tela_gerente.mostra_mensagem('Modificar dados de Agente')
+                self.modificar_agente()
             elif opcao == 0:
                 # AQUI TEM QUE VOLTAR PARA A TELA INICIAL DO GERENTE!
                 self.iniciar_tela_gerente()
 
     def adicionar_agente(self):
-        opcao, name = self.__tela_gerente.tela_adicionar_agentes()
-        if opcao == 1:
-            print(name)
-            self.abrir_tela_cadastro()
-            # *pega os dados, testa e joga no BD.
-        elif opcao == 2:
-            self.__tela_gerente.close()
-            self.abrir_tela_cadastro()
-            # só volta e da uma mensagem de erro.
+        data = self.__tela_gerente.tela_adicionar_agentes()
+        print(data)
+        # *pega os dados, testa e joga no BD (fazer ainda).
+        if data != None:
+            # aqui tem que mandar o objeto 'data' para o BD.
+            pass
+    
+    def excluir_agente(self):
+        data = self.__tela_gerente.tela_excluir_agentes()
+        print(data)
+
+        if data != None:
+            # aqui tem que comparar o objeto 'data', que contém apenas um cpf, com os cpf do BD.
+            # caso há algum igual, exclui.
+            # caso contrário, pop-up de erro.
+            pass
+
+    def modificar_agente(self):
+        data = self.__tela_gerente.tela_modificar_agentes()
+        print(data)
+
+        if data != None:
+            # aqui tem que comparar o objeto 'data', que contém apenas um cpf, com os cpf do BD.
+            # caso há algum igual, exclui.
+            # caso contrário, pop-up de erro.
+            pass
 
 #--------------------- TELA GERENTE ACIMA -----------------------
 
