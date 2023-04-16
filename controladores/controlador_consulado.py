@@ -42,10 +42,21 @@ class ControladorConsulado:
                 return self.abre_tela_consulados()
 
     def alterar_consulado(self):
-        pass
+        consulado = self.__consulado_tela.componentes_tela_alterar_qual_consulado()
+        consulado_novo = self.__consulado_tela.componentes_tela_alterar_consulado(consulado)
+        # consulado.sede = consulado["sede"]
+        if consulado_novo is not None:
+            self.__consulado_tela.mostrar_msg("Consulado alterado com sucesso!")
+        self.__consulado_DAO.update_consulado(velha_sede=consulado.sede, nova_sede=consulado_novo["sede"])
+        return self.abre_tela_consulados()
 
     def excluir_consulado(self):
-        pass
+        consulado = self.__consulado_tela.componentes_tela_excluir_consulado()
+        # consulado.sede = consulado["sede"]
+        # if consulado is not None:
+        #     self.__consulado_tela.mostrar_msg("Consulado alterado com sucesso!")
+        self.__consulado_DAO.delete_consulado(sede=consulado.sede)
+        return self.abre_tela_consulados()
 
     def listar_consulados(self):
         pass

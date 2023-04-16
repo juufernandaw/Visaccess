@@ -53,10 +53,10 @@ class TelaConsulado:
         ]
         self.__window = tela_consulado.Window('Adicionar Consulado').Layout(layout)
 
-    def componentes_tela_alterar_consulado(self):
+    def componentes_tela_alterar_consulado(self, consulado):
         layout = [
             [tela_consulado.Text('Alterar consulado', font=("Helvica", 25))],
-            [tela_consulado.Text('Sede'), tela_consulado.InputText('', key="sede")],
+            [tela_consulado.Text('Sede'), tela_consulado.InputText(consulado.sede, key="sede")],
             [tela_consulado.Button('OK'), tela_consulado.Button('Voltar')]
         ]
         self.__window = tela_consulado.Window('Alterar Consulado').Layout(layout)

@@ -1,4 +1,5 @@
 import sqlite3
+from Visaccess.entidades.consulado import Consulado
 
 
 class ConsuladoDAO:
@@ -17,17 +18,19 @@ class ConsuladoDAO:
 
     def get_all_consulados(self):
         self.cursor.execute("SELECT * FROM consulado")
-        row = self.cursor.fetchone()
-        if row is None:
-            return None
-        return {'id': row[0], 'sede': row[1]}
+        rows = self.cursor.fetchall()
+        consulados = []
+        for row in rows:
+            consulado = Consulado(sede=row[1])
+            consulados.append(consulado)
+        return consulados
 
-    def get_consulado_by_sede(self, sede):
-        self.cursor.execute("SELECT * FROM consulado WHERE sede=?", sede)
-        row = self.cursor.fetchone()
-        if row is None:
-            return None
-        return {'id': row[0], 'sede': row[1]}
+    # def get_consulado_by_sede(self, sede):
+    #     self.cursor.execute("SELECT * FROM consulado WHERE sede=?", sede)
+    #     row = self.cursor.fetchone()
+    #     if row is None:
+    #         return None
+    #     return {'id': row[0], 'sede': row[1]}
 
     def delete_consulado(self, sede):
         self.cursor.execute("DELETE FROM consulado WHERE sede=?", sede)
