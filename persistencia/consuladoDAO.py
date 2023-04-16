@@ -1,5 +1,5 @@
 import sqlite3
-from Visaccess.entidades.consulado import Consulado
+from entidades.consulado import Consulado
 
 
 class ConsuladoDAO:
