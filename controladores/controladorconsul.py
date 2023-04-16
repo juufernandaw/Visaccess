@@ -18,13 +18,13 @@ class ControladorConsul:
 
     def abre_tela_inicial(self):  # abre a tela consul pos login da tela do sistema
         try:
-            mexer_consul_opcoes = {1: self.__controlador_sistema.iniciar_tela_sistema(),
-                                   2: self.__controlador_sistema.iniciar_tela_sistema(),
-                                   3: self.__controlador_sistema.iniciar_tela_sistema(),
-                                   4: self.__controlador_sistema.iniciar_tela_sistema(),
-                                   5: self.__controlador_sistema.iniciar_tela_sistema(),
-                                   6: self.__controlador_sistema.iniciar_tela_sistema(),
-                                   0: self.__controlador_sistema.iniciar_tela_sistema()
+            mexer_consul_opcoes = {1: self.__controlador_sistema.iniciar_tela_sistema,
+                                   2: self.__controlador_sistema.iniciar_tela_sistema,
+                                   3: self.__controlador_sistema.iniciar_tela_sistema,
+                                   4: self.__controlador_sistema.iniciar_tela_sistema,
+                                   5: self.__controlador_sistema.iniciar_tela_sistema,
+                                   6: self.__controlador_sistema.iniciar_tela_sistema,
+                                   0: self.__controlador_sistema.iniciar_tela_sistema
                                    }
             while True:
                 opcao_escolhida = self.__tela_consul.tela_consul_inicial()

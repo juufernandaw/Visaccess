@@ -6,6 +6,9 @@ class TelaConsul:
         self.__window = None
         self.layout_tela_aba_consul()
 
+    def close(self):
+        self.__window.Close()
+
     def layout_tela_aba_consul(self):
         sg.ChangeLookAndFeel('DarkTeal4')
         layout = [
@@ -36,8 +39,9 @@ class TelaConsul:
         if values['5']:
             opcao = 5
         if values['6']:
-            opcao = 5
+            opcao = 6
         if button == 'Voltar':
             opcao = 0
         self.close()
         return opcao
+
