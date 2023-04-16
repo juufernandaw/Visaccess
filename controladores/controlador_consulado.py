@@ -1,7 +1,7 @@
-from Visaccess.excecoes.valueErrorException import ValueErrorException
-from Visaccess.persistencia.consuladoDAO import ConsuladoDAO
-from Visaccess.entidades.consulado import Consulado
-from Visaccess.telas.tela_consulado import TelaConsulado
+from excecoes.valueErrorException import ValueErrorException
+from persistencia.consuladoDAO import ConsuladoDAO
+from entidades.consulado import Consulado
+from telas.tela_consulado import TelaConsulado
 
 
 class ControladorConsulado:
