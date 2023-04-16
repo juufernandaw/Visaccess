@@ -18,7 +18,7 @@ class ControladorConsul:
 
     def abre_tela_inicial(self):  # abre a tela consul pos login da tela do sistema
         try:
-            mexer_consul_opcoes = {1: self.__controlador_sistema.iniciar_tela_sistema,
+            mexer_consul_opcoes = {1: self.__controlador_sistema.controlador_consulado.abre_tela_consulados,
                                    2: self.__controlador_sistema.iniciar_tela_sistema,
                                    3: self.__controlador_sistema.iniciar_tela_sistema,
                                    4: self.__controlador_sistema.iniciar_tela_sistema,
