@@ -78,8 +78,12 @@ class TelaConsulado:
         self.__window = tela_consulado.Window('Escolher qual Consulado alterar').Layout(layout)
 
     def componentes_tela_listar_consulados(self, lista_consulados):
-        # elaborar menu dropdown com lista de consulados
-        pass
+        layout = [
+            [tela_consulado.Text('Lista de Consulados', font=("Helvica", 25))],
+            [tela_consulado.Listbox(values=lista_consulados, select_mode='extended', size=(30, 6))],
+            [tela_consulado.Button('Voltar')]
+        ]
+        self.__window = tela_consulado.Window('Lista de Consulados').Layout(layout)
 
     def pegar_dados_consulado(self):
         button, values = self.__window.Read()
