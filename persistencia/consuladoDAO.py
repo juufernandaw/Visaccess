@@ -21,7 +21,7 @@ class ConsuladoDAO:
         rows = self.cursor.fetchall()
         consulados = []
         for row in rows:
-            consulado = Consulado(sede=row[1])
+            consulado = Consulado(sede=row[0])
             consulados.append(consulado.sede)
         return consulados
 
