@@ -62,8 +62,6 @@ class ControladorAgente:
                 opcao_escolhida = self.__tela_agente.tela_agente_inicial()
                 if opcao_escolhida != 1 and opcao_escolhida != 2 and opcao_escolhida != 0:
                     raise ValueErrorException
-                # if opcao_escolhida == 1:
-                #     return self.voltar_tela_sistema()
                 else:
                     funcao_escolhida = mexer_agente_opcoes[opcao_escolhida]
                     return funcao_escolhida()
