@@ -47,7 +47,7 @@ class TelaGerente:
 
         return opcao
     
-    # CADASTRO DE GERENTE
+    # --------------- CADASTRO DE GERENTE --------------- 
     def novo_gerente(self):
         interface_gerente.ChangeLookAndFeel('DarkTeal4')
         layout = [
@@ -77,7 +77,7 @@ class TelaGerente:
             [interface_gerente.Text('CPF'), interface_gerente.Input(key='cpf')],
             [interface_gerente.Button('OK'), interface_gerente.Button('Voltar')]
         ]
-        self.__janela = interface_gerente.Window('Consul').Layout(layout)
+        self.__janela = interface_gerente.Window('Excluir Gerente').Layout(layout)
         while True:
             evento, valores = self.__janela.read()
             if evento == interface_gerente.WIN_CLOSED():
@@ -104,13 +104,32 @@ class TelaGerente:
 
         self.close()
 
-    def alterar_gerente(self, gerente):
+    def escolher_gerente_para_alterar(self):
+        layout = [
+            [interface_gerente.Text('Modificar dados do Gerente', font=("Helvica", 25))],
+            [interface_gerente.Text('CPF'), interface_gerente.InputText('', key="cpf")],
+            [interface_gerente.Button('OK'), interface_gerente.Button('Voltar')]
+        ]
+        self.__janela = interface_gerente.Window('Alterar Gerente').Layout(layout)
+
+        while True:
+            evento, valores = self.__janela.read()
+            if evento == interface_gerente.WIN_CLOSED():
+                break
+            if evento == 'Voltar':
+                self.tela_cadastrar_gerente()
+            if evento == "OK":
+                return valores
+        
+        self.close()
+
+    def alterar_agente(self, gerente):
         layout = [
             [interface_gerente.Text('Modificar dados do Gerente', font=("Helvica", 25))],
             [interface_gerente.Text('CPF'), interface_gerente.InputText(gerente, key="cpf")],
             [interface_gerente.Button('OK'), interface_gerente.Button('Voltar')]
         ]
-        self.__janela = interface_gerente.Window('Alterar Consulado').Layout(layout)
+        self.__janela = interface_gerente.Window('Alterar Gerente').Layout(layout)
 
         while True:
             evento, valores = self.__janela.read()
@@ -135,37 +154,37 @@ class TelaGerente:
         ]
         self.__janela = interface_gerente.Window('Consul').Layout(layout)
 
-        while True:
-            eventos, valores = self.__janela.read()
-            if eventos == interface_gerente.WIN_CLOSED():
-                break
-            if eventos == 'Voltar':
-                self.layout_tela_aba_consul(self)
-            if eventos == "OK":
-                if valores['novo']:
-                    self.novo_gerente(self)
-                if valores['excluir']:
-                    self.excluir_gerente(self)
-                if valores['listar']:
-                    self.listar_gerentes(self)
-                if valores['alterar']:
-                    self.alterar_gerente(self)
+        # while True:
+        #     eventos, valores = self.__janela.read()
+        #     if eventos == interface_gerente.WIN_CLOSED():
+        #         break
+        #     if eventos == 'Voltar':
+        #         self.layout_tela_aba_consul(self)
+        #     if eventos == "OK":
+        #         if valores['novo']:
+        #             self.novo_gerente(self)
+        #         if valores['excluir']:
+        #             self.excluir_gerente(self)
+        #         if valores['listar']:
+        #             self.listar_gerentes(self)
+        #         if valores['alterar']:
+        #             self.alterar_gerente(self)
         
-        self.close()
+        # self.close()
 
     def tela_cadastro_gerentes(self):
         self.tela_cadastrar_gerente()
-        button, values = self.__janela.Read()
+        evento, valores = self.__janela.Read()
         opcao = 0
-        if values['novo']:
-            opcao = 'novo'
-        if values['excluir']:
-            opcao = 'excluir'
-        if values['listar']:
-            opcao = 'listar'
-        if values['alterar']:
-            opcao = 'alterar'
-        if button in (None, 'Voltar'):
+        if valores['1']:
+            opcao = 1
+        if valores['2']:
+            opcao = 2
+        if valores['3']:
+            opcao = 3
+        if valores['4']:
+            opcao = 4
+        if evento in (None, 'Voltar'):
             opcao = 0
         
         self.close()

@@ -5,6 +5,7 @@ from persistencia.gerenteDAO import GerenteDAO
 from persistencia.agenteDAO import AgenteDAO
 from telas.telagerente import TelaGerente
 from entidades.agente import Agente
+from entidades.gerente import Gerente
 import sqlite3
 
 class ControladorGerente:
@@ -105,33 +106,70 @@ class ControladorGerente:
 #--------------------- CADASTRO DE GERENTE -----------------------
 
     def abrir_tela_cadastro_gerente(self):
-        while True:
-            opcao = self.__tela_gerente.tela_cadastrar_gerente(self)
-            if opcao == 'novo':
-                self.adicionar_gerente()
-            elif opcao == 'excluir':
-                self.excluir_gerente()
-            elif opcao == 'listar':
-                self.listar_gerentes()
-            elif opcao == 'alterar':
-                self.modificar_gerente()
-            elif opcao == 0:
-                self.iniciar_tela_cadastro_gerente()
-
-    # def adicionar_gerente(self):
-    #     data = self.__tela_gerente.novo_gerente()
-
-    #     if data != None:
-    #         for gerentes in self.__gerente_DAO.buscar_todos_agentes():
-    #             if data[1] == gerentes['cpf']:
-    #                 self.__tela_gerente.mostra_mensagem('Este agente já está cadastrado!')
-    #                 return self.abrir_tela_cadastro()
-    #         else:
-    #             agente = Agente(data[0], data[1], data[2])
-    #             self.__agente_DAO.cadastrar_agente(data[1], data[0], data[2], data[3])
-    #             self.__tela_gerente.mostra_mensagem('Agente cadastrado!')
+        try:
+            # usuario = self.__controlador_sistema.usuario_logado
+            mexer_gerente_opcoes = {1: self.incluir_gerente,
+                                    2: self.excluir_gerente,
+                                    3: self.listar_gerentes,
+                                    4: self.alterar_gerente,
+                                    0: self.abre_tela_gerentes}
+            while True:
+                opcao_escolhida = self.__tela_gerente.tela_cadastro_gerentes()
+                if opcao_escolhida != 1 and opcao_escolhida != 2 and opcao_escolhida != 3 and opcao_escolhida != 4 and opcao_escolhida != 0:
+                    raise ValueErrorException
+                funcao_escolhida = mexer_gerente_opcoes[opcao_escolhida]
+                return funcao_escolhida()
+        except ValueErrorException as erro:
+            self.__tela_gerente.mostra_mensagem(erro)
+            self.abrir_tela_cadastro_gerente()
 
 
+    def incluir_gerente(self):
+        evento, valores = self.__tela_gerente.novo_gerente()
+        for gerente in self.__gerente_dao.lista_gerentes():
+            if valores['cpf'] == gerente:
+                self.__tela_gerente.mostra_mensagem("Este gerente já consta no sistema!")
+                return self.incluir_gerente()
+        
+        if valores['cpf'] == "":
+            self.__tela_gerente.mostra_mensagem("O cpf não pode ser vazio!")
+            return self.incluir_gerente()
+        gerente = Gerente(valores['nome'], valores['senha'], valores['cpf'], valores['consulado'])
+        if gerente is not None:
+            self.__gerente_dao.cria_consulado(gerente)
+            self.__tela_gerente.mostra_mensagem("Consulado cadastrado com sucesso!")
+            return self.abrir_tela_cadastro_gerente()
+
+    def alterar_gerente(self):
+        evento, valores = self.__tela_gerente.escolher_gerente_para_alterar()
+        for gerente in self.__gerente_dao.lista_gerentes():
+            if valores["cpf"] == gerente:
+                evento, gerente_novo = self.__tela_gerente.alterar_agente(gerente)
+                if gerente_novo is not None:
+                    if gerente_novo["cpf"] == "":
+                        self.__tela_gerente.mostra_mensagem("O nome da sede não pode ser vazio!")
+                        return self.alterar_gerente()
+                    self.__tela_gerente.mostra_mensagem("Gerente alterado com sucesso!")
+                    self.__gerente_dao.atualizar_gerente()
+                    return self.abrir_tela_cadastro_gerente()
+            else:
+                self.__tela_gerente.mostra_mensagem("Este gerente NÃO consta no sistema!")
+                return self.abrir_tela_cadastro_gerente()
+
+    def excluir_gerente(self):
+        evento, gerente_excluir = self.__tela_gerente.excluir_gerente()
+        for gerente in self.__gerente_dao.lista_gerentes():
+            if gerente_excluir["cpf"] == gerente:
+                self.__gerente_dao.remover_gerente(gerente)
+                self.__tela_gerente.mostra_mensagem("Gerente excluído com sucesso!")
+                return self.abrir_tela_cadastro_gerente()
+            else:
+                self.__tela_gerente.mostra_mensagem("Este gerente NÃO consta no sistema!")
+                return self.abrir_tela_cadastro_gerente()
+
+    def listar_gerente(self):
+        gerentes = self.__gerente_dao.lista_gerentes()
+        evento, values = self.__tela_gerente.listar_gerentes(gerentes)
 
 
 

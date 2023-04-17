@@ -14,13 +14,13 @@ class GerenteDAO():
         );
         """)
 
-    def add(self, gerente: Gerente): # adiciona novos dados na tabela
+    def cria_consulado(self, gerente: Gerente): # adiciona novos dados na tabela
         self.cursor.execute(f"INSERT INTO gerente VALUES ({gerente.cpf, gerente.nome, gerente.senha, gerente.consulado})")
         self.cursor.commit()
         print(self.cursor.fetchall())
         self.banco.close()
 
-    def get(self): # lista os dados da tabela
+    def lista_gerentes(self): # lista os dados da tabela
         self.cursor.execute("SELECT * FROM gerente")
         rows = self.cursor.fetchall()
         gerentes = []
@@ -29,14 +29,6 @@ class GerenteDAO():
             gerentes.append(gerente.sede)
         print(rows)
         return gerentes
-
-    def remove(self, gerente: Gerente): # remove dados da tabela
-        try:
-            self.cursor.execute(f"DELETE from gerente WHERE cpf = {gerente.cpf}")
-            self.banco.close()
-            print("Dados excluídos com sucesso")
-        except sqlite3.Error as erro:
-            print("Erro ao excluir: ", erro)
 
     def buscar_gerente_por_cpf(self, cpf):
         self.cursor.execute(f"SELECT * FROM gerente WHERE cpf = {cpf}")
@@ -47,3 +39,15 @@ class GerenteDAO():
             return gerente
         else:
             return None
+        
+    def atualizar_gerente(cpf):
+        pass
+        
+    def remover_gerente(self, gerente: Gerente): # remove dados da tabela
+        try:
+            self.cursor.execute(f"DELETE from gerente WHERE cpf = {gerente.cpf}")
+            self.banco.close()
+            print("Dados excluídos com sucesso")
+        except sqlite3.Error as erro:
+            print("Erro ao excluir: ", erro)
+
