@@ -30,6 +30,10 @@ class ControladorSistema:
         return self.__controlador_gerente
 
     @property
+    def controlador_consulado(self):
+        return self.__controlador_consulado
+
+    @property
     def controlador_agente(self):
         return self.__controlador_agente
 

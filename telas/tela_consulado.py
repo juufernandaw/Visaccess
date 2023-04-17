@@ -86,6 +86,7 @@ class TelaConsulado:
         self.__window = tela_consulado.Window('Lista de Consulados').Layout(layout)
 
     def pegar_dados_consulado(self):
+        self.componentes_tela_adicionar_consulado()
         button, values = self.__window.Read()
         sede = values['sede']
         self.close()

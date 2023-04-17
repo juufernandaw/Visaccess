@@ -7,7 +7,7 @@ class ConsuladoDAO:
     def __init__(self):
         self.conn = sqlite3.connect("visaccess.db")
         self.cursor = self.conn.cursor()
-        self.cursor.execute('CREATE TABLE IF NOT EXISTS consulado (id INTEGER AUTOINCREMENT, sede TEXT PRIMARY KEY)')
+        self.cursor.execute('CREATE TABLE IF NOT EXISTS consulado (id INTEGER, sede TEXT PRIMARY KEY NOT NULL)')
 
     def close(self):
         self.conn.close()

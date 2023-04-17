@@ -6,7 +6,8 @@ from telas.tela_consulado import TelaConsulado
 
 class ControladorConsulado:
 
-    def __init__(self):
+    def __init__(self, controlador_sistema):
+        self.__controlador_sistema = controlador_sistema
         self.__consulado_DAO = ConsuladoDAO()
         self.__consulado_tela = TelaConsulado()
 
