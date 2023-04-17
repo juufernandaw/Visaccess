@@ -224,7 +224,9 @@ class ControladorGerente:
         if isinstance(cpf, str) and isinstance(senha, str):
             try:
               gerente = self.__gerente_dao.buscar_gerente_por_cpf(cpf)
-              if gerente is not None and gerente.senha == senha:
+              senha_digitada = senha
+              senha_conferir = str(gerente.senha)
+              if gerente is not None and senha_conferir == senha_digitada:
                   return True
               elif gerente is None:
                   raise UsuarioInexistenteException
@@ -236,7 +238,7 @@ class ControladorGerente:
                 return False
 
 
-    def abre_tela_inicial(self):  # abre a tela gerente pos login
+    def abre_tela_inicial_gerente(self):  # abre a tela gerente pos login
         try:
             usuario = self.__controlador_sistema.usuario_logado
             mexer_gerente_opcoes = {1: self.voltar_tela_sistema(),

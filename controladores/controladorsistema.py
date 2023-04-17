@@ -42,7 +42,7 @@ class ControladorSistema:
         try:
             login_com_sucesso = None
             lista_opcoes = {1: self.__controlador_consul.abre_tela_inicial,
-                            2: self.__controlador_gerente.abrir_tela_cadastro_gerente,
+                            2: self.__controlador_gerente.abre_tela_inicial_gerente,
                             3: self.__controlador_agente.abre_tela_inicial,
                             0: self.encerrar_sistema}
             login = None
