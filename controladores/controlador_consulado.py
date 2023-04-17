@@ -62,3 +62,4 @@ class ControladorConsulado:
     def listar_consulados(self):
         consulados = self.__consulado_DAO.get_all_consulados()
         self.__consulado_tela.componentes_tela_listar_consulados(lista_consulados=consulados)
+        return self.__consulado_tela.tela_consulado_inicial()
