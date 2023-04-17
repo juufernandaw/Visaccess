@@ -32,12 +32,12 @@ class ControladorConsulado:
     def incluir_consulado(self):
         dados_consulado = self.__consulado_tela.pegar_dados_consulado()
         for consulado in self.__consulado_DAO.get_all_consulados():
-            if dados_consulado["sede"] == consulado.sede:
+            if dados_consulado == consulado.sede:
                 self.__consulado_tela.mostrar_msg("Este consulado já consta no sistema!")
                 return self.incluir_consulado()
         else:
-            consulado = Consulado(dados_consulado["sede"])
-            self.__consulado_DAO.create_consulado(sede=consulado)
+            consulado = Consulado(dados_consulado)
+            self.__consulado_DAO.create_consulado(sede=consulado.sede)
             if consulado is not None:
                 self.__consulado_tela.mostrar_msg("Consulado cadastrado com sucesso!")
                 return self.abre_tela_consulados()
@@ -60,4 +60,5 @@ class ControladorConsulado:
         return self.abre_tela_consulados()
 
     def listar_consulados(self):
-        pass
+        consulados = self.__consulado_DAO.get_all_consulados()
+        self.__consulado_tela.componentes_tela_listar_consulados(lista_consulados=consulados)

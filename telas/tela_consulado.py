@@ -10,7 +10,8 @@ class TelaConsulado:
         self.__window.Close()
 
     def mostrar_msg(self, msg):
-        tela_consulado.popup(msg)
+        # tela_consulado.popup(msg)
+        return print(msg)
 
     def mensagem(self, texto):
         return print(texto)
@@ -84,10 +85,11 @@ class TelaConsulado:
             [tela_consulado.Button('Voltar')]
         ]
         self.__window = tela_consulado.Window('Lista de Consulados').Layout(layout)
+        print()
 
     def pegar_dados_consulado(self):
         self.componentes_tela_adicionar_consulado()
         button, values = self.__window.Read()
         sede = values['sede']
         self.close()
-        return {"sede": sede}
+        return sede

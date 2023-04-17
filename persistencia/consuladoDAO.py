@@ -7,14 +7,16 @@ class ConsuladoDAO:
     def __init__(self):
         self.conn = sqlite3.connect("visaccess.db")
         self.cursor = self.conn.cursor()
-        self.cursor.execute('CREATE TABLE IF NOT EXISTS consulado (id INTEGER, sede TEXT PRIMARY KEY NOT NULL)')
+        self.cursor.execute('CREATE TABLE IF NOT EXISTS consulado (sede TEXT PRIMARY KEY NOT NULL)')
 
     def close(self):
         self.conn.close()
 
     def create_consulado(self, sede):
-        self.cursor.execute("INSERT INTO consulado (sede) VALUES (?)", sede)
+        self.cursor.execute("INSERT INTO consulado (sede) VALUES (?)", [sede])
         self.conn.commit()
+        # self.cursor.execute("SELECT * FROM consulado")
+
 
     def get_all_consulados(self):
         self.cursor.execute("SELECT * FROM consulado")
@@ -22,7 +24,7 @@ class ConsuladoDAO:
         consulados = []
         for row in rows:
             consulado = Consulado(sede=row[1])
-            consulados.append(consulado)
+            consulados.append(consulado.sede)
         return consulados
 
     # def get_consulado_by_sede(self, sede):
