@@ -21,7 +21,7 @@ class TelaAgente:
         self.__window = sg.Window('Agente').Layout(layout)
 
     def tela_agente_inicial(self):
-        self.layout_tela_aba_consul()
+        self.layout_tela_aba_agente()
         button, values = self.__window.Read()
         opcao = 0
         if values['1']:
