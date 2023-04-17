@@ -10,8 +10,8 @@ class TelaConsulado:
         self.__window.Close()
 
     def mostrar_msg(self, msg):
-        # tela_consulado.popup(msg)
-        return print(msg)
+        tela_consulado.popup_ok(msg)
+        # return print(msg)
 
     def mensagem(self, texto):
         return print(texto)

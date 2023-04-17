@@ -37,8 +37,8 @@ class ControladorConsulado:
                 return self.incluir_consulado()
         else:
             consulado = Consulado(dados_consulado)
-            self.__consulado_DAO.create_consulado(sede=consulado.sede)
             if consulado is not None:
+                self.__consulado_DAO.create_consulado(sede=consulado.sede)
                 self.__consulado_tela.mostrar_msg("Consulado cadastrado com sucesso!")
                 return self.abre_tela_consulados()
 
@@ -50,10 +50,14 @@ class ControladorConsulado:
                 consulado_novo = self.__consulado_tela.componentes_tela_alterar_consulado(consulado)
                 if consulado_novo is not None:
                     self.__consulado_tela.mostrar_msg("Consulado alterado com sucesso!")
-                self.__consulado_DAO.update_consulado(velha_sede=consulado, nova_sede=consulado_novo["sede"])
+                    self.__consulado_DAO.update_consulado(velha_sede=consulado, nova_sede=consulado_novo["sede"])
+                    return self.abre_tela_consulados()
+                else:
+                    self.__consulado_tela.mostrar_msg("Este consulado NÃO consta no sistema!")
+                    return self.abre_tela_consulados()
+            else:
+                self.__consulado_tela.mostrar_msg("Este consulado NÃO consta no sistema!")
                 return self.abre_tela_consulados()
-        else:
-            raise Exception("Não há nenhum consulado com esta sede para cadastrarmos!")
 
     def excluir_consulado(self):
         consulado_excluir = self.__consulado_tela.componentes_tela_excluir_consulado()
@@ -63,7 +67,8 @@ class ControladorConsulado:
                 self.__consulado_DAO.delete_consulado(sede=consulado)
                 return self.abre_tela_consulados()
             else:
-                raise Exception("Não há nenhum consulado com esta sede para deletarmos!")
+                self.__consulado_tela.mostrar_msg("Este consulado NÃO consta no sistema!")
+                return self.abre_tela_consulados()
 
     def listar_consulados(self):
         consulados = self.__consulado_DAO.get_all_consulados()
