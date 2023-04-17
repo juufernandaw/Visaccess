@@ -63,7 +63,7 @@ class ControladorSistema:
                         if not login_com_sucesso and opcao_escolhida != 0:
                             raise LoginSenhaException
                     elif opcao_escolhida == 2:#GERENTE
-                        login_com_sucesso = self.__controlador_gerente.verificar_login_senha(login, senha)
+                        login_com_sucesso = self.__controlador_gerente.verificar_login_senha_sqlite(login, senha)
                         if not login_com_sucesso:
                             raise LoginSenhaException
                     elif opcao_escolhida == 3: #Agente
