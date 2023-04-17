@@ -30,7 +30,9 @@ class ControladorConsulado:
             self.abre_tela_consulados()
 
     def incluir_consulado(self):
-        dados_consulado = self.__consulado_tela.pegar_dados_consulado()
+        botao, dados_consulado = self.__consulado_tela.pegar_dados_consulado()
+        if botao == 'Voltar':
+            return self.abre_tela_consulados()
         for consulado in self.__consulado_DAO.get_all_consulados():
             if dados_consulado == consulado:
                 self.__consulado_tela.mostrar_msg("Este consulado já consta no sistema!")
@@ -56,6 +58,9 @@ class ControladorConsulado:
                 if botao == 'Voltar':
                     return self.abre_tela_consulados()
                 if consulado_novo is not None:
+                    if consulado_novo["sede"] == "":
+                        self.__consulado_tela.mostrar_msg("O nome da sede não pode ser vazio!")
+                        return self.alterar_consulado()
                     self.__consulado_tela.mostrar_msg("Consulado alterado com sucesso!")
                     self.__consulado_DAO.update_consulado(velha_sede=consulado, nova_sede=consulado_novo["sede"])
                     return self.abre_tela_consulados()

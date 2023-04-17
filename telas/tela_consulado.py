@@ -99,4 +99,4 @@ class TelaConsulado:
         button, values = self.__window.Read()
         sede = values['sede']
         self.close()
-        return sede
+        return button, sede
