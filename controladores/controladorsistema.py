@@ -60,16 +60,16 @@ class ControladorSistema:
                         login_com_sucesso = self.__controlador_consul.verificar_login_senha(
                             login,
                             senha)
-                        if not login_com_sucesso:
-                            raise UsuarioInexistenteException
+                        if not login_com_sucesso and opcao_escolhida != 0:
+                            raise LoginSenhaException
                     elif opcao_escolhida == 2:#GERENTE
-                        login_com_sucesso, self.__usuario_logado = self.__controlador_gerente.verificar_login_senha(login, senha)
-                        if self.__usuario_logado is None:
-                            raise UsuarioInexistenteException
+                        login_com_sucesso = self.__controlador_gerente.verificar_login_senha(login, senha)
+                        if not login_com_sucesso:
+                            raise LoginSenhaException
                     elif opcao_escolhida == 3: #Agente
-                        login_com_sucesso, self.__usuario_logado = self.__controlador_agente.verificar_login_senha(login, senha)
-                        if self.__usuario_logado is None:
-                            raise UsuarioInexistenteException
+                        login_com_sucesso = self.__controlador_agente.verificar_login_senha_sqlite(login, senha)
+                        if not login_com_sucesso:
+                            raise LoginSenhaException
                     if login_com_sucesso:
                         funcao_escolhida = lista_opcoes[opcao_escolhida]
                         return funcao_escolhida()
@@ -78,7 +78,7 @@ class ControladorSistema:
             self.iniciar_tela_sistema()
         except TypeError:
             self.iniciar_tela_sistema()
-        except UsuarioInexistenteException as e:
+        except LoginSenhaException as e:
             self.__tela_sistema.mostrar_msg(e)
             self.iniciar_tela_sistema()
 
