@@ -37,3 +37,13 @@ class GerenteDAO():
             print("Dados excluídos com sucesso")
         except sqlite3.Error as erro:
             print("Erro ao excluir: ", erro)
+
+    def buscar_gerente_por_cpf(self, cpf):
+        self.cursor.execute(f"SELECT * FROM gerente WHERE cpf = {cpf}")
+        row = self.cursor.fetchone()
+        if row is not None:
+            cpf, nome, senha, consulado = row
+            gerente = Gerente(cpf=cpf, nome=nome, senha=senha, consulado=consulado)
+            return gerente
+        else:
+            return None
