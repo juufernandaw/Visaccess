@@ -1,17 +1,49 @@
-from persistencia.DAO import DAO
-from entidades.agente import Agente
 import sqlite3
 
-class AgenteDAO(DAO):
+class AgenteDAO:
+
     def __init__(self):
-        super().__init__('agente.pkl')
+        # Create an in-memory SQLite database
+        self.conn = sqlite3.connect("visaccess.db")
+        self.cursor = self.conn.cursor()
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS agente (
+                cpf TEXT PRIMARY KEY,
+                nome TEXT,
+                senha INTEGER,
+                consulado INTEGER
+            )
+        ''')
+        self.conn.commit()
 
-    def add(self, agente: Agente):
-        super().add(agente.cpf, agente)  # passa a chave e o objeto
+    def close(self):
+        self.conn.close()
 
-    def get(self, cpf_agente: str):
-        return super().get(cpf_agente)
+    def cadastrar_agente(self, cpf, nome, senha, consulado):
+        self.cursor.execute("INSERT INTO agente (cpf, nome, senha, consulado) VALUES (?, ?, ?, ?)", (cpf, nome, senha, consulado))
+        self.conn.commit()
 
-    def remove(self, agente: Agente):
-        super().remove(agente.cpf)
+    def buscar_agente_por_cpf(self, cpf):
+        self.cursor.execute("SELECT * FROM agente WHERE cpf=?", (cpf,))
+        row = self.cursor.fetchone()
+        if row is None:
+            return None
+        return {'cpf': row[0], 'nome': row[1], 'senha': row[2], 'consulado': row[3]}
 
+    def buscar_todos_agentes(self):
+        self.cursor.execute("SELECT * FROM agente")
+        rows = self.cursor.fetchall()
+        agentes = []
+        for row in rows:
+            agente = {'cpf': row[0], 'nome': row[1], 'senha': row[2], 'consulado': row[3]}
+            agentes.append(agente)
+        return agentes
+    
+    def atualizar_agente(self, cpf_antigo, cpf_novo, nome, senha, consulado):
+        # Atualiza o CPF, nome, senha e consulado na tabela 'agentes'
+        self.cursor.execute("UPDATE agente SET cpf=?, nome=?, senha=?, consulado=? WHERE cpf=?", (cpf_novo, nome, senha, consulado, cpf_antigo))
+        self.conn.commit()
+
+    def excluir_agente(self, cpf):
+        self.cursor.execute("DELETE FROM agente WHERE cpf=?", (cpf,))
+        self.conn.commit()

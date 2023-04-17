@@ -1,12 +1,15 @@
 from excecoes.loginsenhaException import LoginSenhaException
 from excecoes.valueErrorException import ValueErrorException
 from persistencia.gerenteDAO import GerenteDAO
+from persistencia.agenteDAO import AgenteDAO
 from telas.telagerente import TelaGerente
+from entidades.agente import Agente
 import sqlite3
 
 class ControladorGerente:
     def __init__(self, controlador_sistema):
         self.__gerente_dao = GerenteDAO()
+        self.__agente_DAO = AgenteDAO()
         self.__controlador_sistema = controlador_sistema
         self.__tela_gerente = TelaGerente()
 
@@ -30,7 +33,6 @@ class ControladorGerente:
             elif opcao == 5:
                 self.__tela_gerente.mostra_mensagem('Emitir Relatório de Solicitações Aprovadas')
             elif opcao == 0:
-                # AQUI TEM QUE VOLTAR PARA A TELA LOGIN (ARRUMADO)!
                 self.__controlador_sistema.iniciar_tela_sistema()
 
 
@@ -42,40 +44,62 @@ class ControladorGerente:
             elif opcao == 2:
                 self.excluir_agente()
             elif opcao == 3:
-                self.__tela_gerente.mostra_mensagem('Listar Agentes')
+                self.listar_agentes()
             elif opcao == 4:
                 self.modificar_agente()
             elif opcao == 0:
-                # AQUI TEM QUE VOLTAR PARA A TELA INICIAL DO GERENTE!
                 self.iniciar_tela_gerente()
 
     def adicionar_agente(self):
         data = self.__tela_gerente.tela_adicionar_agentes()
-        print(data)
-        # *pega os dados, testa e joga no BD (fazer ainda).
-        if data != None:
-            # aqui tem que mandar o objeto 'data' para o BD.
-            pass
-    
-    def excluir_agente(self):
-        data = self.__tela_gerente.tela_excluir_agentes()
-        print(data)
 
         if data != None:
-            # aqui tem que comparar o objeto 'data', que contém apenas um cpf, com os cpf do BD.
-            # caso há algum igual, exclui.
-            # caso contrário, pop-up de erro.
-            pass
+            for agentes in self.__agente_DAO.buscar_todos_agentes():
+                if data[1] == agentes['cpf']:
+                    self.__tela_gerente.mostra_mensagem('Este agente já está cadastrado!')
+                    return self.abrir_tela_cadastro()
+            else:
+                agente = Agente(data[0], data[1], data[2])
+                self.__agente_DAO.cadastrar_agente(data[1], data[0], data[2], data[3])
+                self.__tela_gerente.mostra_mensagem('Agente cadastrado!')
+
+    def excluir_agente(self):
+        cpf = self.__tela_gerente.tela_excluir_agentes()
+        if cpf != None:
+            for agentes in self.__agente_DAO.buscar_todos_agentes():
+                if cpf[0] == agentes['cpf']:
+                    self.__agente_DAO.excluir_agente(cpf[0])
+                    return self.abrir_tela_cadastro()
+            else:
+                self.__tela_gerente.mostra_mensagem('Agente Não está cadastrado!')
+
+    def listar_agentes(self):
+        agentes = self.__agente_DAO.buscar_todos_agentes()
+        self.__tela_gerente.componentes_tela_listar_agentes(agentes)
 
     def modificar_agente(self):
-        data = self.__tela_gerente.tela_modificar_agentes()
-        print(data)
+        cpf = self.__tela_gerente.tela_modificar_agentes()
 
-        if data != None:
-            # aqui tem que comparar o objeto 'data', que contém apenas um cpf, com os cpf do BD.
-            # caso há algum igual, exclui.
-            # caso contrário, pop-up de erro.
-            pass
+        if cpf != None:
+            for agentes in self.__agente_DAO.buscar_todos_agentes():
+                if cpf[0] == agentes['cpf']:            
+                    agente = self.__agente_DAO.buscar_agente_por_cpf(cpf[0])
+                    dados_novos = self.__tela_gerente.tela_atualizar_agentes()
+                    if dados_novos != None:
+                        self.__agente_DAO.atualizar_agente(
+                            agente['cpf'], 
+                            dados_novos[1], 
+                            dados_novos[0], 
+                            dados_novos[2], 
+                            dados_novos[3]
+                        )
+                        self.__tela_gerente.mostra_mensagem('Agente Modificado!')
+                        return self.abrir_tela_cadastro()
+                    else:
+                        return self.abrir_tela_cadastro()
+
+            else:
+                self.__tela_gerente.mostra_mensagem('Não há agentes com esse cadastro!')
 
 #--------------------- TELA GERENTE ACIMA -----------------------
 
