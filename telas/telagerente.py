@@ -48,7 +48,7 @@ class TelaGerente:
         return opcao
     
     # --------------- CADASTRO DE GERENTE --------------- 
-    def novo_gerente(self):
+    def componentes_novo_gerente(self):
         interface_gerente.ChangeLookAndFeel('DarkTeal4')
         layout = [
             [interface_gerente.Text('Novo Gerente', font=("Helvica", 15))],
@@ -60,14 +60,11 @@ class TelaGerente:
         ]
         self.__janela = interface_gerente.Window('Novo Gerente').Layout(layout)
         
-        while True:
-            evento, valores = self.__janela.read()
-            if evento == interface_gerente.WIN_CLOSED():
-                break
-            if evento == 'Voltar':
-                self.tela_cadastrar_gerente()
-            if evento == "OK":
-                return valores
+    def pegar_dados_gerente(self):
+        self.componentes_novo_gerente()
+        button, values = self.__janela.Read()
+        self.close()
+        return button, values
 
 
     def excluir_gerente(self):
@@ -78,14 +75,9 @@ class TelaGerente:
             [interface_gerente.Button('OK'), interface_gerente.Button('Voltar')]
         ]
         self.__janela = interface_gerente.Window('Excluir Gerente').Layout(layout)
-        while True:
-            evento, valores = self.__janela.read()
-            if evento == interface_gerente.WIN_CLOSED():
-                break
-            if evento == 'Voltar':
-                self.tela_cadastrar_gerente()
-            if evento == "OK":
-                return valores
+        evento, valores = self.__janela.read()
+        self.close()
+        return evento, valores
 
     def listar_gerentes(self, lista_gerentes):
         layout = [
@@ -107,49 +99,38 @@ class TelaGerente:
     def escolher_gerente_para_alterar(self):
         layout = [
             [interface_gerente.Text('Modificar dados do Gerente', font=("Helvica", 25))],
-            [interface_gerente.Text('CPF'), interface_gerente.InputText('', key="cpf")],
+            [interface_gerente.Text('CPF'), interface_gerente.Input('', key="cpf")],
             [interface_gerente.Button('OK'), interface_gerente.Button('Voltar')]
         ]
         self.__janela = interface_gerente.Window('Alterar Gerente').Layout(layout)
 
-        while True:
-            evento, valores = self.__janela.read()
-            if evento == interface_gerente.WIN_CLOSED():
-                break
-            if evento == 'Voltar':
-                self.tela_cadastrar_gerente()
-            if evento == "OK":
-                return valores
-        
+        evento, valores = self.__janela.read()
         self.close()
+        return evento, valores
 
-    def alterar_agente(self, gerente):
+    def alterar_gerente(self, gerente):
         layout = [
             [interface_gerente.Text('Modificar dados do Gerente', font=("Helvica", 25))],
-            [interface_gerente.Text('CPF'), interface_gerente.InputText(gerente, key="cpf")],
+            [interface_gerente.Text('CPF'), interface_gerente.Input(gerente['cpf'], key="cpf")],
+            [interface_gerente.Text('Nome'), interface_gerente.Input(gerente['nome'], key='nome')],
+            [interface_gerente.Text('Senha'), interface_gerente.Input(gerente['senha'], key='senha')],
+            [interface_gerente.Text('Consulado'), interface_gerente.Input(gerente['consulado'], key='consulado')],
             [interface_gerente.Button('OK'), interface_gerente.Button('Voltar')]
         ]
         self.__janela = interface_gerente.Window('Alterar Gerente').Layout(layout)
 
-        while True:
-            evento, valores = self.__janela.read()
-            if evento == interface_gerente.WIN_CLOSED():
-                break
-            if evento == 'Voltar':
-                self.tela_cadastrar_gerente()
-            if evento == "OK":
-                return valores
-        
+        evento, valores = self.__janela.read()
         self.close()
+        return evento, valores
 
     def tela_cadastrar_gerente(self):
         interface_gerente.ChangeLookAndFeel('DarkTeal4')
         layout = [
             [interface_gerente.Text('Cadastro de Gerentes', font=("Helvica", 15))],
-            [interface_gerente.Radio('Novo Gerente', "RD1", key='novo')],
-            [interface_gerente.Radio('Excluir Gerente', "RD1", key='excluir')],
-            [interface_gerente.Radio('Listar Gerente', "RD1", key='listar')],
-            [interface_gerente.Radio('Alterar Gerente', "RD1", key='alterar')],
+            [interface_gerente.Radio('Novo Gerente', "RD1", key='1')],
+            [interface_gerente.Radio('Excluir Gerente', "RD1", key='2')],
+            [interface_gerente.Radio('Listar Gerente', "RD1", key='3')],
+            [interface_gerente.Radio('Alterar Gerente', "RD1", key='4')],
             [interface_gerente.Button('OK'), interface_gerente.Button('Voltar')]
         ]
         self.__janela = interface_gerente.Window('Consul').Layout(layout)

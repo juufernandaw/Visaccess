@@ -112,7 +112,7 @@ class ControladorGerente:
                                     2: self.excluir_gerente,
                                     3: self.listar_gerentes,
                                     4: self.alterar_gerente,
-                                    0: self.abre_tela_gerentes}
+                                    0: self.abrir_tela_cadastro_gerente}
             while True:
                 opcao_escolhida = self.__tela_gerente.tela_cadastro_gerentes()
                 if opcao_escolhida != 1 and opcao_escolhida != 2 and opcao_escolhida != 3 and opcao_escolhida != 4 and opcao_escolhida != 0:
@@ -125,49 +125,80 @@ class ControladorGerente:
 
 
     def incluir_gerente(self):
-        evento, valores = self.__tela_gerente.novo_gerente()
+        print("Entrou no incluir gerente controlador")
+        evento, valores = self.__tela_gerente.pegar_dados_gerente()
+        print(f"valores: {valores}")
+        print(f"valores[cpf]: {valores['cpf']}")
+        print(f"evento: {evento}")
+        if evento == "Voltar":
+            return self.abrir_tela_cadastro_gerente()
+        
         for gerente in self.__gerente_dao.lista_gerentes():
+            print('entro no for lista_gerente controlador')
+            print(f"gerente controlador: {gerente}")
+            print(f"cpf gerente controlador: {gerente['cpf']}")
             if valores['cpf'] == gerente:
                 self.__tela_gerente.mostra_mensagem("Este gerente já consta no sistema!")
                 return self.incluir_gerente()
         
-        if valores['cpf'] == "":
-            self.__tela_gerente.mostra_mensagem("O cpf não pode ser vazio!")
-            return self.incluir_gerente()
-        gerente = Gerente(valores['nome'], valores['senha'], valores['cpf'], valores['consulado'])
-        if gerente is not None:
-            self.__gerente_dao.cria_consulado(gerente)
-            self.__tela_gerente.mostra_mensagem("Consulado cadastrado com sucesso!")
-            return self.abrir_tela_cadastro_gerente()
-
-    def alterar_gerente(self):
-        evento, valores = self.__tela_gerente.escolher_gerente_para_alterar()
-        for gerente in self.__gerente_dao.lista_gerentes():
-            if valores["cpf"] == gerente:
-                evento, gerente_novo = self.__tela_gerente.alterar_agente(gerente)
-                if gerente_novo is not None:
-                    if gerente_novo["cpf"] == "":
-                        self.__tela_gerente.mostra_mensagem("O nome da sede não pode ser vazio!")
-                        return self.alterar_gerente()
-                    self.__tela_gerente.mostra_mensagem("Gerente alterado com sucesso!")
-                    self.__gerente_dao.atualizar_gerente()
-                    return self.abrir_tela_cadastro_gerente()
-            else:
-                self.__tela_gerente.mostra_mensagem("Este gerente NÃO consta no sistema!")
+        else:
+            print('entrou no else')
+            if valores['cpf'] == "":
+                print('entrou no cpf vazio')
+                self.__tela_gerente.mostra_mensagem("O cpf não pode ser vazio!")
+                return self.incluir_gerente()
+            gerente = Gerente(valores['nome'], valores['senha'], valores['cpf'], valores['consulado'])
+            print(f'gerente: {gerente}')
+            if gerente is not None:
+                print('entrou no gerente is not none')
+                self.__gerente_dao.cria_gerente(gerente)
+                self.__tela_gerente.mostra_mensagem("Gerente cadastrado com sucesso!")
                 return self.abrir_tela_cadastro_gerente()
 
-    def excluir_gerente(self):
-        evento, gerente_excluir = self.__tela_gerente.excluir_gerente()
+    def alterar_gerente(self):
+        print("Entrou no alterar gerente controlador")
+        evento, valores = self.__tela_gerente.escolher_gerente_para_alterar()
+        if evento == 'Voltar':
+            return self.abrir_tela_cadastro_gerente()
         for gerente in self.__gerente_dao.lista_gerentes():
-            if gerente_excluir["cpf"] == gerente:
+            print('entrou no for')
+            if int(valores["cpf"]) == gerente['cpf']:
+                evento, gerente_novo = self.__tela_gerente.alterar_gerente(gerente)
+                if evento == 'Voltar':
+                    return self.abrir_tela_cadastro_gerente()
+                print(f"gerente novo: {gerente_novo}")
+                print(f"gerente novo cpf: {gerente_novo['cpf']}")
+                if gerente_novo is not None:
+                    print('entrou no if')
+                    if gerente_novo["cpf"] == "":
+                        self.__tela_gerente.mostra_mensagem("O CPF do Gerente não pode ser vazio!")
+                        return self.alterar_gerente()
+                    self.__gerente_dao.atualizar_gerente(gerente_novo, gerente['cpf'])
+                    self.__tela_gerente.mostra_mensagem("Gerente alterado com sucesso!")
+                    return self.abrir_tela_cadastro_gerente()
+        else:
+            self.__tela_gerente.mostra_mensagem("Este gerente NÃO consta no sistema!")
+            return self.abrir_tela_cadastro_gerente()
+
+    def excluir_gerente(self):
+        print("Entrou no excluir gerente controlador")
+        evento, gerente_excluir = self.__tela_gerente.excluir_gerente()
+        if evento == "Voltar":
+            return self.abrir_tela_cadastro_gerente()
+        for gerente in self.__gerente_dao.lista_gerentes():
+            print('entrou no for do excluir')
+            if gerente['cpf'] == int(gerente_excluir['cpf']):
+                print('entrou no if')
                 self.__gerente_dao.remover_gerente(gerente)
                 self.__tela_gerente.mostra_mensagem("Gerente excluído com sucesso!")
                 return self.abrir_tela_cadastro_gerente()
-            else:
-                self.__tela_gerente.mostra_mensagem("Este gerente NÃO consta no sistema!")
-                return self.abrir_tela_cadastro_gerente()
+        else:
+            print('entrou no else')
+            self.__tela_gerente.mostra_mensagem("Este gerente NÃO consta no sistema!")
+            return self.abrir_tela_cadastro_gerente()
 
-    def listar_gerente(self):
+    def listar_gerentes(self):
+        print("Entrou no listar gerente controlador")
         gerentes = self.__gerente_dao.lista_gerentes()
         evento, values = self.__tela_gerente.listar_gerentes(gerentes)
 

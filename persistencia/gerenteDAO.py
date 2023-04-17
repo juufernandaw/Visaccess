@@ -7,27 +7,26 @@ class GerenteDAO():
         self.cursor = self.banco.cursor()
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS gerente (
-                cpf INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                cpf INTEGER NOT NULL PRIMARY KEY,
                 nome TEXT NOT NULL,
                 senha TEXT NOT NULL,
                 consulado TEXT NOT NULL
         );
         """)
 
-    def cria_consulado(self, gerente: Gerente): # adiciona novos dados na tabela
-        self.cursor.execute(f"INSERT INTO gerente VALUES ({gerente.cpf, gerente.nome, gerente.senha, gerente.consulado})")
-        self.cursor.commit()
-        print(self.cursor.fetchall())
-        self.banco.close()
+    def cria_gerente(self, gerente: Gerente): # adiciona novos dados na tabela
+        print(f"gerente['cpf']: {gerente.cpf}")
+        self.cursor.execute("INSERT INTO gerente (cpf, nome, senha, consulado) VALUES (?, ?, ?, ?)", [gerente.cpf, gerente.nome, gerente.senha, gerente.consulado])
+        self.banco.commit()
 
     def lista_gerentes(self): # lista os dados da tabela
         self.cursor.execute("SELECT * FROM gerente")
         rows = self.cursor.fetchall()
         gerentes = []
         for row in rows:
-            gerente = Gerente(sede=row[1])
-            gerentes.append(gerente.sede)
-        print(rows)
+            gerente = {'cpf': row[0], 'nome': row[1], 'senha': row[2], 'consulado': row[3]}
+            gerentes.append(gerente)
+        print(f"linhas tabela: {rows}")
         return gerentes
 
     def buscar_gerente_por_cpf(self, cpf):
@@ -40,13 +39,16 @@ class GerenteDAO():
         else:
             return None
         
-    def atualizar_gerente(cpf):
-        pass
+    def atualizar_gerente(self, gerente_novo, cpf_antigo):
+        self.cursor.execute("UPDATE gerente SET cpf=?, nome=?, senha=?, consulado=? WHERE cpf=?", (gerente_novo['cpf'], gerente_novo['nome'], gerente_novo['senha'], gerente_novo['consulado'], cpf_antigo))
+        self.banco.commit()
         
     def remover_gerente(self, gerente: Gerente): # remove dados da tabela
         try:
-            self.cursor.execute(f"DELETE from gerente WHERE cpf = {gerente.cpf}")
-            self.banco.close()
+            print(f"gerente bd: {gerente}")
+            print(f"gerente bd: {gerente['cpf']}")
+            self.cursor.execute("DELETE from gerente WHERE cpf = ?", [gerente['cpf']])
+            self.banco.commit()
             print("Dados excluídos com sucesso")
         except sqlite3.Error as erro:
             print("Erro ao excluir: ", erro)
