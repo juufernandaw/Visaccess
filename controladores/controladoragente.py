@@ -54,7 +54,6 @@ class ControladorAgente:
 
     def abre_tela_inicial(self):  # abre a tela aluno pós login da tela
         try:
-            usuario = self.__controlador_sistema.usuario_logado
             mexer_agente_opcoes = {1: self.voltar_tela_sistema,
                                   2: self.voltar_tela_sistema,
                                   0: self.voltar_tela_sistema
