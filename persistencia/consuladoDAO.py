@@ -35,9 +35,9 @@ class ConsuladoDAO:
     #     return {'id': row[0], 'sede': row[1]}
 
     def delete_consulado(self, sede):
-        self.cursor.execute("DELETE FROM consulado WHERE sede=?", sede)
+        self.cursor.execute("DELETE FROM consulado WHERE sede=?", [sede])
         self.conn.commit()
 
     def update_consulado(self, nova_sede, velha_sede):
-        self.cursor.execute(f"UPDATE consulado SET sede={nova_sede} WHERE sede=?", velha_sede)
+        self.cursor.execute(f"UPDATE consulado SET sede={nova_sede} WHERE sede=?", [velha_sede])
         self.conn.commit()
