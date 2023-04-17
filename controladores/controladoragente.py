@@ -1,10 +1,10 @@
 from entidades.agente import Agente
-from persistencia.agente import AgenteDAO
+from persistencia.agenteDAO import AgenteDAO
 from excecoes.loginsenhaException import LoginSenhaException
 from excecoes.valueErrorException import ValueErrorException
 from telas.telasistema import TelaSistema
 from telas.telaagente import TelaAgente
-
+import sqlite3
 
 
 class ControladorAgente:
@@ -26,6 +26,21 @@ class ControladorAgente:
                         return True, agente  # agente q achou retornar
                     if agente.cpf != cpf or not agente.senha != senha:
                         raise LoginSenhaException
+            except LoginSenhaException as e:
+                self.__tela_sistema.mostrar_msg(e)
+                self.__controlador_sistema.iniciar_tela_sistema()
+            else:
+                return False
+
+    def verificar_login_senha_sqlite(self, cpf, senha):  # VERIFICAR o cpf e senha pelo sqlite.
+        if isinstance(cpf, str) and isinstance(senha, str):
+            try:
+              conn = sqlite3.connect('visaccess.bd') # Cria uma conexão com o banco de dados
+              cursor = conn.cursor() # Cria um objeto cursor
+              cursor.execute("SELECT * FROM agente WHERE cpf=?", (cpf,))
+              resultado = cursor.fetchone()
+              if resultado and resultado[2] == senha:
+                  return True
             except LoginSenhaException as e:
                 self.__tela_sistema.mostrar_msg(e)
                 self.__controlador_sistema.iniciar_tela_sistema()

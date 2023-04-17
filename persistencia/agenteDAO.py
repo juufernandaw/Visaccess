@@ -1,6 +1,6 @@
 from persistencia.DAO import DAO
 from entidades.agente import Agente
-
+import sqlite3
 
 class AgenteDAO(DAO):
     def __init__(self):
@@ -14,3 +14,4 @@ class AgenteDAO(DAO):
 
     def remove(self, agente: Agente):
         super().remove(agente.cpf)
+
