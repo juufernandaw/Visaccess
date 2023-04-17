@@ -10,11 +10,7 @@ class TelaConsulado:
         self.__window.Close()
 
     def mostrar_msg(self, msg):
-        # tela_consulado.popup(msg)
-        return print(msg)
-
-    def mensagem(self, texto):
-        return print(texto)
+        tela_consulado.popup_ok(msg)
 
     def componentes_tela_consulado_inicial(self):
         layout = [
@@ -63,7 +59,7 @@ class TelaConsulado:
         self.__window = tela_consulado.Window('Alterar Consulado').Layout(layout)
         button, values = self.__window.Read()
         self.close()
-        return values
+        return button, values
 
     def componentes_tela_excluir_consulado(self):
         layout = [
@@ -74,7 +70,7 @@ class TelaConsulado:
         self.__window = tela_consulado.Window('Excluir Consulado').Layout(layout)
         button, values = self.__window.Read()
         self.close()
-        return values
+        return button, values
 
     def componentes_tela_alterar_qual_consulado(self):
         layout = [
@@ -85,7 +81,7 @@ class TelaConsulado:
         self.__window = tela_consulado.Window('Escolher qual Consulado alterar').Layout(layout)
         button, values = self.__window.Read()
         self.close()
-        return values
+        return button, values
 
     def componentes_tela_listar_consulados(self, lista_consulados):
         layout = [
@@ -96,10 +92,11 @@ class TelaConsulado:
         self.__window = tela_consulado.Window('Lista de Consulados').Layout(layout)
         button, values = self.__window.Read()
         self.close()
+        return button, values
 
     def pegar_dados_consulado(self):
         self.componentes_tela_adicionar_consulado()
         button, values = self.__window.Read()
         sede = values['sede']
         self.close()
-        return sede
+        return button, sede
