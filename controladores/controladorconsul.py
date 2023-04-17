@@ -2,7 +2,7 @@ from entidades.consul_geral import Consul
 from excecoes.valueErrorException import ValueErrorException
 from telas.telasistema import TelaSistema
 from telas.telaconsul import TelaConsul
-from controladorgerente import ControladorGerente
+from controladores.controladorgerente import ControladorGerente
 
 
 class ControladorConsul:
