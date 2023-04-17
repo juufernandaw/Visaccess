@@ -48,7 +48,6 @@ class ControladorConsulado:
             if consulado_alterado["sede"] == consulado:
                 self.__consulado_tela.mostrar_msg("Este consulado consta no sistema! Podemos alterar!")
                 consulado_novo = self.__consulado_tela.componentes_tela_alterar_consulado(consulado)
-                # consulado.sede = consulado["sede"]
                 if consulado_novo is not None:
                     self.__consulado_tela.mostrar_msg("Consulado alterado com sucesso!")
                 self.__consulado_DAO.update_consulado(velha_sede=consulado, nova_sede=consulado_novo["sede"])
