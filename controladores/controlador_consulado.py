@@ -36,6 +36,9 @@ class ControladorConsulado:
                 self.__consulado_tela.mostrar_msg("Este consulado já consta no sistema!")
                 return self.incluir_consulado()
         else:
+            if dados_consulado == "":
+                self.__consulado_tela.mostrar_msg("O nome da sede não pode ser vazio!")
+                return self.incluir_consulado()
             consulado = Consulado(dados_consulado)
             if consulado is not None:
                 self.__consulado_DAO.create_consulado(sede=consulado.sede)
@@ -48,7 +51,7 @@ class ControladorConsulado:
             return self.abre_tela_consulados()
         for consulado in self.__consulado_DAO.get_all_consulados():
             if consulado_alterado["sede"] == consulado:
-                self.__consulado_tela.mostrar_msg("Este consulado consta no sistema! Podemos alterar!")
+                # self.__consulado_tela.mostrar_msg("Este consulado consta no sistema! Podemos alterar!")
                 botao, consulado_novo = self.__consulado_tela.componentes_tela_alterar_consulado(consulado)
                 if botao == 'Voltar':
                     return self.abre_tela_consulados()
@@ -56,12 +59,9 @@ class ControladorConsulado:
                     self.__consulado_tela.mostrar_msg("Consulado alterado com sucesso!")
                     self.__consulado_DAO.update_consulado(velha_sede=consulado, nova_sede=consulado_novo["sede"])
                     return self.abre_tela_consulados()
-                else:
-                    self.__consulado_tela.mostrar_msg("Este consulado NÃO consta no sistema!")
-                    return self.abre_tela_consulados()
-            else:
-                self.__consulado_tela.mostrar_msg("Este consulado NÃO consta no sistema!")
-                return self.abre_tela_consulados()
+        else:
+            self.__consulado_tela.mostrar_msg("Este consulado NÃO consta no sistema!")
+            return self.abre_tela_consulados()
 
     def excluir_consulado(self):
         botao, consulado_excluir = self.__consulado_tela.componentes_tela_excluir_consulado()
@@ -69,12 +69,13 @@ class ControladorConsulado:
             return self.abre_tela_consulados()
         for consulado in self.__consulado_DAO.get_all_consulados():
             if consulado_excluir["sede"] == consulado:
-                self.__consulado_tela.mostrar_msg("Este consulado consta no sistema! Podemos excluir!")
+                # self.__consulado_tela.mostrar_msg("Este consulado consta no sistema! Podemos excluir!")
                 self.__consulado_DAO.delete_consulado(sede=consulado)
+                self.__consulado_tela.mostrar_msg("Consulado excluído com sucesso!")
                 return self.abre_tela_consulados()
-            else:
-                self.__consulado_tela.mostrar_msg("Este consulado NÃO consta no sistema!")
-                return self.abre_tela_consulados()
+        else:
+            self.__consulado_tela.mostrar_msg("Este consulado NÃO consta no sistema!")
+            return self.abre_tela_consulados()
 
     def listar_consulados(self):
         consulados = self.__consulado_DAO.get_all_consulados()
