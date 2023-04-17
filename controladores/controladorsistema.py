@@ -66,7 +66,7 @@ class ControladorSistema:
                         login_com_sucesso, self.__usuario_logado = self.__controlador_gerente.verificar_login_senha(login, senha)
                         if self.__usuario_logado is None:
                             raise UsuarioInexistenteException
-                    elif opcao_escolhida == 3:
+                    elif opcao_escolhida == 3: #Agente
                         login_com_sucesso, self.__usuario_logado = self.__controlador_agente.verificar_login_senha(login, senha)
                         if self.__usuario_logado is None:
                             raise UsuarioInexistenteException
