@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+from telas.telagerente import TelaGerente
 
 
 class TelaConsul:
@@ -44,4 +45,5 @@ class TelaConsul:
             opcao = 0
         self.close()
         return opcao
-
+    
+    

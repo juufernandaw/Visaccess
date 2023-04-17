@@ -2,6 +2,7 @@ from entidades.consul_geral import Consul
 from excecoes.valueErrorException import ValueErrorException
 from telas.telasistema import TelaSistema
 from telas.telaconsul import TelaConsul
+from controladorgerente import ControladorGerente
 
 
 class ControladorConsul:
@@ -10,6 +11,7 @@ class ControladorConsul:
         self.__consul = Consul("Sung D. Ego", "1", "1")
         self.__tela_sistema = TelaSistema()
         self.__tela_consul = TelaConsul()
+        self.__controlador_gerente = ControladorGerente()
 
     def verificar_login_senha(self, cpf, senha):
         if isinstance(cpf, str) and isinstance(senha, str):
@@ -19,7 +21,7 @@ class ControladorConsul:
     def abre_tela_inicial(self):  # abre a tela consul pos login da tela do sistema
         try:
             mexer_consul_opcoes = {1: self.__controlador_sistema.controlador_consulado.abre_tela_consulados,
-                                   2: self.__controlador_sistema.iniciar_tela_sistema,
+                                   2: self.__controlador_gerente.abrir_tela_cadastro_gerente(),
                                    3: self.__controlador_sistema.iniciar_tela_sistema,
                                    4: self.__controlador_sistema.iniciar_tela_sistema,
                                    5: self.__controlador_sistema.iniciar_tela_sistema,

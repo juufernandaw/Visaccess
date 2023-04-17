@@ -101,7 +101,40 @@ class ControladorGerente:
             else:
                 self.__tela_gerente.mostra_mensagem('Não há agentes com esse cadastro!')
 
-#--------------------- TELA GERENTE ACIMA -----------------------
+#--------------------- CADASTRO DE GERENTE -----------------------
+
+    def abrir_tela_cadastro_gerente(self):
+        while True:
+            opcao = self.__tela_gerente.tela_cadastrar_gerente(self)
+            if opcao == 'novo':
+                self.adicionar_gerente()
+            elif opcao == 'excluir':
+                self.excluir_gerente()
+            elif opcao == 'listar':
+                self.listar_gerentes()
+            elif opcao == 'alterar':
+                self.modificar_gerente()
+            elif opcao == 0:
+                self.iniciar_tela_cadastro_gerente()
+
+    # def adicionar_gerente(self):
+    #     data = self.__tela_gerente.novo_gerente()
+
+    #     if data != None:
+    #         for gerentes in self.__gerente_DAO.buscar_todos_agentes():
+    #             if data[1] == gerentes['cpf']:
+    #                 self.__tela_gerente.mostra_mensagem('Este agente já está cadastrado!')
+    #                 return self.abrir_tela_cadastro()
+    #         else:
+    #             agente = Agente(data[0], data[1], data[2])
+    #             self.__agente_DAO.cadastrar_agente(data[1], data[0], data[2], data[3])
+    #             self.__tela_gerente.mostra_mensagem('Agente cadastrado!')
+
+
+
+
+
+#--------------------- VERIFICAÇÃO LOGIN -----------------------
 
     def verificar_login_senha(self, cpf, senha):  # VERIFICAR o cpf e senha.
         if isinstance(cpf, str) and isinstance(senha, str):
