@@ -43,21 +43,27 @@ class ControladorConsulado:
                 return self.abre_tela_consulados()
 
     def alterar_consulado(self):
-        consulado = self.__consulado_tela.componentes_tela_alterar_qual_consulado()
-        consulado_novo = self.__consulado_tela.componentes_tela_alterar_consulado(consulado)
-        # consulado.sede = consulado["sede"]
-        if consulado_novo is not None:
-            self.__consulado_tela.mostrar_msg("Consulado alterado com sucesso!")
-        self.__consulado_DAO.update_consulado(velha_sede=consulado.sede, nova_sede=consulado_novo["sede"])
-        return self.abre_tela_consulados()
+        consulado_alterado = self.__consulado_tela.componentes_tela_alterar_qual_consulado()
+        for consulado in self.__consulado_DAO.get_all_consulados():
+            if consulado_alterado["sede"] == consulado:
+                self.__consulado_tela.mostrar_msg("Este consulado consta no sistema! Podemos alterar!")
+                consulado_novo = self.__consulado_tela.componentes_tela_alterar_consulado(consulado)
+                if consulado_novo is not None:
+                    self.__consulado_tela.mostrar_msg("Consulado alterado com sucesso!")
+                self.__consulado_DAO.update_consulado(velha_sede=consulado, nova_sede=consulado_novo["sede"])
+                return self.abre_tela_consulados()
+        else:
+            raise Exception("Não há nenhum consulado com esta sede para cadastrarmos!")
 
     def excluir_consulado(self):
-        consulado = self.__consulado_tela.componentes_tela_excluir_consulado()
-        # consulado.sede = consulado["sede"]
-        # if consulado is not None:
-        #     self.__consulado_tela.mostrar_msg("Consulado alterado com sucesso!")
-        self.__consulado_DAO.delete_consulado(sede=consulado.sede)
-        return self.abre_tela_consulados()
+        consulado_excluir = self.__consulado_tela.componentes_tela_excluir_consulado()
+        for consulado in self.__consulado_DAO.get_all_consulados():
+            if consulado_excluir["sede"] == consulado:
+                self.__consulado_tela.mostrar_msg("Este consulado consta no sistema! Podemos excluir!")
+                self.__consulado_DAO.delete_consulado(sede=consulado)
+                return self.abre_tela_consulados()
+            else:
+                raise Exception("Não há nenhum consulado com esta sede para deletarmos!")
 
     def listar_consulados(self):
         consulados = self.__consulado_DAO.get_all_consulados()

@@ -57,10 +57,13 @@ class TelaConsulado:
     def componentes_tela_alterar_consulado(self, consulado):
         layout = [
             [tela_consulado.Text('Alterar consulado', font=("Helvica", 25))],
-            [tela_consulado.Text('Sede'), tela_consulado.InputText(consulado.sede, key="sede")],
+            [tela_consulado.Text('Sede'), tela_consulado.InputText(consulado, key="sede")],
             [tela_consulado.Button('OK'), tela_consulado.Button('Voltar')]
         ]
         self.__window = tela_consulado.Window('Alterar Consulado').Layout(layout)
+        button, values = self.__window.Read()
+        self.close()
+        return values
 
     def componentes_tela_excluir_consulado(self):
         layout = [
@@ -69,6 +72,9 @@ class TelaConsulado:
             [tela_consulado.Button('OK'), tela_consulado.Button('Voltar')]
         ]
         self.__window = tela_consulado.Window('Excluir Consulado').Layout(layout)
+        button, values = self.__window.Read()
+        self.close()
+        return values
 
     def componentes_tela_alterar_qual_consulado(self):
         layout = [
@@ -77,6 +83,9 @@ class TelaConsulado:
             [tela_consulado.Button('OK'), tela_consulado.Button('Voltar')]
         ]
         self.__window = tela_consulado.Window('Escolher qual Consulado alterar').Layout(layout)
+        button, values = self.__window.Read()
+        self.close()
+        return values
 
     def componentes_tela_listar_consulados(self, lista_consulados):
         layout = [
