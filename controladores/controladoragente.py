@@ -37,7 +37,9 @@ class ControladorAgente:
         if isinstance(cpf, str) and isinstance(senha, str):
             try:
               agente = self.__agente_dao.buscar_agente_por_cpf(cpf)
-              if agente is not None and agente['senha'] == senha:
+              senha_digitada = senha
+              senha_conferir = str(agente['senha'])
+              if agente is not None and senha_conferir == senha_digitada:
                   return True
               elif agente is None:
                   raise UsuarioInexistenteException
