@@ -47,22 +47,26 @@ class ControladorAgente:
         data = self.tela_agente.tela_adicionar_agentes()
 
         if data != None:
-            for agentes in self.agente_dao.buscar_todos_agentes():
-                if data[1] == agentes['cpf']:
+            if data[0] and data[1] and data[2] and data[3] != '':
+                agente = self.agente_dao.buscar_agente_por_cpf(data[1])
+                if agente != None:
                     self.tela_agente.mostra_mensagem('Este agente já está cadastrado!')
                     return self.abrir_tela_cadastro()
+                else:
+                    agente = Agente(data[0], data[1], data[2])
+                    self.agente_dao.cadastrar_agente(data[1], data[0], data[2], data[3])
+                    self.tela_agente.mostra_mensagem('Agente cadastrado!')
             else:
-                agente = Agente(data[0], data[1], data[2])
-                self.agente_dao.cadastrar_agente(data[1], data[0], data[2], data[3])
-                self.tela_agente.mostra_mensagem('Agente cadastrado!')
+                self.tela_agente.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
 
     def excluir_agente(self):
         cpf = self.tela_agente.tela_excluir_agentes()
         if cpf != None:
-            for agentes in self.agente_dao.buscar_todos_agentes():
-                if cpf[0] == agentes['cpf']:
-                    self.agente_dao.excluir_agente(cpf[0])
-                    return self.abrir_tela_cadastro()
+            agente = self.agente_dao.buscar_agente_por_cpf(cpf[0])
+            if agente != None:
+                self.agente_dao.excluir_agente(cpf[0])
+                self.tela_agente.mostra_mensagem('Agente Excluído!')
+                return self.abrir_tela_cadastro()
             else:
                 self.tela_agente.mostra_mensagem('Agente Não está cadastrado!')
 
@@ -74,23 +78,28 @@ class ControladorAgente:
         cpf = self.tela_agente.tela_modificar_agentes()
 
         if cpf != None:
-            for agentes in self.agente_dao.buscar_todos_agentes():
-                if cpf[0] == agentes['cpf']:            
-                    agente = self.agente_dao.buscar_agente_por_cpf(cpf[0])
+            agente = self.agente_dao.buscar_agente_por_cpf(cpf[0])
+            if agente != None:
                     dados_novos = self.tela_agente.tela_atualizar_agentes()
                     if dados_novos != None:
-                        self.agente_dao.atualizar_agente(
-                            agente['cpf'], 
-                            dados_novos[1], 
-                            dados_novos[0], 
-                            dados_novos[2], 
-                            dados_novos[3]
-                        )
-                        self.tela_agente.mostra_mensagem('Agente Modificado!')
-                        return self.abrir_tela_cadastro()
-                    else:
-                        return self.abrir_tela_cadastro()
-
+                        if dados_novos[0] and dados_novos[1] and dados_novos[2] and dados_novos[3]!= '':
+                            teste = self.agente_dao.buscar_agente_por_cpf(dados_novos[1])
+                            if teste == None:
+                                self.agente_dao.atualizar_agente(
+                                    agente['cpf'], 
+                                    dados_novos[1], 
+                                    dados_novos[0], 
+                                    dados_novos[2], 
+                                    dados_novos[3]
+                                )
+                                self.tela_agente.mostra_mensagem('Agente Modificado!')
+                                return self.abrir_tela_cadastro()
+                            else:
+                                self.tela_agente.mostra_mensagem('CPF já consta no sistema!')
+                                return self.abrir_tela_cadastro()
+                        else:
+                            self.tela_agente.mostra_mensagem('Preencha com os dados corretos!')
+                            return self.abrir_tela_cadastro()
             else:
                 self.tela_agente.mostra_mensagem('Não há agentes com esse cadastro!')
 
