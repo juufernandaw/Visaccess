@@ -19,19 +19,82 @@ class ControladorAgente:
     def agente_dao(self):
         return self.__agente_dao
 
-    # def verificar_login_senha(self, cpf, senha):  # VERIFICAR o cpf e senha.
-    #     if isinstance(cpf, str) and isinstance(senha, str):
-    #         try:
-    #             for agente in self.__agente_dao.get_all():
-    #                 if (agente.cpf == cpf) and (agente.senha == senha):
-    #                     return True, agente  # agente q achou retornar
-    #                 if agente.cpf != cpf or not agente.senha != senha:
-    #                     raise LoginSenhaException
-    #         except LoginSenhaException as e:
-    #             self.__tela_sistema.mostrar_msg(e)
-    #             self.__controlador_sistema.iniciar_tela_sistema()
-    #         else:
-    #             return False
+    @property
+    def tela_agente(self):
+        return self.__tela_agente
+    
+    @property
+    def controlador_sistema(self):
+        return self.__controlador_sistema
+
+    #  CADASTRO DE AGENTES ABAIXO ------------------
+
+    def abrir_tela_cadastro(self):
+        while True:
+            opcao = self.tela_agente.tela_cadastro_agentes()
+            if opcao == 1:
+                self.adicionar_agente()
+            elif opcao == 2:
+                self.excluir_agente()
+            elif opcao == 3:
+                self.listar_agentes()
+            elif opcao == 4:
+                self.modificar_agente()
+            elif opcao == 0:
+                self.controlador_sistema.controlador_gerente.iniciar_tela_gerente()
+
+    def adicionar_agente(self):
+        data = self.tela_agente.tela_adicionar_agentes()
+
+        if data != None:
+            for agentes in self.agente_dao.buscar_todos_agentes():
+                if data[1] == agentes['cpf']:
+                    self.tela_agente.mostra_mensagem('Este agente já está cadastrado!')
+                    return self.abrir_tela_cadastro()
+            else:
+                agente = Agente(data[0], data[1], data[2])
+                self.agente_dao.cadastrar_agente(data[1], data[0], data[2], data[3])
+                self.tela_agente.mostra_mensagem('Agente cadastrado!')
+
+    def excluir_agente(self):
+        cpf = self.tela_agente.tela_excluir_agentes()
+        if cpf != None:
+            for agentes in self.agente_dao.buscar_todos_agentes():
+                if cpf[0] == agentes['cpf']:
+                    self.agente_dao.excluir_agente(cpf[0])
+                    return self.abrir_tela_cadastro()
+            else:
+                self.tela_agente.mostra_mensagem('Agente Não está cadastrado!')
+
+    def listar_agentes(self):
+        agentes = self.agente_dao.buscar_todos_agentes()
+        self.tela_agente.componentes_tela_listar_agentes(agentes)
+
+    def modificar_agente(self):
+        cpf = self.tela_agente.tela_modificar_agentes()
+
+        if cpf != None:
+            for agentes in self.agente_dao.buscar_todos_agentes():
+                if cpf[0] == agentes['cpf']:            
+                    agente = self.agente_dao.buscar_agente_por_cpf(cpf[0])
+                    dados_novos = self.tela_agente.tela_atualizar_agentes()
+                    if dados_novos != None:
+                        self.agente_dao.atualizar_agente(
+                            agente['cpf'], 
+                            dados_novos[1], 
+                            dados_novos[0], 
+                            dados_novos[2], 
+                            dados_novos[3]
+                        )
+                        self.tela_agente.mostra_mensagem('Agente Modificado!')
+                        return self.abrir_tela_cadastro()
+                    else:
+                        return self.abrir_tela_cadastro()
+
+            else:
+                self.tela_agente.mostra_mensagem('Não há agentes com esse cadastro!')
+
+    #  CADASTRO DE AGENTES ACIMA ------------------
 
     def verificar_login_senha_sqlite(self, cpf, senha):  # VERIFICAR o cpf e senha pelo sqlite.
         if isinstance(cpf, str) and isinstance(senha, str):

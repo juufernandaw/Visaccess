@@ -29,79 +29,13 @@ class ControladorGerente:
             elif opcao == 2:
                 self.__tela_gerente.mostra_mensagem('Aprovar Solicitação de Visto')
             elif opcao == 3:
-                self.abrir_tela_cadastro()
+                self.__controlador_sistema.controlador_agente.abrir_tela_cadastro()
             elif opcao == 4:
                 self.__tela_gerente.mostra_mensagem('Cadastrar Estrangeiros')
             elif opcao == 5:
                 self.__tela_gerente.mostra_mensagem('Emitir Relatório de Solicitações Aprovadas')
             elif opcao == 0:
                 self.__controlador_sistema.iniciar_tela_sistema()
-
-
-    def abrir_tela_cadastro(self):
-        while True:
-            opcao = self.__tela_gerente.tela_cadastro_agentes()
-            if opcao == 1:
-                self.adicionar_agente()
-            elif opcao == 2:
-                self.excluir_agente()
-            elif opcao == 3:
-                self.listar_agentes()
-            elif opcao == 4:
-                self.modificar_agente()
-            elif opcao == 0:
-                self.iniciar_tela_gerente()
-
-    def adicionar_agente(self):
-        data = self.__tela_gerente.tela_adicionar_agentes()
-
-        if data != None:
-            for agentes in self.__agente_DAO.buscar_todos_agentes():
-                if data[1] == agentes['cpf']:
-                    self.__tela_gerente.mostra_mensagem('Este agente já está cadastrado!')
-                    return self.abrir_tela_cadastro()
-            else:
-                agente = Agente(data[0], data[1], data[2])
-                self.__agente_DAO.cadastrar_agente(data[1], data[0], data[2], data[3])
-                self.__tela_gerente.mostra_mensagem('Agente cadastrado!')
-
-    def excluir_agente(self):
-        cpf = self.__tela_gerente.tela_excluir_agentes()
-        if cpf != None:
-            for agentes in self.__agente_DAO.buscar_todos_agentes():
-                if cpf[0] == agentes['cpf']:
-                    self.__agente_DAO.excluir_agente(cpf[0])
-                    return self.abrir_tela_cadastro()
-            else:
-                self.__tela_gerente.mostra_mensagem('Agente Não está cadastrado!')
-
-    def listar_agentes(self):
-        agentes = self.__agente_DAO.buscar_todos_agentes()
-        self.__tela_gerente.componentes_tela_listar_agentes(agentes)
-
-    def modificar_agente(self):
-        cpf = self.__tela_gerente.tela_modificar_agentes()
-
-        if cpf != None:
-            for agentes in self.__agente_DAO.buscar_todos_agentes():
-                if cpf[0] == agentes['cpf']:            
-                    agente = self.__agente_DAO.buscar_agente_por_cpf(cpf[0])
-                    dados_novos = self.__tela_gerente.tela_atualizar_agentes()
-                    if dados_novos != None:
-                        self.__agente_DAO.atualizar_agente(
-                            agente['cpf'], 
-                            dados_novos[1], 
-                            dados_novos[0], 
-                            dados_novos[2], 
-                            dados_novos[3]
-                        )
-                        self.__tela_gerente.mostra_mensagem('Agente Modificado!')
-                        return self.abrir_tela_cadastro()
-                    else:
-                        return self.abrir_tela_cadastro()
-
-            else:
-                self.__tela_gerente.mostra_mensagem('Não há agentes com esse cadastro!')
 
 #--------------------- CADASTRO DE GERENTE -----------------------
 
