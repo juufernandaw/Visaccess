@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="33e457d1-915d-4cd3-9bac-ddce9f263fe8" name="Changes" comment="fix: botao voltarr">
+      <change afterPath="$PROJECT_DIR$/entidades/solicitacao_de_visto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gerente.db" beforeDir="false" afterPath="$PROJECT_DIR$/gerente.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visaccess.db" beforeDir="false" afterPath="$PROJECT_DIR$/visaccess.db" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2OFppKV38WlYvJhfKWYUS4nMzhQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/Julia/visaccess",
+    "settings.editor.selected.configurable": "configurable.group.editor"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Julia\visaccess" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="conexao_bd" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="visaccess" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/config" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config/conexao_bd.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="consulado" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="visaccess" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\Julia\visaccess\consulado.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="visaccess" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.conexao_bd" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="33e457d1-915d-4cd3-9bac-ddce9f263fe8" name="Changes" comment="" />
+      <created>1681166365858</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1681166365858</updated>
+    </task>
+    <task id="LOCAL-00001" summary="feat: creating table consulado">
+      <created>1681519542454</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1681519542454</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: creating DAO class">
+      <created>1681519610850</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681519610850</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: creating view consulado">
+      <created>1681615719102</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1681615719102</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: creating views and method">
+      <created>1681621335648</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681621335648</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: creating dao methods">
+      <created>1681678341867</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1681678341867</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: creating dao list method">
+      <created>1681681689926</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1681681689926</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix: importation path">
+      <created>1681682355226</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1681682355226</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix: removing wrong attrs">
+      <created>1681682383832</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1681682383832</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix: importing path">
+      <created>1681682513845</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1681682513845</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: connecting with controlador sistema">
+      <created>1681685871993</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681685871993</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix: methods initiate">
+      <created>1681692761010</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1681692761010</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fix: sqlite select">
+      <created>1681695806830</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1681695806830</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix: method listar consulado">
+      <created>1681697979143</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1681697979143</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix: method deletar consulado">
+      <created>1681701222945</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1681701222945</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix: removing comments">
+      <created>1681701623538</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1681701623538</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: regras de cadastro">
+      <created>1681729638704</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1681729638704</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fix: fluxo botoes Voltar">
+      <created>1681730553511</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1681730553511</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix: pop msgs">
+      <created>1681731151880</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1681731151880</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fix: botao voltar">
+      <created>1681731522406</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1681731522406</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fix: botao voltarr">
+      <created>1681765111264</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1681765111264</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: creating table consulado" />
+    <MESSAGE value="feat: creating DAO class" />
+    <MESSAGE value="feat: creating view consulado" />
+    <MESSAGE value="feat: creating views and method" />
+    <MESSAGE value="feat: creating dao methods" />
+    <MESSAGE value="feat: creating dao list method" />
+    <MESSAGE value="fix: importation path" />
+    <MESSAGE value="fix: removing wrong attrs" />
+    <MESSAGE value="fix: importing path" />
+    <MESSAGE value="feat: connecting with controlador sistema" />
+    <MESSAGE value="fix: methods initiate" />
+    <MESSAGE value="fix: sqlite select" />
+    <MESSAGE value="fix: method listar consulado" />
+    <MESSAGE value="fix: method deletar consulado" />
+    <MESSAGE value="fix: removing comments" />
+    <MESSAGE value="feat: regras de cadastro" />
+    <MESSAGE value="fix: fluxo botoes Voltar" />
+    <MESSAGE value="fix: pop msgs" />
+    <MESSAGE value="fix: botao voltar" />
+    <MESSAGE value="fix: botao voltarr" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: botao voltarr" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/consulado.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/config/conexao_bd.py</url>
+          <line>22</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
