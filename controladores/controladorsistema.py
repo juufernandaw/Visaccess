@@ -70,6 +70,8 @@ class ControladorSistema:
                         login_com_sucesso = self.__controlador_agente.verificar_login_senha_sqlite(login, senha)
                         if not login_com_sucesso:
                             raise LoginSenhaException
+                    elif login == None and senha == None:
+                        raise LoginSenhaException
                     if login_com_sucesso:
                         funcao_escolhida = lista_opcoes[opcao_escolhida]
                         return funcao_escolhida()
