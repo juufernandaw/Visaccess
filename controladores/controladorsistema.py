@@ -6,6 +6,7 @@ from controladores.controladorconsul import ControladorConsul
 from controladores.controladoragente import ControladorAgente
 from controladores.controladorgerente import ControladorGerente
 from controladores.controlador_consulado import ControladorConsulado
+from controladores.controlador_tipos_vistos import ControladorTiposVisto
 
 
 class ControladorSistema:
@@ -15,6 +16,7 @@ class ControladorSistema:
         self.__controlador_agente = ControladorAgente(self)
         self.__controlador_gerente = ControladorGerente(self)
         self.__controlador_consulado = ControladorConsulado(self)
+        self.__controlador_tipos_vistos = ControladorTiposVisto(self)
         self.__tela_sistema = TelaSistema()
 
     @property
@@ -36,6 +38,10 @@ class ControladorSistema:
     @property
     def controlador_agente(self):
         return self.__controlador_agente
+    
+    @property
+    def controlador_tipos_vistos(self):
+        return self.__controlador_tipos_vistos
 
     def iniciar_tela_sistema(self):
         global opcao_escolhida

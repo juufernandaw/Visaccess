@@ -25,7 +25,7 @@ class ControladorConsul:
                                    3: self.abre_tela_inicial,
                                    4: self.abre_tela_inicial,
                                    5: self.abre_tela_inicial,
-                                   6: self.abre_tela_inicial,
+                                   6: self.__controlador_sistema.controlador_tipos_vistos.abrir_tela_cadastro,
                                    0: self.__controlador_sistema.iniciar_tela_sistema
                                    }
             while True:
