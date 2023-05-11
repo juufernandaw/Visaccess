@@ -36,6 +36,10 @@ class ControladorSistema:
     @property
     def controlador_agente(self):
         return self.__controlador_agente
+    
+    @property
+    def tela_sistema(self):
+        return self.__tela_sistema
 
     def iniciar_tela_sistema(self):
         global opcao_escolhida

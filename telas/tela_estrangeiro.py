@@ -85,16 +85,16 @@ class TelaEstrangeiro:
     
     def tela_adicionar_estrangeiro(self):
         self.componentes_tela_adicionar_atualizar_estrangeiro('Adicionar Estrangeiro')
-        return self.logica_tela_agentes()
+        return self.logica_tela_estrangeiro()
 
     def tela_excluir_estrangeiro(self):
         self.componentes_tela_excluir_modificar_estrangeiro('Excluir Estrangeiro')
-        return self.logica_tela_agentes()
+        return self.logica_tela_estrangeiro()
 
     def tela_modificar_estrangeiro(self):
         self.componentes_tela_excluir_modificar_estrangeiro('Modificar Estrangeiro')
-        return self.logica_tela_agentes()
+        return self.logica_tela_estrangeiro()
     
     def tela_atualizar_estrangeiro(self):
         self.componentes_tela_adicionar_atualizar_estrangeiro('Atualizar Estrangeiro')
-        return self.logica_tela_agentes()
+        return self.logica_tela_estrangeiro()
