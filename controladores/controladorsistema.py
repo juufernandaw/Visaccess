@@ -1,11 +1,11 @@
 from excecoes.valueErrorException import ValueErrorException
 from excecoes.loginsenhaException import LoginSenhaException
-from excecoes.usuarioinexistenteException import UsuarioInexistenteException
 from telas.telasistema import TelaSistema
 from controladores.controladorconsul import ControladorConsul
 from controladores.controladoragente import ControladorAgente
 from controladores.controladorgerente import ControladorGerente
 from controladores.controlador_consulado import ControladorConsulado
+from controladores.controlador_solicitacao_de_visto import ControladorSolicitacaoVisto
 
 
 class ControladorSistema:
@@ -15,6 +15,7 @@ class ControladorSistema:
         self.__controlador_agente = ControladorAgente(self)
         self.__controlador_gerente = ControladorGerente(self)
         self.__controlador_consulado = ControladorConsulado(self)
+        self.__controlador_solicitacao_visto = ControladorSolicitacaoVisto(self)
         self.__tela_sistema = TelaSistema()
 
     @property
@@ -36,6 +37,10 @@ class ControladorSistema:
     @property
     def controlador_agente(self):
         return self.__controlador_agente
+
+    @property
+    def controlador_solicitacao_visto(self):
+        return self.__controlador_solicitacao_visto
 
     def iniciar_tela_sistema(self):
         global opcao_escolhida

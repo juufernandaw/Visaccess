@@ -3,13 +3,13 @@ from excecoes.valueErrorException import ValueErrorException
 from excecoes.usuarioinexistenteException import UsuarioInexistenteException
 from persistencia.gerenteDAO import GerenteDAO
 from persistencia.agenteDAO import AgenteDAO
+from controladores.controladorsistema import ControladorSistema
 from telas.telagerente import TelaGerente
-from entidades.agente import Agente
 from entidades.gerente import Gerente
 import sqlite3
 
 class ControladorGerente:
-    def __init__(self, controlador_sistema):
+    def __init__(self, controlador_sistema: ControladorSistema):
         self.__gerente_dao = GerenteDAO()
         self.__agente_DAO = AgenteDAO()
         self.__controlador_sistema = controlador_sistema
@@ -25,7 +25,7 @@ class ControladorGerente:
         while True:
             opcao = self.__tela_gerente.tela_gerente_inicial()
             if opcao == 1:
-                self.__tela_gerente.mostra_mensagem('Cadastrar Solicitação de Visto')
+                self.__controlador_sistema.controlador_solicitacao_visto.abrir_tela_solicitacao_visto()
             elif opcao == 2:
                 self.__tela_gerente.mostra_mensagem('Aprovar Solicitação de Visto')
             elif opcao == 3:
