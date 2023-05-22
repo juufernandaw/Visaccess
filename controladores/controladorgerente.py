@@ -31,7 +31,7 @@ class ControladorGerente:
             elif opcao == 3:
                 self.__controlador_sistema.controlador_agente.abrir_tela_cadastro()
             elif opcao == 4:
-                self.__controlador_sistema.controlador_estrangeiro.
+                self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro()
             elif opcao == 5:
                 self.__tela_gerente.mostra_mensagem('Emitir Relatório de Solicitações Aprovadas')
             elif opcao == 0:

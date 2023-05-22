@@ -124,7 +124,7 @@ class ControladorAgente:
             else:
                 return False
 
-    def abre_tela_inicial(self):  # abre a tela aluno pós login da tela
+    def abre_tela_inicial(self):  # abre a tela
         try:
             mexer_agente_opcoes = {1: self.voltar_tela_sistema,
                                   2: self.voltar_tela_sistema,
