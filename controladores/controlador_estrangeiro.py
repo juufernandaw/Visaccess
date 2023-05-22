@@ -55,7 +55,7 @@ class ControladorEstrangeiro:
                         self.tela_agente.mostra_mensagem('Este estrangeiro já está cadastrado!')
                         return self.abrir_tela_cadastro()
                     else:
-                        agente = Estrangeiro(informacoes[0], informacoes[1], informacoes[2])
+                        estrangeiro = Estrangeiro(informacoes[0], informacoes[1], informacoes[2])
                         self.agente_dao.cadastrar_agente(informacoes[1], informacoes[0], informacoes[2], informacoes[3])
                         self.tela_agente.mostra_mensagem('Estrangeiro cadastrado!')
                 else:
