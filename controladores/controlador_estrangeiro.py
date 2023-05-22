@@ -25,22 +25,29 @@ class ControladorEstrangeiro:
     def controlador_sistema(self):
         return self.__controlador_sistema
 
-
     def adicionar_estrangeiro(self):
         try:
             informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro()
-            if informacoes[]
             if informacoes != None:
-                if data[0] and data[1] and data[2] and data[3] != '':
-                    agente = self.agente_dao.buscar_agente_por_cpf(data[1])
+                if informacoes[0] and informacoes[1] and informacoes[2] and informacoes[3] != '':
+                    agente = self.agente_dao.buscar_agente_por_cpf(informacoes[1])
                     if agente != None:
-                        self.tela_agente.mostra_mensagem('Este agente já está cadastrado!')
+                        self.tela_agente.mostra_mensagem('Este estrangeiro já está cadastrado!')
                         return self.abrir_tela_cadastro()
                     else:
-                        agente = Agente(data[0], data[1], data[2])
-                        self.agente_dao.cadastrar_agente(data[1], data[0], data[2], data[3])
-                        self.tela_agente.mostra_mensagem('Agente cadastrado!')
+                        agente = Estrangeiro(informacoes[0], informacoes[1], informacoes[2])
+                        self.agente_dao.cadastrar_agente(informacoes[1], informacoes[0], informacoes[2], informacoes[3])
+                        self.tela_agente.mostra_mensagem('Estrangeiro cadastrado!')
                 else:
                     self.tela_agente.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
         except ValueErrorException as e:
             self.__controlador_sistema.tela_sistema()           
+
+    def excluir_estrangeiro(self):
+        pass
+
+    def listar_estrangeiro(self):
+        pass
+
+    def modificar_estrangeiro(self):
+        pass

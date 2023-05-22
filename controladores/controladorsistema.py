@@ -6,6 +6,7 @@ from controladores.controladorconsul import ControladorConsul
 from controladores.controladoragente import ControladorAgente
 from controladores.controladorgerente import ControladorGerente
 from controladores.controlador_consulado import ControladorConsulado
+from controladores.controlador_estrangeiro import ControladorEstrangeiro
 
 
 class ControladorSistema:
@@ -15,6 +16,7 @@ class ControladorSistema:
         self.__controlador_agente = ControladorAgente(self)
         self.__controlador_gerente = ControladorGerente(self)
         self.__controlador_consulado = ControladorConsulado(self)
+        self.__controlador_estrangeiro = ControladorEstrangeiro(self)
         self.__tela_sistema = TelaSistema()
 
     @property
@@ -36,7 +38,11 @@ class ControladorSistema:
     @property
     def controlador_agente(self):
         return self.__controlador_agente
-    
+
+    @property
+    def controlador_estrangeiro(self):
+        return self.__controlador_estrangeiro
+
     @property
     def tela_sistema(self):
         return self.__tela_sistema
