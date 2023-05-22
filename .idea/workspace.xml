@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="33e457d1-915d-4cd3-9bac-ddce9f263fe8" name="Changes" comment="fix: botao voltarr" />
+    <list default="true" id="33e457d1-915d-4cd3-9bac-ddce9f263fe8" name="Changes" comment="fix: botao voltarr">
+      <change afterPath="$PROJECT_DIR$/persistencia/blacklistDAO.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entidades/blacklist.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidades/blacklist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/persistencia/consuladoDAO.py" beforeDir="false" afterPath="$PROJECT_DIR$/persistencia/consuladoDAO.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
