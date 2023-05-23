@@ -1,7 +1,7 @@
-import PySimpleGUI as tela_blacklist
+import PySimpleGUI as tela_tipo_visto
 
 
-class TelaBlacklist:
+class TelaTipoVisto:
 
     def __init__(self):
         self.__window = None

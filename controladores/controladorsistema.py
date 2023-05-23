@@ -6,6 +6,9 @@ from controladores.controladoragente import ControladorAgente
 from controladores.controladorgerente import ControladorGerente
 from controladores.controlador_consulado import ControladorConsulado
 from controladores.controlador_solicitacao_de_visto import ControladorSolicitacaoVisto
+from controladores.controlador_blacklist import ControladorBlacklist
+from controladores.controlador_documento_verificado import ControladorDocumentoVerificado
+from controladores.controlador_tipo_visto import ControladorTipoVisto
 
 
 class ControladorSistema:
@@ -15,12 +18,23 @@ class ControladorSistema:
         self.__controlador_agente = ControladorAgente(self)
         self.__controlador_gerente = ControladorGerente(self)
         self.__controlador_consulado = ControladorConsulado(self)
+        self.__controlador_tipo_visto = ControladorTipoVisto(self)
         self.__controlador_solicitacao_visto = ControladorSolicitacaoVisto(self)
+        self.__controlador_blacklist = ControladorBlacklist(self)
+        self.__controlador_documento_verificado = ControladorDocumentoVerificado(self)
         self.__tela_sistema = TelaSistema()
 
     @property
     def usuario_logado(self):  # conseguir saber quem logou
         return self.__usuario_logado
+
+    @property
+    def controlador_tipo_visto(self):
+        return self.__controlador_tipo_visto
+
+    @property
+    def controlador_documento_verificado(self):
+        return self.__controlador_documento_verificado
 
     @property
     def controlador_consul(self):
@@ -41,6 +55,10 @@ class ControladorSistema:
     @property
     def controlador_solicitacao_visto(self):
         return self.__controlador_solicitacao_visto
+
+    @property
+    def controlador_blacklist(self):
+        return self.__controlador_blacklist
 
     def iniciar_tela_sistema(self):
         global opcao_escolhida
