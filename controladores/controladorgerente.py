@@ -15,6 +15,7 @@ class ControladorGerente:
         self.__controlador_sistema = controlador_sistema
         self.__tela_gerente = TelaGerente()
 
+
 # ---------- TELA GERENTE ABAIXO -----------------------
 
     @property
