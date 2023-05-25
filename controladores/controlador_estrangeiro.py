@@ -49,21 +49,24 @@ class ControladorEstrangeiro:
 
     def adicionar_estrangeiro(self):
         try:
+            #IR PARA TELA
             informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro()
             if informacoes != None:
                 if informacoes[0] and informacoes[1] and informacoes[2] and informacoes[3] != '':
                     agente = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(informacoes[1])
                     if agente != None:
                         self.tela_estrangeiro.mostra_mensagem('Este estrangeiro já está cadastrado!')
-                        return self.abrir_tela_cadastro()
+                        return self.adicionar_estrangeiro()
                     else:
+                        #CRIAR ENTIDADE
                         estrangeiro = Estrangeiro(informacoes[0], informacoes[1], informacoes[2])
+                        #BANCO DE DADOS
                         self.estrangeiro_dao.cadastrar_estrangeiro(informacoes[1], informacoes[0], informacoes[2], informacoes[3])
                         self.tela_estrangeiro.mostra_mensagem('Estrangeiro cadastrado!')
                 else:
-                    self.tela_agente.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
+                    self.tela_estrangeiro.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
         except ValueErrorException as e:
-            self.__controlador_sistema.tela_sistema()           
+            self.abre_tela_inicial_estrangeiro()           
 
     def excluir_estrangeiro(self):
         pass

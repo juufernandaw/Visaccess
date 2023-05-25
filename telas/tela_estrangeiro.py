@@ -42,7 +42,7 @@ class TelaEstrangeiro:
 
     def componentes_tela_adicionar_atualizar_estrangeiro(self, tipo):
         estado_civil = ["Solteiro", "Casado", "Viuvo(a)", "Namorando"]
-        paises = ['Afeganistão', 'África do Sul', 'Albânia', 'Alemanha', 'Andorra', 'Angola', 'Antígua e Barbuda', 'Arábia Saudita', 'Argélia', 'Argentina', 'Armênia', 'Austrália', 'Áustria', 'Azerbaijão','Aruba', 'Bahamas', 'Bahrein', 'Bangladesh', 'Barbados', 'Belarus', 'Bélgica', 'Belize', 'Benin', 'Bhutan', 'Bolívia', 'Bósnia e Herzegovina', 'Botswana', 'Brasil', 'Brunei', 'Bulgária', 'Burkina Faso', 'Burundi', 'Butão', 'Cabo Verde', 'Camarões', 'Camboja', 'Canadá', 'Catar', 'Cazaquistão', 'Chade', 'Chile', 'China', 'Chipre', 'Colômbia', 'Comores', 'Congo', 'Coreia do Norte', 'Coreia do Sul', 'Costa do Marfim', 'Costa Rica', 'Croácia', 'Cuba', 'Dinamarca', 'Djibouti', 'Dominica', 'Egito', 'El Salvador', 'Emirados Árabes Unidos', 'Equador', 'Eritreia', 'Eslováquia', 'Eslovênia', 'Espanha', 'Estados Unidos da América', 'Estônia', 'Etiópia', 'Fiji', 'Filipinas', 'Finlândia', 'França', 'Gabão', 'Gâmbia', 'Gana', 'Geórgia', 'Granada', 'Grécia', 'Guatemala', 'Guiana', 'Guiné', 'Guiné Equatorial', 'Guiné-Bissau', 'Haiti', 'Honduras', 'Hungria', 'Iêmen', 'Ilhas Marshall', 'Ilhas Maurício', 'Índia', 'Indonésia', 'Irã', 'Iraque', 'Irlanda', 'Islândia', 'Israel', 'Itália', 'Jamaica', 'Japão', 'Jordânia', 'Kiribati', 'Kosovo', 'Kuwait', 'Laos', 'Lesoto', 'Letônia', 'Líbano', 'Libéria', 'Líbia', 'Liechtenstein', 'Lituânia', 'Luxemburgo', 'Macedônia', 'Madagascar', 'Malásia', 'Malawi', 'Maldivas', 'Mali', 'Malta', 'Marrocos', 'Mauritânia', 'México', 'Micronésia', 'Moçambique', 'Moldávia', 'Mônaco', 'Mongólia', 'Montenegro', 'Namíbia', 'Nauru', 'Nepal', 'Nicarágua', 'Níger', 'Nigéria', 'Noruega', 'Nova Zelândia', 'Omã', 'Holanda', 'Peru', 'Palestina', 'Panamá', 'Papua Nova Guiné', 'Paquistão', 'Paraguai', 'Peru', 'Polônia', 'Venezuela','Tailândia','Suriname','Uruguai']
+        paises = [] #vai vim do BD ainda preciso fazer isso
         layout = [
             [tela_estrangeiro.Text('Passaporte'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Nome'), tela_estrangeiro.InputText('')],
@@ -64,7 +64,7 @@ class TelaEstrangeiro:
         ]
         self.__window = tela_estrangeiro.Window(tipo).Layout(layout)
 
-    def componentes_tela_listar_estrangeiro(self, lista_estrangeiros):
+    def tela_listar_estrangeiro(self, lista_estrangeiros):
         layout = [
             [tela_estrangeiro.Text('Lista Estrangeiros', font=("Helvica", 25))],
             [tela_estrangeiro.Listbox(values=lista_estrangeiros, select_mode='extended', size=(30, 6))],
@@ -85,16 +85,16 @@ class TelaEstrangeiro:
     
     def tela_adicionar_estrangeiro(self):
         self.componentes_tela_adicionar_atualizar_estrangeiro('Adicionar Estrangeiro')
-        return self.logica_tela_estrangeiro()
+        self.logica_tela_estrangeiro()
 
     def tela_excluir_estrangeiro(self):
         self.componentes_tela_excluir_modificar_estrangeiro('Excluir Estrangeiro')
-        return self.logica_tela_estrangeiro()
+        self.logica_tela_estrangeiro()
 
     def tela_modificar_estrangeiro(self):
         self.componentes_tela_excluir_modificar_estrangeiro('Modificar Estrangeiro')
-        return self.logica_tela_estrangeiro()
+        self.logica_tela_estrangeiro()
     
     def tela_atualizar_estrangeiro(self):
         self.componentes_tela_adicionar_atualizar_estrangeiro('Atualizar Estrangeiro')
-        return self.logica_tela_estrangeiro()
+        self.logica_tela_estrangeiro()
