@@ -89,7 +89,44 @@ class ControladorEstrangeiro:
                 return self.abre_tela_inicial_estrangeiro()
 
     def listar_estrangeiro(self):
-        pass
+        estrangeiro = self.estrangeiro_dao.buscar_todos_estrangeiros()
+        self.tela_estrangeiro.tela_listar_estrangeiro(estrangeiro)
+        
 
     def modificar_estrangeiro(self):
-        pass
+        passaporte = self.tela_estrangeiro.tela_modificar_estrangeiro()
+        try:
+            if passaporte != None:
+                estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte[0])
+                if estrangeiro != None:
+                        dados_novos = self.tela_estrangeiro.tela_atualizar_estrangeiro()
+                        if dados_novos != None:
+                            if dados_novos[0] and dados_novos[1] and dados_novos[2] and dados_novos[3] and dados_novos[4 ]and dados_novos[5] and dados_novos[6]and dados_novos[7]and dados_novos[8] != '':
+                                teste_novo_dados = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(dados_novos[0])
+                                if teste_novo_dados == None:
+                                    self.estrangeiro_dao.atualizar_estrangeiro(
+                                        estrangeiro['passaporte'], 
+                                        dados_novos[0], 
+                                        dados_novos[1], 
+                                        dados_novos[2], 
+                                        dados_novos[3],
+                                        dados_novos[4],
+                                        dados_novos[5],
+                                        dados_novos[6],
+                                        dados_novos[7],
+                                        dados_novos[8],
+                                    )
+                                    self.tela_estrangeiro.mostra_mensagem('Estrangeiro Modificado!')
+                                    return self.abre_tela_inicial_estrangeiro()
+                                else:
+                                    self.tela_estrangeiro.mostra_mensagem('Estrangeiro já consta no sistema!')
+                                    return self.abre_tela_inicial_estrangeiro()
+                            else:
+                                self.estrangeiro_dao.mostra_mensagem('Preencha com os dados corretos!')
+                                return self.abre_tela_inicial_estrangeiro()
+                else:
+                    self.tela_estrangeiro.mostra_mensagem('Não há agentes com esse cadastro!')
+        except:
+            self.tela_estrangeiro.mostra_mensagem()
+            
+
