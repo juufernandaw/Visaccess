@@ -127,7 +127,7 @@ class ControladorAgente:
     def abre_tela_inicial(self):  # abre a tela
         try:
             mexer_agente_opcoes = {1: self.voltar_tela_sistema,
-                                  2: self.voltar_tela_sistema,
+                                  2: self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro, #cadastrar estrangeiro
                                   0: self.voltar_tela_sistema
                                   }
             while True:

@@ -42,7 +42,7 @@ class TelaEstrangeiro:
 
     def componentes_tela_adicionar_atualizar_estrangeiro(self, tipo):
         estado_civil = ["Solteiro", "Casado", "Viuvo(a)", "Namorando"]
-        paises = [] #vai vim do BD ainda preciso fazer isso
+        paises = ['Argentina', 'Paraguai', 'Uruguai'] #vai vim do BD ainda preciso fazer isso
         layout = [
             [tela_estrangeiro.Text('Passaporte'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Nome'), tela_estrangeiro.InputText('')],

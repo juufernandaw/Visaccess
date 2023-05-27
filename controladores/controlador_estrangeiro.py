@@ -3,6 +3,7 @@ from persistencia.estrangeiroDAO import EstrangeiroDAO
 from excecoes.loginsenhaException import LoginSenhaException
 from excecoes.valueErrorException import ValueErrorException
 from excecoes.usuarioinexistenteException import UsuarioInexistenteException
+from excecoes.campovazioexception import CampoVazioException
 from telas.tela_estrangeiro import TelaEstrangeiro
 import sqlite3
 
@@ -52,24 +53,40 @@ class ControladorEstrangeiro:
             #IR PARA TELA
             informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro()
             if informacoes != None:
-                if informacoes[0] and informacoes[1] and informacoes[2] and informacoes[3] != '':
-                    agente = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(informacoes[1])
+                if informacoes[0] != '' and informacoes[1] != '' and informacoes[2] != '' and informacoes[3] != '' and informacoes[4] != '' and informacoes[5] != '' and informacoes[6] != '' and informacoes[7] != '' and informacoes[8] != '':
+                    if informacoes[0] == '' or informacoes[1] == '' or informacoes[2] == '' or informacoes[3] == '' or informacoes[4] == '' or informacoes[5] =='' or informacoes[6] == '' or informacoes[7] =='' or informacoes[8] == '':
+                        raise CampoVazioException
+                    #buscar estrangeiro por passporte. Primeira opcao do dict
+                    agente = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(informacoes[0])
                     if agente != None:
                         self.tela_estrangeiro.mostra_mensagem('Este estrangeiro já está cadastrado!')
-                        return self.adicionar_estrangeiro()
+                        return self.abre_tela_inicial_estrangeiro()
                     else:
                         #CRIAR ENTIDADE
-                        estrangeiro = Estrangeiro(informacoes[0], informacoes[1], informacoes[2])
+                        estrangeiro = Estrangeiro(informacoes[0], informacoes[1], informacoes[2],informacoes[2],informacoes[4],informacoes[5],informacoes[6],informacoes[7],informacoes[8])
                         #BANCO DE DADOS
-                        self.estrangeiro_dao.cadastrar_estrangeiro(informacoes[1], informacoes[0], informacoes[2], informacoes[3])
+                        self.estrangeiro_dao.cadastrar_estrangeiro(informacoes[0], informacoes[1], informacoes[2],informacoes[2],informacoes[4],informacoes[5],informacoes[6],informacoes[7],informacoes[8])
                         self.tela_estrangeiro.mostra_mensagem('Estrangeiro cadastrado!')
                 else:
                     self.tela_estrangeiro.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
         except ValueErrorException as e:
-            self.abre_tela_inicial_estrangeiro()           
+            self.tela_estrangeiro.mostra_mensagem(e)
+            self.abre_tela_inicial_estrangeiro()
+        except CampoVazioException as e:
+            self.tela_estrangeiro.mostra_mensagem(e)
+            self.abre_tela_inicial_estrangeiro()             
 
     def excluir_estrangeiro(self):
-        pass
+        passaporte = self.tela_estrangeiro.tela_excluir_estrangeiro()
+        if passaporte != None:
+            estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte[0])
+            if estrangeiro != None:
+                self.estrangeiro_dao.excluir_estrangeiro(passaporte[0])
+                self.tela_estrangeiro.mostra_mensagem('Estrangeiro Excluído!')
+                return self.excluir_estrangeiro()
+            else:
+                self.tela_estrangeiro.mostra_mensagem('Estrangeiro Não está cadastrado!')
+                return self.abre_tela_inicial_estrangeiro()
 
     def listar_estrangeiro(self):
         pass

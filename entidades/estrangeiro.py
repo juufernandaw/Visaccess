@@ -2,7 +2,7 @@ import datetime
 
 
 class Estrangeiro:
-    def __init__(self, nome: str, passaporte: str, data_nasc: datetime, estado_civil: str, pais: str, estado: str, cidade: str, trabalho: bool, profissao: str ):
+    def __init__(self, passaporte: str, nome: str, data_nasc: datetime, estado_civil: str, pais: str, estado: str, cidade: str, trabalho: bool, profissao: str ):
         self.__nome = nome
         self.__passaporte = passaporte
         self.__data_nasc = data_nasc
