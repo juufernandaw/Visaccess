@@ -22,7 +22,7 @@ class ControladorGerente:
     def tela_sistema(self):
         return self.__tela_gerente
 
-    def iniciar_tela_gerente(self):
+    def abre_tela_inicial(self):
         while True:
             opcao = self.__tela_gerente.tela_gerente_inicial()
             if opcao == 1:
