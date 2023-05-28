@@ -71,9 +71,9 @@ class TelaEstrangeiro:
             [tela_estrangeiro.Button('Voltar')]
         ]
         self.__window = tela_estrangeiro.Window('Lista de Estrangeiro').Layout(layout)
-        button, values = self.__window.Read()
+        button = self.__window.Read()
         self.close()
-        return button, values
+        return button
 
     # lógica para adicionar/excluir/modificar estrangeiro
     def logica_tela_estrangeiro(self):

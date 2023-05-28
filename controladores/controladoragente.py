@@ -136,6 +136,8 @@ class ControladorAgente:
                     raise ValueErrorException
                 else:
                     funcao_escolhida = mexer_agente_opcoes[opcao_escolhida]
+                    if funcao_escolhida == self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro:
+                        return funcao_escolhida('agente')
                     return funcao_escolhida()
         except ValueErrorException as e:
             self.__tela_sistema.mostrar_msg(e)

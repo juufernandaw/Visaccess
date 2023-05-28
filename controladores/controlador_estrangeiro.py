@@ -26,13 +26,13 @@ class ControladorEstrangeiro:
     def controlador_sistema(self):
         return self.__controlador_sistema
 
-    def abre_tela_inicial_estrangeiro(self):  # abre a tela para cadastrar estrangeiro
+    def abre_tela_inicial_estrangeiro(self, gerente_agente:str):  # abre a tela para cadastrar estrangeiro voltar agente
         try:
             mexer_agente_opcoes = {1: self.__tela_estrangeiro.tela_adicionar_estrangeiro,
                                   2: self.__tela_estrangeiro.tela_atualizar_estrangeiro,
                                   3: self.__tela_estrangeiro.tela_excluir_estrangeiro,
                                   4: self.__tela_estrangeiro.tela_modificar_estrangeiro,
-                                  0: self.voltar_tela_gerente
+                                  0: self.voltar_tela
                                   }
             while True:
                 opcao_escolhida = self.__tela_estrangeiro.tela_cadastro_estrangeiro()
@@ -40,14 +40,22 @@ class ControladorEstrangeiro:
                     raise ValueErrorException
                 else:
                     funcao_escolhida = mexer_agente_opcoes[opcao_escolhida]
+                    if gerente_agente == 'agente' and opcao_escolhida == 0:
+                        return self.voltar('agente')
+                    elif gerente_agente == 'gerente' and opcao_escolhida == 0:
+                        return self.voltar('gerente')
                     return funcao_escolhida()
         except ValueErrorException as e:
             self.__tela_estrangeiro.mostra_mensagem("Tente novamente")
             self.abre_tela_inicial_estrangeiro()
 
-    def voltar_tela_gerente(self):
-        return self.__controlador_sistema.controlador_gerente.iniciar_tela_gerente()
-
+    def voltar_tela(self, escolha:str):
+        if escolha == 'agente':
+            return self.__controlador_sistema.controlador_agente.abre_tela_inicial()
+        elif escolha == 'gerente':
+            return self.__controlador_sistema.controlador_gerente.iniciar_tela_gerente()
+        
+    
     def adicionar_estrangeiro(self):
         try:
             #IR PARA TELA
@@ -90,9 +98,12 @@ class ControladorEstrangeiro:
 
     def listar_estrangeiro(self):
         estrangeiro = self.estrangeiro_dao.buscar_todos_estrangeiros()
-        self.tela_estrangeiro.tela_listar_estrangeiro(estrangeiro)
+        opcao = self.tela_estrangeiro.tela_listar_estrangeiro(estrangeiro)
+        if opcao == 'Voltar':
+            return self.abre_tela_inicial_estrangeiro()
+        else:
+            self.tela_estrangeiro.mostra_mensagem("Clicar em voltar")
         
-
     def modificar_estrangeiro(self):
         passaporte = self.tela_estrangeiro.tela_modificar_estrangeiro()
         try:

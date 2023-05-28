@@ -32,7 +32,7 @@ class ControladorGerente:
             elif opcao == 3:
                 self.__controlador_sistema.controlador_agente.abrir_tela_cadastro()
             elif opcao == 4:
-                self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro()
+                self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro('gerente')
             elif opcao == 5:
                 self.__tela_gerente.mostra_mensagem('Emitir Relatório de Solicitações Aprovadas')
             elif opcao == 0:
@@ -140,20 +140,6 @@ class ControladorGerente:
 
 
 #--------------------- VERIFICAÇÃO LOGIN -----------------------
-
-    # def verificar_login_senha(self, cpf, senha):  # VERIFICAR o cpf e senha.
-    #     if isinstance(cpf, str) and isinstance(senha, str):
-    #         try:
-    #             for gerente in self.__gerente_dao.get_all():
-    #                 if (gerente.cpf == cpf) and (gerente.senha == senha):
-    #                     return True, gerente  # gerente q achou retornar
-    #                 if gerente.cpf != cpf or not gerente.senha != senha:
-    #                     raise LoginSenhaException
-    #         except LoginSenhaException as e: #exception para login e senha errada
-    #             self.__tela_sistema.mostrar_msg(e)
-    #             self.__controlador_sistema.iniciar_tela_sistema() #voltar para a inicial do sistema
-    #         else:
-    #             return False
 
     def verificar_login_senha_sqlite(self, cpf, senha):  # VERIFICAR o cpf e senha pelo sqlite.
         if isinstance(cpf, str) and isinstance(senha, str):
