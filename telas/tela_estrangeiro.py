@@ -51,8 +51,8 @@ class TelaEstrangeiro:
             [tela_estrangeiro.Text('País'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Estado'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Cidade'), tela_estrangeiro.InputText('')],
-            [tela_estrangeiro.Text('Trabalho'), tela_estrangeiro.InputText('')],
-            [tela_estrangeiro.Text('Profissão'), tela_estrangeiro.Combo([True, False])],
+            [tela_estrangeiro.Text('Trabalho'), tela_estrangeiro.Combo([True, False])],
+            [tela_estrangeiro.Text('Profissão'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Button('Confirmar'), tela_estrangeiro.Button('Voltar')]
         ]
         self.__window = tela_estrangeiro.Window(tipo).Layout(layout)

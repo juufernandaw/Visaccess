@@ -86,8 +86,8 @@ class ControladorEstrangeiro:
                     formato_data = '%d/%m/%Y'
                     data_convertida = datetime.strptime(data_nascimento_string, formato_data).date()
                     informacoes[2] = data_convertida
-                    agente = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(informacoes[0])
-                    if agente != None:
+                    estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(informacoes[0])
+                    if estrangeiro != None:
                         self.tela_estrangeiro.mostra_mensagem('Este estrangeiro já está cadastrado!')
                         return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
                     else:
