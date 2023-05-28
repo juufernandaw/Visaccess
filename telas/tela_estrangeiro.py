@@ -46,7 +46,7 @@ class TelaEstrangeiro:
         layout = [
             [tela_estrangeiro.Text('Passaporte'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Nome'), tela_estrangeiro.InputText('')],
-            [tela_estrangeiro.Text('Data de Nascimento'), tela_estrangeiro.InputText('')],
+            [tela_estrangeiro.Text('Data de Nascimento (dd/mm/aaaa)'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Estado civil'), tela_estrangeiro.Combo(estado_civil)],
             [tela_estrangeiro.Text('País'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Estado'), tela_estrangeiro.InputText('')],
