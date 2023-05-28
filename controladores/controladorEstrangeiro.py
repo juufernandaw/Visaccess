@@ -82,9 +82,9 @@ class ControladorEstrangeiro:
                                                   informacoes[4], informacoes[5], informacoes[6], informacoes[7],
                                                   informacoes[8])
                         # BANCO DE DADOS
-                        self.estrangeiro_dao.cadastrar_estrangeiro(informacoes[0], informacoes[1], informacoes[2],
-                                                                   informacoes[2], informacoes[4], informacoes[5],
-                                                                   informacoes[6], informacoes[7], informacoes[8])
+                        self.estrangeiro_dao.cadastrar_estrangeiro(estrangeiro.passaporte, estrangeiro.nome, estrangeiro.data_nasc,
+                                                                   estrangeiro.estado_civil, estrangeiro.pais, estrangeiro.estado,
+                                                                   estrangeiro.cidade, estrangeiro.trabalho, estrangeiro.profissao)
                         self.tela_estrangeiro.mostra_mensagem('Estrangeiro cadastrado!')
                 else:
                     self.tela_estrangeiro.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
