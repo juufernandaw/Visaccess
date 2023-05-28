@@ -7,8 +7,8 @@ class TelaTipoVisto:
     def close(self):
         self.__window.Close()
 
-    def mostra_mensagem(self, interface_tela_tipos_visto):
-        interface_tela_tipos_visto.popup(interface_tela_tipos_visto)
+    def mostra_mensagem(self, minterface_tela_tipos_visto):
+        interface_tela_tipos_visto.popup(minterface_tela_tipos_visto)
 
 # TELAS:
 
@@ -48,11 +48,11 @@ class TelaTipoVisto:
     # TELAS SECUNDÁRIAS:
 
     # tela para adicionar/atualizar tipos de visto:
-    def componentes_tela_adicionar_atualizar_tipos_visto(self, tipo):
+    def componentes_tela_adicionar_atualizar_tipos_visto(self, tipo, docs):
         layout = [
             [interface_tela_tipos_visto.Text('Nome'), interface_tela_tipos_visto.InputText('')],
-            [interface_tela_tipos_visto.Text('Validade'), interface_tela_tipos_visto.InputText('')],
-            [interface_tela_tipos_visto.Text('Documentos???'), interface_tela_tipos_visto.InputText('')],
+            [interface_tela_tipos_visto.Input(key='-DATE-', enable_events=False, readonly=True), interface_tela_tipos_visto.CalendarButton('Choose', target='-DATE-', format='%Y-%m-%d')],
+            [interface_tela_tipos_visto.Listbox(docs, size=(30, 6), select_mode='extended', key='-DOCUMENTOS-')],
             [interface_tela_tipos_visto.Button('Confirmar'), interface_tela_tipos_visto.Button('Voltar')]
         ]
         self.__window = interface_tela_tipos_visto.Window(tipo).Layout(layout)
@@ -78,17 +78,16 @@ class TelaTipoVisto:
     # lógica para adicionar/excluir/modificar tipos de visto
     def logica_tela_tipos_visto(self):
         button, data = self.__window.Read()
-
         self.close()
-
         if button in (None, 'Voltar'):
             self.close()
+
             return None
 
         return data
     
-    def tela_adicionar_tipos_visto(self):
-        self.componentes_tela_adicionar_atualizar_tipos_visto('Adicionar Tipo de Visto')
+    def tela_adicionar_tipos_visto(self, docs):
+        self.componentes_tela_adicionar_atualizar_tipos_visto('Adicionar Tipo de Visto', docs)
         return self.logica_tela_tipos_visto()
 
     def tela_excluir_tipos_visto(self):
@@ -99,6 +98,6 @@ class TelaTipoVisto:
         self.componentes_tela_excluir_modificar_tipos_visto('Modificar Tipo de Visto')
         return self.logica_tela_tipos_visto()
     
-    def tela_atualizar_tipos_visto(self):
-        self.componentes_tela_adicionar_atualizar_tipos_visto('Atualizar Tipo de Visto')
+    def tela_atualizar_tipos_visto(self, docs):
+        self.componentes_tela_adicionar_atualizar_tipos_visto('Atualizar Tipo de Visto', docs)
         return self.logica_tela_tipos_visto()
