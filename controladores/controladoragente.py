@@ -124,22 +124,24 @@ class ControladorAgente:
             else:
                 return False
 
-    def abre_tela_inicial(self):  # abre a tela aluno pós login da tela
-        try:
-            mexer_agente_opcoes = {1: self.voltar_tela_sistema,
-                                  2: self.voltar_tela_sistema,
-                                  0: self.voltar_tela_sistema
-                                  }
-            while True:
-                opcao_escolhida = self.__tela_agente.tela_agente_inicial()
-                if opcao_escolhida != 1 and opcao_escolhida != 2 and opcao_escolhida != 0:
-                    raise ValueErrorException
-                else:
-                    funcao_escolhida = mexer_agente_opcoes[opcao_escolhida]
-                    return funcao_escolhida()
-        except ValueErrorException as e:
-            self.__tela_sistema.mostrar_msg(e)
-            self.abre_tela_inicial()
+    def abre_tela_inicial(self):  # abre a tela
+            try:
+                mexer_agente_opcoes = {1: self.voltar_tela_sistema,
+                                    2: self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro, #cadastrar estrangeiro
+                                    0: self.voltar_tela_sistema
+                                    }
+                while True:
+                    opcao_escolhida = self.__tela_agente.tela_agente_inicial()
+                    if opcao_escolhida != 1 and opcao_escolhida != 2 and opcao_escolhida != 0:
+                        raise ValueErrorException
+                    else:
+                        funcao_escolhida = mexer_agente_opcoes[opcao_escolhida]
+                        if funcao_escolhida == self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro:
+                            return funcao_escolhida('agente')
+                        return funcao_escolhida()
+            except ValueErrorException as e:
+                self.__tela_sistema.mostrar_msg(e)
+                self.abre_tela_inicial()
 
     def voltar_tela_sistema(self):
         return self.__controlador_sistema.iniciar_tela_sistema()
