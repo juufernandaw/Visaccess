@@ -41,9 +41,9 @@ class ControladorEstrangeiro:
                 else:
                     funcao_escolhida = mexer_agente_opcoes[opcao_escolhida]
                     if gerente_agente == 'agente' and opcao_escolhida == 0:
-                        return self.voltar('agente')
+                        return self.voltar_tela('agente')
                     elif gerente_agente == 'gerente' and opcao_escolhida == 0:
-                        return self.voltar('gerente')
+                        return self.voltar_tela('gerente')
                     return funcao_escolhida()
         except ValueErrorException as e:
             self.__tela_estrangeiro.mostra_mensagem("Tente novamente")
