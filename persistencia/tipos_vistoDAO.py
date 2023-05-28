@@ -29,7 +29,7 @@ class Tipos_VistoDAO:
     def cadastrar_documentos_para_visto(self, docs, visa_name):
         for doc in docs:
             self.cursor.execute("INSERT INTO visa_documents (visa_name, nomedoc) VALUES (?, ?)",
-                                (visa_name, doc['nomedoc']))
+                                (visa_name, doc['nome']))
             self.conn.commit()
 
     def buscar_todos_tipos_visto(self):

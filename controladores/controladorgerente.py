@@ -2,7 +2,6 @@ from excecoes.loginsenhaException import LoginSenhaException
 from excecoes.valueErrorException import ValueErrorException
 from excecoes.usuarioinexistenteException import UsuarioInexistenteException
 from persistencia.gerenteDAO import GerenteDAO
-# from persistencia.agenteDAO import AgenteDAO
 from telas.telagerente import TelaGerente
 from entidades.gerente import Gerente
 
@@ -10,7 +9,6 @@ from entidades.gerente import Gerente
 class ControladorGerente:
     def __init__(self, controlador_sistema):
         self.__gerente_dao = GerenteDAO()
-        # self.__agente_DAO = AgenteDAO()
         self.__controlador_sistema = controlador_sistema
         self.__tela_gerente = TelaGerente()
 
@@ -28,7 +26,7 @@ class ControladorGerente:
         while True:
             opcao = self.__tela_gerente.tela_gerente_inicial()
             if opcao == 1:
-                self.__tela_gerente.mostra_mensagem('Cadastrar Solicitação de Visto')
+                self.__controlador_sistema.controlador_solicitacao_visto.abrir_tela_solicitacao()
             elif opcao == 2:
                 self.__tela_gerente.mostra_mensagem('Aprovar Solicitação de Visto')
             elif opcao == 3:
