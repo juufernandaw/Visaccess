@@ -3,8 +3,6 @@ import PySimpleGUI as tela_estrangeiro
 class TelaEstrangeiro:
     def __init__(self):
         self.__window = None
-        self.layout_tela_cadastro_agentes()
-        self.layout_tela_adicionar_atualizar_agentes()
 
     def close(self):
         self.__window.Close()
