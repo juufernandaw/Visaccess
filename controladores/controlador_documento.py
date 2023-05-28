@@ -10,6 +10,10 @@ class ControladorDocumento:
         self.__tela_documento = TelaDocumento()
         self.__documento_DAO = DocumentoDAO()
 
+    @property
+    def documento_DAO(self):
+        return self.__documento_DAO
+
     def abre_tela_cadastro_documentos(self):
         try:
             opcoes_documentos = {1: self.registra_novo_documento,

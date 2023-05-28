@@ -17,13 +17,13 @@ class Tipos_VistoDAO:
                 visa_name TEXT,
                 nomedoc TEXT,
                 FOREIGN KEY (visa_name) REFERENCES tipos_visto(name),
-                FOREIGN KEY (nomedoc) REFERENCES documento(nomedoc)
+                FOREIGN KEY (nomedoc) REFERENCES documento(nome)
             )
         ''')
         self.conn.commit()
 
     def cadastrar_tipos_visto(self, nome, date):
-        self.cursor.execute("INSERT INTO tipos_visto (name, date) VALUES (?, ?)", (nome, date))
+        self.cursor.execute("INSERT INTO tipos_visto (name, validade) VALUES (?, ?)", (nome, date))
         self.conn.commit()
 
     def cadastrar_documentos_para_visto(self, docs, visa_name):
