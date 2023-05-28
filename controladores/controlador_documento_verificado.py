@@ -8,7 +8,9 @@ class ControladorDocumentoVerificado:
         self.__tela_documento_verificado = TelaDocumentoVerificado()
         self.__documento_verificado_DAO = DocumentoVerificadoDAO()
 
-    def abre_tela_documento_verificado(self, documentos):
+    def abre_tela_documento_verificado(self, documentos, id_solicitacao_visto):
         docs_preenchidos = self.__tela_documento_verificado.tela_documento_verificado(lista_documentos=documentos)
-        # instanciar aqui a classe documento verificado para cada documento verificado e salvar no BD
-        return docs_preenchidos
+        for doc in docs_preenchidos:
+            self.__documento_verificado_DAO.create_documento_verificado(id_solicitacao_visto=id_solicitacao_visto, preenchido=doc.preenchido)
+            # instanciar aqui a classe documento verificado para cada documento verificado e salvar no BD
+        return

@@ -15,7 +15,7 @@ class BlacklistDAO:
         self.cursor.execute("INSERT INTO blacklist (passaporte, nome) VALUES (?, ?)", [passaporte, nome])
         self.conn.commit()
 
-    def get_tuple_by_passaport(self, passaporte):
+    def encontra_passaporte(self, passaporte):
         self.cursor.execute("SELECT passaporte FROM blacklist WHERE passaporte=?", passaporte)
         row = self.cursor.fetchone()
         if row is None:

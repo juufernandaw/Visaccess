@@ -6,11 +6,13 @@ class SolicitacaoDeVistoDAO:
     def __init__(self):
         self.conn = sqlite3.connect("visaccess.db")
         self.cursor = self.conn.cursor()
-        self.cursor.execute('CREATE TABLE IF NOT EXISTS solicitacaoDeVisto (id integer PRIMARY KEY AUTO INCREMENT,'
-                            'data_solicitacao datetime NOT NULL,'
-                            'estrangeiro TEXT FOREIGN KEY REFERENCES Estrangeiro NOT NULL,'
-                            'status integer NOT NULL,'
-                            'visto integer FOREIGN KEY REFERENCES TipoDeVisto)')
+        self.cursor.execute('CREATE TABLE IF NOT EXISTS solicitacaoDeVisto (id integer PRIMARY KEY AUTOINCREMENT,'
+                            'data_solicitacao date NOT NULL,'
+                            'estrangeiro TEXT NOT NULL,'
+                            'status TEXT NOT NULL,'
+                            'visto integer,'
+                            'FOREIGN KEY (estrangeiro) REFERENCES Estrangeiro, '
+                            'FOREIGN KEY (visto) REFERENCES tipos_visto)')
 
     def close(self):
         self.conn.close()
@@ -21,9 +23,9 @@ class SolicitacaoDeVistoDAO:
         self.conn.commit()
         return id  # id pk da solicitacaodevisto criada
 
-    def find_solicitacao_visto_para_passaporte(self, passaporte: str):
+    def find_solicitacao_para_passaporte(self, passaporte: str):
         self.cursor.execute("SELECT estrangeiro, visto, status FROM solicitacaoDeVisto WHERE estrangeiro=?", passaporte)
         rows = self.cursor.fetchall()
         if rows is None:
-            return None
+            return []
         return rows

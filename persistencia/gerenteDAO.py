@@ -3,7 +3,7 @@ import sqlite3
 
 class GerenteDAO():
     def __init__(self):
-        self.banco = sqlite3.connect('gerente.db')
+        self.banco = sqlite3.connect('visaccess.db')
         self.cursor = self.banco.cursor()
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS gerente (

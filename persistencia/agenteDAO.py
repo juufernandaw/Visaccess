@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class AgenteDAO:
 
     def __init__(self):

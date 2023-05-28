@@ -11,5 +11,5 @@ class ControladorBlacklist:
         self.__blacklist_tela = TelaBlacklist()
 
     def validar_estrangeiro_blacklist(self, passaporte: str):
-        estrangeiro_na_blacklist = self.__blacklist_DAO.get_tuple_by_passaport(passaporte=passaporte)
+        estrangeiro_na_blacklist = self.__blacklist_DAO.encontra_passaporte(passaporte=passaporte)
         return estrangeiro_na_blacklist    # True ou False

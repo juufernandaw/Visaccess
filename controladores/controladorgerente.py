@@ -2,16 +2,15 @@ from excecoes.loginsenhaException import LoginSenhaException
 from excecoes.valueErrorException import ValueErrorException
 from excecoes.usuarioinexistenteException import UsuarioInexistenteException
 from persistencia.gerenteDAO import GerenteDAO
-from persistencia.agenteDAO import AgenteDAO
-from controladores.controladorsistema import ControladorSistema
+# from persistencia.agenteDAO import AgenteDAO
 from telas.telagerente import TelaGerente
 from entidades.gerente import Gerente
-import sqlite3
+
 
 class ControladorGerente:
-    def __init__(self, controlador_sistema: ControladorSistema):
+    def __init__(self, controlador_sistema):
         self.__gerente_dao = GerenteDAO()
-        self.__agente_DAO = AgenteDAO()
+        # self.__agente_DAO = AgenteDAO()
         self.__controlador_sistema = controlador_sistema
         self.__tela_gerente = TelaGerente()
 
@@ -21,11 +20,15 @@ class ControladorGerente:
     def tela_sistema(self):
         return self.__tela_gerente
 
+    @property
+    def controlador_sistema(self):
+        return self.__controlador_sistema
+
     def iniciar_tela_gerente(self):
         while True:
             opcao = self.__tela_gerente.tela_gerente_inicial()
             if opcao == 1:
-                self.__controlador_sistema.controlador_solicitacao_visto.abrir_tela_solicitacao_visto()
+                self.__controlador_sistema.controlador_solicitacao_visto.abrir_tela_solicitacao()
             elif opcao == 2:
                 self.__tela_gerente.mostra_mensagem('Aprovar Solicitação de Visto')
             elif opcao == 3:
@@ -165,9 +168,9 @@ class ControladorGerente:
               elif gerente is None:
                   raise UsuarioInexistenteException
             except LoginSenhaException as e:
-                self.__tela_sistema.mostrar_msg(e)
+                self.__controlador_sistema.tela_sistema.mostrar_msg(e)
             except UsuarioInexistenteException as e:
-                self.__tela_sistema.mostrar_msg(e)
+                self.__controlador_sistema.tela_sistema.mostrar_msg(e)
             else:
                 return False
 
