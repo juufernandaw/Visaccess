@@ -11,7 +11,7 @@ class SolicitacaoDeVistoDAO:
                             'estrangeiro TEXT NOT NULL,'
                             'status TEXT NOT NULL,'
                             'visto integer,'
-                            'FOREIGN KEY (estrangeiro) REFERENCES Estrangeiro, '
+                            'FOREIGN KEY (estrangeiro) REFERENCES estrangeiro, '
                             'FOREIGN KEY (visto) REFERENCES tipos_visto)')
 
     def close(self):
