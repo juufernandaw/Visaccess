@@ -33,7 +33,7 @@ class EstrangeiroDAO:
         row = self.cursor.fetchone()
         if row is None:
             return None
-        return {'passaporte': row[0], 'nome': row[1]}
+        return {'passaporte': row[0]}
 
     def buscar_todos_estrangeiros(self):
         self.cursor.execute("SELECT * FROM estrangeiro")
