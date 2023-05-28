@@ -3,6 +3,7 @@ from persistencia.estrangeiroDAO import EstrangeiroDAO
 from excecoes.valueErrorException import ValueErrorException
 from excecoes.campovazioexception import CampoVazioException
 from telas.tela_estrangeiro import TelaEstrangeiro
+from datetime import datetime
 
 
 class ControladorEstrangeiro:
@@ -49,9 +50,13 @@ class ControladorEstrangeiro:
                     elif gerente_agente == 'gerente' and opcao_escolhida == 0:
                         return self.voltar_tela('gerente')
                     return funcao_escolhida()
-        except ValueErrorException as e:
+        except ValueErrorException:
             self.__tela_estrangeiro.mostra_mensagem("Tente novamente")
             self.abre_tela_inicial_estrangeiro()
+        except ValueError:
+            self.abre_tela_inicial_estrangeiro()
+        except TypeError:
+            self.abre_tela_inicial_estrangeiro() 
 
     def voltar_tela(self, escolha: str):
         if escolha == 'agente':
@@ -63,6 +68,11 @@ class ControladorEstrangeiro:
         try:
             # IR PARA TELA
             informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro()
+            print(informacoes)
+            # if informacoes[2] == 'Sim':
+            #     informacoes[8] = True
+            # elif informacoes[8]['nao']:
+            #     informacoes[8] = False
             if informacoes != None:
                 if informacoes[0] != '' and informacoes[1] != '' and informacoes[2] != '' and informacoes[3] != '' and \
                         informacoes[4] != '' and informacoes[5] != '' and informacoes[6] != '' and informacoes[
@@ -72,6 +82,10 @@ class ControladorEstrangeiro:
                         7] == '' or informacoes[8] == '':
                         raise CampoVazioException
                     # buscar estrangeiro por passporte. Primeira opcao do dict
+                    data_nascimento_string = informacoes[2]
+                    formato_data = '%d/%m/%Y'
+                    data_convertida = datetime.strptime(data_nascimento_string, formato_data).date()
+                    informacoes[2] = data_convertida
                     agente = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(informacoes[0])
                     if agente != None:
                         self.tela_estrangeiro.mostra_mensagem('Este estrangeiro já está cadastrado!')
@@ -88,6 +102,8 @@ class ControladorEstrangeiro:
                         self.tela_estrangeiro.mostra_mensagem('Estrangeiro cadastrado!')
                 else:
                     self.tela_estrangeiro.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
+            elif informacoes == 0:
+                self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
         except ValueErrorException as e:
             self.tela_estrangeiro.mostra_mensagem(e)
             self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
@@ -106,6 +122,8 @@ class ControladorEstrangeiro:
             else:
                 self.tela_estrangeiro.mostra_mensagem('Estrangeiro Não está cadastrado!')
                 return self.excluir_estrangeiro()
+        if passaporte == 0:
+            self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
 
     def listar_estrangeiro(self):
         estrangeiro = self.estrangeiro_dao.buscar_todos_estrangeiros()
@@ -143,6 +161,8 @@ class ControladorEstrangeiro:
                         else:
                             self.tela_estrangeiro.mostra_mensagem('Preencha todos os campos!')
                             return self.modificar_estrangeiro()
+            elif passaporte == 0:
+                self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
             else:
                 self.tela_estrangeiro.mostra_mensagem('Passaporte não encontrado!')
                 self.abre_tela_inicial_estrangeiro(self.__gerente_agente)

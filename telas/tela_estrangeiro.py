@@ -41,17 +41,18 @@ class TelaEstrangeiro:
 
     def componentes_tela_adicionar_atualizar_estrangeiro(self, tipo):
         estado_civil = ["Solteiro", "Casado", "Viuvo(a)", "Namorando"]
-        paises = ['Argentina', 'Paraguai', 'Uruguai']  # vai vim do BD ainda preciso fazer isso
+        profissao = [True, False]
+        # paises = ['Argentina', 'Paraguai', 'Uruguai']  # vai vim do BD ainda preciso fazer isso
         layout = [
             [tela_estrangeiro.Text('Passaporte'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Nome'), tela_estrangeiro.InputText('')],
-            [tela_estrangeiro.Text('Data de Nascimento'), tela_estrangeiro.CalendarButton(target='data_nasc')],
+            [tela_estrangeiro.Text('Data de Nascimento'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Estado civil'), tela_estrangeiro.Combo(estado_civil)],
-            # [tela_estrangeiro.Text('País'), tela_estrangeiro.InputText('')],
-            # [tela_estrangeiro.Text('Estado'), tela_estrangeiro.InputText('')],
-            # [tela_estrangeiro.Text('Cidade'), tela_estrangeiro.InputText('')],
-            # [tela_estrangeiro.Text('Trabalho'), tela_estrangeiro.InputText('')],
-            # [tela_estrangeiro.Text('Profissão'), tela_estrangeiro.Combo(['Sim', 'Não'])],
+            [tela_estrangeiro.Text('País'), tela_estrangeiro.InputText('')],
+            [tela_estrangeiro.Text('Estado'), tela_estrangeiro.InputText('')],
+            [tela_estrangeiro.Text('Cidade'), tela_estrangeiro.InputText('')],
+            [tela_estrangeiro.Text('Trabalho'), tela_estrangeiro.InputText('')],
+            [tela_estrangeiro.Text('Profissão'), tela_estrangeiro.Combo([True, False])],
             [tela_estrangeiro.Button('Confirmar'), tela_estrangeiro.Button('Voltar')]
         ]
         self.__window = tela_estrangeiro.Window(tipo).Layout(layout)
@@ -84,16 +85,16 @@ class TelaEstrangeiro:
 
     def tela_adicionar_estrangeiro(self):
         self.componentes_tela_adicionar_atualizar_estrangeiro('Adicionar Estrangeiro')
-        self.logica_tela_estrangeiro()
+        return self.logica_tela_estrangeiro()
 
     def tela_excluir_estrangeiro(self):
         self.componentes_tela_excluir_modificar_estrangeiro('Excluir Estrangeiro')
-        self.logica_tela_estrangeiro()
+        return self.logica_tela_estrangeiro()
 
     def tela_modificar_estrangeiro(self):
         self.componentes_tela_excluir_modificar_estrangeiro('Modificar Estrangeiro')
-        self.logica_tela_estrangeiro()
+        return self.logica_tela_estrangeiro()
 
     def tela_atualizar_estrangeiro(self):
         self.componentes_tela_adicionar_atualizar_estrangeiro('Atualizar Estrangeiro')
-        self.logica_tela_estrangeiro()
+        return self.logica_tela_estrangeiro()
