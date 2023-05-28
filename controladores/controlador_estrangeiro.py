@@ -13,6 +13,7 @@ class ControladorEstrangeiro:
         self.__controlador_sistema = controlador_sistema
         self.__estrangeiro_dao = EstrangeiroDAO()
         self.__tela_estrangeiro = TelaEstrangeiro()
+        self.__gerente_agente = None
 
     @property
     def estrangeiro_dao(self):
@@ -26,15 +27,20 @@ class ControladorEstrangeiro:
     def controlador_sistema(self):
         return self.__controlador_sistema
 
+    @property
+    def gerente_agente(self):
+        return self.__gerente_agente
+
     def abre_tela_inicial_estrangeiro(self, gerente_agente:str):  # abre a tela para cadastrar estrangeiro voltar agente
         try:
             mexer_agente_opcoes = {1: self.adicionar_estrangeiro,
-                                  2: self.listar_estrangeiro,
-                                  3: self.excluir_estrangeiro,
+                                  2: self.excluir_estrangeiro,
+                                  3: self.listar_estrangeiro,
                                   4: self.modificar_estrangeiro,
                                   0: self.voltar_tela
                                   }
             while True:
+                self.__gerente_agente = gerente_agente
                 opcao_escolhida = self.__tela_estrangeiro.tela_cadastro_estrangeiro()
                 if opcao_escolhida != 1 and opcao_escolhida != 2 and opcao_escolhida != 3 and opcao_escolhida != 4 and opcao_escolhida != 0:
                     raise ValueErrorException
@@ -67,7 +73,7 @@ class ControladorEstrangeiro:
                     agente = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(informacoes[0])
                     if agente != None:
                         self.tela_estrangeiro.mostra_mensagem('Este estrangeiro já está cadastrado!')
-                        return self.abre_tela_inicial_estrangeiro()
+                        return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
                     else:
                         #CRIAR ENTIDADE
                         estrangeiro = Estrangeiro(informacoes[0], informacoes[1], informacoes[2],informacoes[2],informacoes[4],informacoes[5],informacoes[6],informacoes[7],informacoes[8])
@@ -78,10 +84,10 @@ class ControladorEstrangeiro:
                     self.tela_estrangeiro.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
         except ValueErrorException as e:
             self.tela_estrangeiro.mostra_mensagem(e)
-            self.abre_tela_inicial_estrangeiro()
+            self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
         except CampoVazioException as e:
             self.tela_estrangeiro.mostra_mensagem(e)
-            self.abre_tela_inicial_estrangeiro()             
+            self.abre_tela_inicial_estrangeiro(self.__gerente_agente)             
 
     def excluir_estrangeiro(self):
         passaporte = self.tela_estrangeiro.tela_excluir_estrangeiro()
@@ -90,18 +96,16 @@ class ControladorEstrangeiro:
             if estrangeiro != None:
                 self.estrangeiro_dao.excluir_estrangeiro(passaporte[0])
                 self.tela_estrangeiro.mostra_mensagem('Estrangeiro Excluído!')
-                return self.excluir_estrangeiro()
+                return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
             else:
                 self.tela_estrangeiro.mostra_mensagem('Estrangeiro Não está cadastrado!')
-                return self.abre_tela_inicial_estrangeiro()
+                return self.excluir_estrangeiro()
 
     def listar_estrangeiro(self):
         estrangeiro = self.estrangeiro_dao.buscar_todos_estrangeiros()
         opcao = self.tela_estrangeiro.tela_listar_estrangeiro(estrangeiro)
         if opcao == 'Voltar':
-            return self.abre_tela_inicial_estrangeiro()
-        else:
-            self.tela_estrangeiro.mostra_mensagem("Clicar em voltar")
+            return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
         
     def modificar_estrangeiro(self):
         passaporte = self.tela_estrangeiro.tela_modificar_estrangeiro()
@@ -111,9 +115,9 @@ class ControladorEstrangeiro:
                 if estrangeiro != None:
                         dados_novos = self.tela_estrangeiro.tela_atualizar_estrangeiro()
                         if dados_novos != None:
-                            if dados_novos[0] and dados_novos[1] and dados_novos[2] and dados_novos[3] and dados_novos[4 ]and dados_novos[5] and dados_novos[6]and dados_novos[7]and dados_novos[8] != '':
-                                teste_novo_dados = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(dados_novos[0])
-                                if teste_novo_dados == None:
+                            if dados_novos[0]!= '' and dados_novos[1]!= '' and dados_novos[2]!= '' and dados_novos[3]!= '' and dados_novos[4]!= '' and dados_novos[5]!= '' and dados_novos[6]!= '' and dados_novos[7]!= '' and dados_novos[8] != '':
+                                passaporte = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(dados_novos[0])
+                                if passaporte != None:
                                     self.estrangeiro_dao.atualizar_estrangeiro(
                                         estrangeiro['passaporte'], 
                                         dados_novos[0], 
@@ -127,16 +131,13 @@ class ControladorEstrangeiro:
                                         dados_novos[8],
                                     )
                                     self.tela_estrangeiro.mostra_mensagem('Estrangeiro Modificado!')
-                                    return self.abre_tela_inicial_estrangeiro()
-                                else:
-                                    self.tela_estrangeiro.mostra_mensagem('Estrangeiro já consta no sistema!')
-                                    return self.abre_tela_inicial_estrangeiro()
+                                    return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
                             else:
-                                self.estrangeiro_dao.mostra_mensagem('Preencha com os dados corretos!')
-                                return self.abre_tela_inicial_estrangeiro()
-                else:
-                    self.tela_estrangeiro.mostra_mensagem('Não há agentes com esse cadastro!')
+                                self.tela_estrangeiro.mostra_mensagem('Preencha todos os campos!')
+                                return self.modificar_estrangeiro()
+            else:
+                self.tela_estrangeiro.mostra_mensagem('Passaporte não encontrado!')
+                self.abre_tela_inicial_estrangeiro(self.__gerente_agente) 
         except:
-            self.tela_estrangeiro.mostra_mensagem()
-            
+            self.modificar_estrangeiro()
 
