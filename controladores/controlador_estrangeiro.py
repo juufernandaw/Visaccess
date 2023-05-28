@@ -54,8 +54,7 @@ class ControladorEstrangeiro:
             return self.__controlador_sistema.controlador_agente.abre_tela_inicial()
         elif escolha == 'gerente':
             return self.__controlador_sistema.controlador_gerente.iniciar_tela_gerente()
-        
-    
+
     def adicionar_estrangeiro(self):
         try:
             #IR PARA TELA
