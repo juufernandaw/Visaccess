@@ -108,15 +108,17 @@ class ControladorAgente:
     def verificar_login_senha_sqlite(self, cpf, senha):  # VERIFICAR o cpf e senha pelo sqlite.
         if isinstance(cpf, str) and isinstance(senha, str):
             try:
-              agente = self.__agente_dao.buscar_agente_por_cpf(cpf)
-              senha_digitada = senha
-              senha_conferir = str(agente['senha'])
-              if agente is not None and senha_conferir == senha_digitada:
-                  return True
-              elif agente is None:
-                  raise UsuarioInexistenteException
-              elif agente['senha'] != senha:
-                  raise LoginSenhaException
+                if cpf == '' or senha == '':
+                    raise UsuarioInexistenteException
+                agente = self.__agente_dao.buscar_agente_por_cpf(cpf)
+                senha_digitada = senha
+                senha_conferir = str(agente['senha'])
+                if agente is not None and senha_conferir == senha_digitada:
+                    return True
+                elif agente is None:
+                    raise UsuarioInexistenteException
+                elif agente['senha'] != senha:
+                    raise LoginSenhaException
             except LoginSenhaException as e:
                 self.__tela_sistema.mostrar_msg(e)
             except UsuarioInexistenteException as e:

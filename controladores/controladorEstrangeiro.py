@@ -133,6 +133,9 @@ class ControladorEstrangeiro:
 
     def modificar_estrangeiro(self):
         passaporte = self.tela_estrangeiro.tela_modificar_estrangeiro()
+        if passaporte == '':
+            self.__tela_estrangeiro.mostra_mensagem('Passaporte não localizado')
+            self.abre_tela_inicial_estrangeiro()
         try:
             if passaporte != None:
                 estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte[0])

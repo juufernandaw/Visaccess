@@ -161,8 +161,10 @@ class ControladorGerente:
     def verificar_login_senha_sqlite(self, cpf, senha):  # VERIFICAR o cpf e senha pelo sqlite.
         if isinstance(cpf, str) and isinstance(senha, str):
             try:
-              gerente = self.__gerente_dao.buscar_gerente_por_cpf(cpf)
               senha_digitada = senha
+              if cpf == '' and senha == '':
+                  raise UsuarioInexistenteException
+              gerente = self.__gerente_dao.buscar_gerente_por_cpf(cpf)
               senha_conferir = str(gerente.senha)
               if gerente is not None and senha_conferir == senha_digitada:
                   return True

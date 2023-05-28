@@ -9,7 +9,7 @@ class EstrangeiroDAO:
         self.cursor = self.conn.cursor()
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS estrangeiro (
-                passaporte TEXT PRIMARY KEY,
+                passaporte TEXT PRIMARY KEY NOT NULL,
                 nome TEXT,
                 data_nasc DATE,
                 estado_civil TEXT,
