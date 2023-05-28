@@ -9,7 +9,7 @@ class DocumentoDAO:
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS documento (
                 nome TEXT NOT NULL,
-                regra TEXT NOT NULL
+                regra TEXT NOT NULL,
                 PRIMARY KEY(nome)
         );
         """)

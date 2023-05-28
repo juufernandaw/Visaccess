@@ -20,7 +20,7 @@ class ControladorDocumento:
                                  2: self.exclui_documento,
                                  3: self.lista_documentos,
                                  4: self.altera_documento,
-                                 0: self.abre_tela_cadastro_documentos}
+                                 0: self.__controlador_sistema.controlador_consul.abre_tela_inicial}
             while True:
                 opcao_escolhida = self.__tela_documento.tela_documento_inicial()
                 if opcao_escolhida != 1 and opcao_escolhida != 2 and opcao_escolhida != 3 and opcao_escolhida != 4 and opcao_escolhida != 0:
