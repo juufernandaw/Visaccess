@@ -7,7 +7,7 @@ class EstrangeiroDAO:
         # Create an in-memory SQLite database
         self.conn = sqlite3.connect("visaccess.db")
         self.cursor = self.conn.cursor()
-        self.cursor.execute('''
+        self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS estrangeiro (
                 passaporte TEXT PRIMARY KEY,
                 nome TEXT,
@@ -18,8 +18,8 @@ class EstrangeiroDAO:
                 cidade TEXT
                 trabalho BOOLEAN
                 profissao TEXT
-            )
-        ''')
+            );
+        """)
         self.conn.commit()
 
     def close(self):
