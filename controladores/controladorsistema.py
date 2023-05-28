@@ -99,15 +99,15 @@ class ControladorSistema:
                         login_com_sucesso = self.__controlador_consul.verificar_login_senha(
                             login,
                             senha)
-                        if not login_com_sucesso and opcao_escolhida != 0:
+                        if not login_com_sucesso and opcao_escolhida != 0 or login == '' or senha == '':
                             raise LoginSenhaException
                     elif opcao_escolhida == 2:#GERENTE
                         login_com_sucesso = self.__controlador_gerente.verificar_login_senha_sqlite(login, senha)
-                        if not login_com_sucesso:
+                        if not login_com_sucesso or login == '' or senha == '':
                             raise LoginSenhaException
                     elif opcao_escolhida == 3: #Agente
                         login_com_sucesso = self.__controlador_agente.verificar_login_senha_sqlite(login, senha)
-                        if not login_com_sucesso:
+                        if not login_com_sucesso or login == '' or senha == '':
                             raise LoginSenhaException
                     elif login == None and senha == None:
                         raise LoginSenhaException

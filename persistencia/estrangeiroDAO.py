@@ -12,11 +12,11 @@ class EstrangeiroDAO:
                 passaporte TEXT PRIMARY KEY,
                 nome TEXT,
                 data_nasc DATE,
-                estado_civil TEXT
-                pais TEXT
-                estado TEXT
-                cidade TEXT
-                trabalho BOOLEAN
+                estado_civil TEXT,
+                pais TEXT,
+                estado TEXT,
+                cidade TEXT,
+                trabalho BOOLEAN,
                 profissao TEXT
             );
         """)
