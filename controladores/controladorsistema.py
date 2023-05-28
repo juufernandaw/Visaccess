@@ -45,6 +45,10 @@ class ControladorSistema:
         return self.__controlador_documento_verificado
 
     @property
+    def controlador_documento(self):
+        return self.__controlador_documento
+
+    @property
     def controlador_consul(self):
         return self.__controlador_consul
 

@@ -11,7 +11,6 @@ class ControladorConsul:
         self.__consul = Consul("Sung D. Ego", "1", "1")
         self.__tela_sistema = TelaSistema()
         self.__tela_consul = TelaConsul()
-        # self.__controlador_gerente = ControladorGerente(controlador_sistema)
 
     def verificar_login_senha(self, cpf, senha):
         if isinstance(cpf, str) and isinstance(senha, str):
@@ -24,8 +23,8 @@ class ControladorConsul:
                                    2: self.__controlador_sistema.controlador_gerente.abrir_tela_cadastro_gerente,
                                    3: self.abre_tela_inicial,
                                    4: self.abre_tela_inicial,
-                                   5: self.abre_tela_inicial,
-                                   6: self.abre_tela_inicial,
+                                   5: self.__controlador_sistema.controlador_documento.abre_tela_cadastro_documentos,
+                                   6: self.__controlador_sistema.get_controlador_tipos_visto.abrir_tela_cadastro,
                                    0: self.__controlador_sistema.iniciar_tela_sistema
                                    }
             while True:

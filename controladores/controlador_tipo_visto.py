@@ -39,7 +39,7 @@ class ControladorTiposVisto:
                 self.controlador_sistema.controlador_consul.abre_tela_inicial()
 
     def novo_tipos_visto(self):
-        docs = self.teste_dao.buscar_todos_testes()
+        docs = self.controlador_sistema.controlador_documento.documento_DAO.get_all_documentos()
         data = self.tela_tipos_vistos.tela_adicionar_tipos_visto(docs)
         if data != None:
             if data[0] and data['-DATE-'] != '' and data['-DOCUMENTOS-'] != []:
