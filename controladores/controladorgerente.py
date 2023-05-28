@@ -172,6 +172,7 @@ class ControladorGerente:
                 self.__controlador_sistema.tela_sistema.mostrar_msg(e)
             except UsuarioInexistenteException as e:
                 self.__controlador_sistema.tela_sistema.mostrar_msg(e)
+                self.__controlador_sistema.iniciar_tela_sistema()
             else:
                 return False
 

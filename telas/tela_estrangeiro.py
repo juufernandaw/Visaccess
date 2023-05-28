@@ -4,8 +4,6 @@ import PySimpleGUI as tela_estrangeiro
 class TelaEstrangeiro:
     def __init__(self):
         self.__window = None
-        # self.layout_tela_cadastro_agentes()
-        # self.layout_tela_adicionar_atualizar_agentes()
 
     def close(self):
         self.__window.Close()
@@ -49,11 +47,11 @@ class TelaEstrangeiro:
             [tela_estrangeiro.Text('Nome'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Data de Nascimento'), tela_estrangeiro.CalendarButton(target='data_nasc')],
             [tela_estrangeiro.Text('Estado civil'), tela_estrangeiro.Combo(estado_civil)],
-            [tela_estrangeiro.Text('País'), tela_estrangeiro.InputText('')],
-            [tela_estrangeiro.Text('Estado'), tela_estrangeiro.InputText('')],
-            [tela_estrangeiro.Text('Cidade'), tela_estrangeiro.InputText('')],
-            [tela_estrangeiro.Text('Trabalho'), tela_estrangeiro.InputText('')],
-            [tela_estrangeiro.Text('Profissão'), tela_estrangeiro.Combo(['Sim', 'Não'])],
+            # [tela_estrangeiro.Text('País'), tela_estrangeiro.InputText('')],
+            # [tela_estrangeiro.Text('Estado'), tela_estrangeiro.InputText('')],
+            # [tela_estrangeiro.Text('Cidade'), tela_estrangeiro.InputText('')],
+            # [tela_estrangeiro.Text('Trabalho'), tela_estrangeiro.InputText('')],
+            # [tela_estrangeiro.Text('Profissão'), tela_estrangeiro.Combo(['Sim', 'Não'])],
             [tela_estrangeiro.Button('Confirmar'), tela_estrangeiro.Button('Voltar')]
         ]
         self.__window = tela_estrangeiro.Window(tipo).Layout(layout)
