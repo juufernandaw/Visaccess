@@ -28,10 +28,10 @@ class ControladorEstrangeiro:
 
     def abre_tela_inicial_estrangeiro(self, gerente_agente:str):  # abre a tela para cadastrar estrangeiro voltar agente
         try:
-            mexer_agente_opcoes = {1: self.__tela_estrangeiro.tela_adicionar_estrangeiro,
-                                  2: self.__tela_estrangeiro.tela_atualizar_estrangeiro,
-                                  3: self.__tela_estrangeiro.tela_excluir_estrangeiro,
-                                  4: self.__tela_estrangeiro.tela_modificar_estrangeiro,
+            mexer_agente_opcoes = {1: self.adicionar_estrangeiro,
+                                  2: self.listar_estrangeiro,
+                                  3: self.excluir_estrangeiro,
+                                  4: self.modificar_estrangeiro,
                                   0: self.voltar_tela
                                   }
             while True:
