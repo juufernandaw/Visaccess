@@ -1,4 +1,6 @@
 import PySimpleGUI as tela_solicitacao_visto
+import re
+from datetime import datetime
 
 
 class TelaSolicitacaoVisto:
@@ -30,18 +32,23 @@ class TelaSolicitacaoVisto:
         if button in (None, 'Retornar'):
             self.close()
         algum_erro = False
-        if values["data"] == "" or values["passaporte"] == "" or values[list(values.keys())[0]] == "":
+        if values["data"] == "" or values["passaporte"] == "" or True not in values.values():
             algum_erro = True
-            msg_erro = "todos os campos devem estar preenchidos"
-        # if data
-        # validar se a data é valida (formato date e data > q a data atual)
+            msg_erro = "É necessário preencher todos os campos"
+        data = values["data"]
+        formato_valido = re.match(r'^\d{4}-\d{2}-\d{2}$', data) is not None
+        if not formato_valido:
+            msg_erro = "Data inválida. Favor seguir o padrão de data AAAA-MM-DD"
 
-        msg_erro = ""  # especifica p cada erro
+        data_dt_time = datetime.strptime(data, '%Y-%m-%d')
+        if data_dt_time < datetime.now():
+            msg_erro = "Data inválida. Favor seguir o padrão de data AAAA-MM-DD"
+
         if algum_erro:
             self.mostrar_mtela_solicitacao_visto(msg_erro)
             self.tela_solicitacao_visto_inicial(lista_tipos_visto=lista_tipos_visto)
         else:
-            escolha_tipo_visto = list(values.keys())[0]
-            data = values["data"]
+            # escolha_tipo_visto =
+            # aqui tenho q dar um jeito de pegar o valor true
             passaporte = values["passaporte"]
             return escolha_tipo_visto, passaporte, data

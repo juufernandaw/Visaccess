@@ -13,7 +13,7 @@ class ControladorDocumentoVerificado:
         docs = []
         for k, v in docs_preenchidos.items():
             preenchido = 1 if v else 0
-            doc_verificado =self.__documento_verificado_DAO.create_documento_verificado(id_solicitacao_visto=id_solicitacao_visto, preenchido=preenchido,
+            doc_verificado = self.__documento_verificado_DAO.create_documento_verificado(id_solicitacao_visto=id_solicitacao_visto, preenchido=preenchido,
                                                                         documento=k)
             docs.append(doc_verificado)
         return docs

@@ -23,6 +23,7 @@ class SolicitacaoDeVistoDAO:
                             [data_solicitacao, passaporte_estrangeiro, status, nome_visto])
         self.conn.commit()
         id = self.cursor.lastrowid
+        print("Instanciando solicitacao de visto")
         obj = SolicitacaoDeVisto(data_solicitacao=data_solicitacao, estrangeiro=passaporte_estrangeiro, documentos_verificados=[], status=status, visto=nome_visto)
         return obj, id
 

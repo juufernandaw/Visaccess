@@ -22,29 +22,34 @@ class ControladorSolicitacaoVisto:
             docs_verificados = self.__controlador_sistema.controlador_documento_verificado.\
                 abre_tela_documento_verificado(documentos=lista_documentos, id_solicitacao_visto=id_solicitacao_visto)
             # AQUI TEM Q CHAMAR ATUALIZAR O ID DA SOLICITACAO COM BASE NOS DOCS VERIFICADOS
+            solicitacao_visto.documentos_verificados = docs_verificados
         else:
             self.abrir_tela_solicitacao()
 
     def validar_infos_solicitacao(self, passaporte: str):
         estrangeiro_na_blacklist = self.__controlador_sistema.controlador_blacklist.validar_estrangeiro_blacklist(passaporte=passaporte)
         if estrangeiro_na_blacklist:
-            self.__controlador_sistema.controlador_estrangeiro.tela_estrangeiro.mostra_mensagem("Estrangeiro na blacklist n pode ter solicitacao de visto")
+            self.__controlador_sistema.controlador_estrangeiro.tela_estrangeiro.mostra_mensagem\
+                ("Não é possível solicitar visto para tal passaporte, pois o mesmo encontra-se presente na blacklist")
             return False
         estrangeiro_cadastrado = self.__controlador_sistema.controlador_estrangeiro.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte=passaporte)
         if not estrangeiro_cadastrado:
-            self.__controlador_sistema.controlador_estrangeiro.tela_estrangeiro.mostra_mensagem("Estrangeiro nao ta cadastrado!!")
+            self.__controlador_sistema.controlador_estrangeiro.tela_estrangeiro.mostra_mensagem("Passaporte não cadastrado no sistema."
+                                                                                                " Favor cadastrar o estrangeiro antes de solicitar o visto")
             return False
         lista_solicitacoes_visto = self.__solicitacao_de_visto_DAO.find_solicitacao_para_passaporte(passaporte=passaporte)
         if lista_solicitacoes_visto == []:
             return True
         else:
             for solicitacao in lista_solicitacoes_visto:
-                print("opa entrei")
                 print(solicitacao["visto"])
                 if (solicitacao["visto"]).upper() == "PERMANENTE":
                     self.__tela_solicitacao_visto.mostrar_mtela_solicitacao_visto(
-                        "Estrangeiro com solicitacao de visto do tipo permanente n pode solicitar outro")
+                        "Não é possível cadastrar outra solicitação de visto para esse passaporte,"
+                        " pois o mesmo já possui um visto do tipo permanente")
                     return False
-                # reformular esse if
-                if solicitacao["status"] == "expirado":
-                    return True
+                if (solicitacao["status"]).upper != "expirado":
+                    self.__tela_solicitacao_visto.mostrar_mtela_solicitacao_visto(
+                        "Não é possível cadastrar outra solicitação de visto para esse passaporte, "
+                        "pois o mesmo já possui outro visto com status válido")
+                    return False

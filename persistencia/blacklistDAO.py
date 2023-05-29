@@ -16,9 +16,9 @@ class BlacklistDAO:
         self.conn.commit()
 
     def encontra_passaporte(self, passaporte):
-        # self.cursor.execute("INSERT INTO blacklist (passaporte, nome) VALUES (?, ?)", ['123123', 'HENRIQUE'])
+        # self.cursor.execute("INSERT INTO blacklist (passaporte, nome) VALUES (?, ?)", ['1', 'HENRIQUE'])
         # self.conn.commit()
-        # self.cursor.execute("INSERT INTO blacklist (passaporte, nome) VALUES (?, ?)", ['12345678', 'JULIO'])
+        # self.cursor.execute("INSERT INTO blacklist (passaporte, nome) VALUES (?, ?)", ['2', 'JULIO'])
         # self.conn.commit()
         # self.cursor.execute("SELECT * FROM blacklist")
         # rows = self.cursor.fetchall()

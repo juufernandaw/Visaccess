@@ -29,7 +29,7 @@ class Tipos_VistoDAO:
     def cadastrar_documentos_para_visto(self, docs, visa_name):
         for doc in docs:
             print("concatenadndo")
-            print(doc, visa_name)
+            print(doc['nome'], visa_name)
             self.cursor.execute("INSERT INTO visa_documents (visa_name, nomedoc) VALUES (?, ?)",
                                 (visa_name, doc['nome']))
             self.conn.commit()
@@ -54,11 +54,9 @@ class Tipos_VistoDAO:
         self.cursor.execute('''
             SELECT nomedoc
             FROM visa_documents
-            JOIN tipos_visto ON visa_documents.visa_name = tipos_visto.name
-            WHERE tipos_visto.name = ?
+            WHERE visa_name = ?
         ''', (visa_name,))
         results = self.cursor.fetchall()
-        print("docs encontrados:")
         print(results)
         documents = [result[0] for result in results]
         return documents

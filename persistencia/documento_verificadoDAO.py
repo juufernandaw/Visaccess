@@ -25,8 +25,8 @@ class DocumentoVerificadoDAO:
         self.conn.commit()
         self.cursor.execute("SELECT regra FROM documento WHERE nome=?", (documento,))
         row = self.cursor.fetchone()
-        # instanciar documento
         preenchido = True if 1 else False
-        Documento(nome=documento, regra=row)
-        doc_verificado = DocumentoVerificado(documento=documento, preenchido=preenchido)
-        return
+        print("Instanciando documento e documento verificado")
+        doc = Documento(nome=documento, regra=row)
+        doc_verificado = DocumentoVerificado(documento=doc, preenchido=preenchido)
+        return doc_verificado
