@@ -71,4 +71,4 @@ class Tipos_VistoDAO:
 
     def atualizar_visto(self, nome_antigo, nome_novo, data):
         # Atualiza o CPF, nome, senha e consulado na tabela 'agentes'
-        self.cursor.execute("UPDATE tipos_visto SET name=?, date=? WHERE name=?", (nome_novo, data, nome_antigo))
+        self.cursor.execute("UPDATE tipos_visto SET name=?, validade=? WHERE name=?", (nome_novo, data, nome_antigo))

@@ -110,8 +110,6 @@ class ControladorEstrangeiro:
     def excluir_estrangeiro(self):
         passaporte = self.tela_estrangeiro.tela_excluir_estrangeiro()
         if passaporte != None or passaporte != 0:
-            if passaporte == 0 or estrangeiro == 0:
-                self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
             estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte[0])
             if estrangeiro != None:
                 self.estrangeiro_dao.excluir_estrangeiro(passaporte[0])
