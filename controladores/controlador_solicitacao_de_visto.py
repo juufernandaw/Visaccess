@@ -22,6 +22,8 @@ class ControladorSolicitacaoVisto:
             docs_verificados = self.__controlador_sistema.controlador_documento_verificado.\
                 abre_tela_documento_verificado(documentos=lista_documentos, id_solicitacao_visto=id_solicitacao_visto)
             # AQUI TEM Q CHAMAR ATUALIZAR O ID DA SOLICITACAO COM BASE NOS DOCS VERIFICADOS
+        else:
+            self.abrir_tela_solicitacao()
 
     def validar_infos_solicitacao(self, passaporte: str):
         estrangeiro_na_blacklist = self.__controlador_sistema.controlador_blacklist.validar_estrangeiro_blacklist(passaporte=passaporte)

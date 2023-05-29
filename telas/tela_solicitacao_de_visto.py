@@ -32,9 +32,11 @@ class TelaSolicitacaoVisto:
         algum_erro = False
         if values["data"] == "" or values["passaporte"] == "" or values[list(values.keys())[0]] == "":
             algum_erro = True
+            msg_erro = "todos os campos devem estar preenchidos"
+        # if data
         # validar se a data é valida (formato date e data > q a data atual)
 
-        msg_erro = "" # especifica p cada erro
+        msg_erro = ""  # especifica p cada erro
         if algum_erro:
             self.mostrar_mtela_solicitacao_visto(msg_erro)
             self.tela_solicitacao_visto_inicial(lista_tipos_visto=lista_tipos_visto)
