@@ -12,7 +12,6 @@ class TelaSolicitacaoVisto:
     def mostrar_mtela_solicitacao_visto(self, mtela_solicitacao_visto):
         tela_solicitacao_visto.popup_ok(mtela_solicitacao_visto)
 
-    # tela inicial de criar solicitacao de visto
     def tela_solicitacao_visto_inicial(self, lista_tipos_visto: list):
         global id
         botoes_tipos_visto = []
@@ -28,11 +27,13 @@ class TelaSolicitacaoVisto:
         ]
         self.__window = tela_solicitacao_visto.Window("Cria solicitacao de visto").Layout(layout)
         button, values = self.__window.Read()
-
+        if button in (None, 'Retornar'):
+            self.close()
         algum_erro = False
+        if values["data"] == "" or values["passaporte"] == "" or values[list(values.keys())[0]] == "":
+            algum_erro = True
         # validar se a data é valida (formato date e data > q a data atual)
-        # validar se algum campo não está preenchido
-        # se sim algum_erro = True
+
         msg_erro = "" # especifica p cada erro
         if algum_erro:
             self.mostrar_mtela_solicitacao_visto(msg_erro)
@@ -41,6 +42,4 @@ class TelaSolicitacaoVisto:
             escolha_tipo_visto = list(values.keys())[0]
             data = values["data"]
             passaporte = values["passaporte"]
-            if button in (None, 'Retornar'):
-                self.close()
             return escolha_tipo_visto, passaporte, data
