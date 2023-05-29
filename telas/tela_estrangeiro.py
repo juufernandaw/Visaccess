@@ -73,6 +73,8 @@ class TelaEstrangeiro:
         self.__window = tela_estrangeiro.Window('Lista de Estrangeiro').Layout(layout)
         button = self.__window.Read()
         self.close()
+        if button[0] == 'Voltar':
+            return 0
         return button
 
     # lógica para adicionar/excluir/modificar estrangeiro
