@@ -68,11 +68,6 @@ class ControladorEstrangeiro:
         try:
             # IR PARA TELA
             informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro()
-            print(informacoes)
-            # if informacoes[2] == 'Sim':
-            #     informacoes[8] = True
-            # elif informacoes[8]['nao']:
-            #     informacoes[8] = False
             if informacoes != None:
                 if informacoes[0] != '' and informacoes[1] != '' and informacoes[2] != '' and informacoes[3] != '' and \
                         informacoes[4] != '' and informacoes[5] != '' and informacoes[6] != '' and informacoes[
@@ -145,8 +140,9 @@ class ControladorEstrangeiro:
                             3] != '' and dados_novos[4] != '' and dados_novos[5] != '' and dados_novos[6] != '' and \
                                 dados_novos[7] != '' and dados_novos[8] != '':
                                     #busca pelo passaporte o estrangeiro
-                            passaporte = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(dados_novos[0])
-                            if passaporte != None:
+                            passaporteAlterar = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(dados_novos[0])
+                            if passaporteAlterar == None:
+                                print(estrangeiro['passaporte'])
                                 self.estrangeiro_dao.atualizar_estrangeiro(
                                     dados_novos[0],
                                     dados_novos[1],
