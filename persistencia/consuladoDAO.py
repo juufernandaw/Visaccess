@@ -1,5 +1,6 @@
 import sqlite3
 from entidades.consulado import Consulado
+# validar porque acho que entidade e DAO não podem conversar
 
 
 class ConsuladoDAO:
