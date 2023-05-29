@@ -81,11 +81,10 @@ class ControladorEstrangeiro:
                             informacoes[4] == '' or informacoes[5] == '' or informacoes[6] == '' or informacoes[
                         7] == '' or informacoes[8] == '':
                         raise CampoVazioException
+                    #converte data str --> date
+                    data_nascimento_string = informacoes[2] 
+                    informacoes[2] =  datetime.strptime(data_nascimento_string, '%d/%m/%Y').date()
                     # buscar estrangeiro por passporte. Primeira opcao do dict
-                    data_nascimento_string = informacoes[2]
-                    formato_data = '%d/%m/%Y'
-                    data_convertida = datetime.strptime(data_nascimento_string, formato_data).date()
-                    informacoes[2] = data_convertida
                     estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(informacoes[0])
                     if estrangeiro != None:
                         self.tela_estrangeiro.mostra_mensagem('Este estrangeiro já está cadastrado!')
@@ -145,6 +144,7 @@ class ControladorEstrangeiro:
                         if dados_novos[0] != '' and dados_novos[1] != '' and dados_novos[2] != '' and dados_novos[
                             3] != '' and dados_novos[4] != '' and dados_novos[5] != '' and dados_novos[6] != '' and \
                                 dados_novos[7] != '' and dados_novos[8] != '':
+                                    #busca pelo passaporte o estrangeiro
                             passaporte = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(dados_novos[0])
                             if passaporte != None:
                                 self.estrangeiro_dao.atualizar_estrangeiro(
@@ -161,6 +161,8 @@ class ControladorEstrangeiro:
                                 )
                                 self.tela_estrangeiro.mostra_mensagem('Estrangeiro Modificado!')
                                 return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
+                            else:
+                                self.modificar_estrangeiro()
                         else:
                             self.tela_estrangeiro.mostra_mensagem('Preencha todos os campos!')
                             return self.modificar_estrangeiro()
