@@ -148,7 +148,6 @@ class ControladorEstrangeiro:
                             passaporte = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(dados_novos[0])
                             if passaporte != None:
                                 self.estrangeiro_dao.atualizar_estrangeiro(
-                                    estrangeiro['passaporte'],
                                     dados_novos[0],
                                     dados_novos[1],
                                     dados_novos[2],
@@ -158,6 +157,7 @@ class ControladorEstrangeiro:
                                     dados_novos[6],
                                     dados_novos[7],
                                     dados_novos[8],
+                                    estrangeiro['passaporte'],
                                 )
                                 self.tela_estrangeiro.mostra_mensagem('Estrangeiro Modificado!')
                                 return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)

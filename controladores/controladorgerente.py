@@ -160,14 +160,14 @@ class ControladorGerente:
         if isinstance(cpf, str) and isinstance(senha, str):
             try:
               senha_digitada = senha
-              if cpf == '' and senha == '':
+              if cpf == '' and senha_digitada == '':
                   raise UsuarioInexistenteException
               gerente = self.__gerente_dao.buscar_gerente_por_cpf(cpf)
+              if gerente is None:
+                  raise UsuarioInexistenteException
               senha_conferir = str(gerente.senha)
               if gerente is not None and senha_conferir == senha_digitada:
                   return True
-              elif gerente is None:
-                  raise UsuarioInexistenteException
             except LoginSenhaException as e:
                 self.__controlador_sistema.tela_sistema.mostrar_msg(e)
             except UsuarioInexistenteException as e:
