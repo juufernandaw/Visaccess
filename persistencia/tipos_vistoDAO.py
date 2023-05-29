@@ -28,6 +28,8 @@ class Tipos_VistoDAO:
 
     def cadastrar_documentos_para_visto(self, docs, visa_name):
         for doc in docs:
+            print("concatenadndo")
+            print(doc, visa_name)
             self.cursor.execute("INSERT INTO visa_documents (visa_name, nomedoc) VALUES (?, ?)",
                                 (visa_name, doc['nome']))
             self.conn.commit()
@@ -56,6 +58,8 @@ class Tipos_VistoDAO:
             WHERE tipos_visto.name = ?
         ''', (visa_name,))
         results = self.cursor.fetchall()
+        print("docs encontrados:")
+        print(results)
         documents = [result[0] for result in results]
         return documents
 
@@ -70,10 +74,3 @@ class Tipos_VistoDAO:
     def atualizar_visto(self, nome_antigo, nome_novo, data):
         # Atualiza o CPF, nome, senha e consulado na tabela 'agentes'
         self.cursor.execute("UPDATE tipos_visto SET name=?, date=? WHERE name=?", (nome_novo, data, nome_antigo))
-
-    # def get_documentos_from_tipo_visto(self, id_tipo_visto: int):
-    #     #  vai pegar um dado id de tipo de visto e
-    #     #  ai vai validar na tabela associativa de docs e tipos de vistos
-    #     #  e retornar os documentos atrelados a ao tipo de visto em formato de lista de dicts {"nome": nome, "id": id}
-    #     return list[dict, dict,...]
-    #

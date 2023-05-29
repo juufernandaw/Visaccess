@@ -1,4 +1,5 @@
 import sqlite3
+from entidades.solicitacao_de_visto import SolicitacaoDeVisto
 
 
 class SolicitacaoDeVistoDAO:
@@ -17,15 +18,17 @@ class SolicitacaoDeVistoDAO:
     def close(self):
         self.conn.close()
 
-    def create_solicitacao_visto(self, data_solicitacao, passaporte_estrangeiro, status, id_visto):
+    def create_solicitacao_visto(self, data_solicitacao, passaporte_estrangeiro, status, nome_visto):
         self.cursor.execute("INSERT INTO solicitacaoDeVisto (data_solicitacao, estrangeiro, status, visto) VALUES (?, ?, ?, ?)",
-                            [data_solicitacao, passaporte_estrangeiro, status, id_visto])
+                            [data_solicitacao, passaporte_estrangeiro, status, nome_visto])
         self.conn.commit()
-        return id  # id pk da solicitacaodevisto criada
+        id = self.cursor.lastrowid
+        obj = SolicitacaoDeVisto(data_solicitacao=data_solicitacao, estrangeiro=passaporte_estrangeiro, documentos_verificados=[], status=status, visto=nome_visto)
+        return obj, id
 
     def find_solicitacao_para_passaporte(self, passaporte: str):
-        self.cursor.execute("SELECT estrangeiro, visto, status FROM solicitacaoDeVisto WHERE estrangeiro=?", passaporte)
+        self.cursor.execute("SELECT estrangeiro, visto, status FROM solicitacaoDeVisto WHERE estrangeiro=?", (passaporte,))
         rows = self.cursor.fetchall()
-        if rows is None:
+        if rows == []:
             return []
         return rows

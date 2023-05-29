@@ -12,18 +12,17 @@ class TelaDocumentoVerificado:
     def mostrar_msg(self, msg):
         tela_documento_verificado.popup_ok(msg)
 
-    def tela_documento_verificado(self, lista_documentos):
+    def tela_documento_verificado(self, lista_documentos: list):
         # tela dos documentos verificados com checkbox para preencher ou não
-        # layout = [
-        #     [tela_documento_verificado.Text('Selecione o que deseja fazer:', font=("Helvica", 25))],
-        #     [tela_documento_verificado.Radio('Novo consulado', "componentes_tela_documento_verificado_inicial", key='1')],
-        #     [tela_documento_verificado.Radio('Excluir consulado', "componentes_tela_documento_verificado_inicial", key='2')],
-        #     [tela_documento_verificado.Radio('Listar consulado', "componentes_tela_documento_verificado_inicial", key='3')],
-        #     [tela_documento_verificado.Radio('Alterar consulado', "componentes_tela_documento_verificado_inicial", key='4')],
-        #     [tela_documento_verificado.Button('Confirmar'), tela_documento_verificado.Button('Voltar')]
-        # ]
-        # self.__window = tela_documento_verificado.Window('Tela Documentos Verificados').Layout(layout)
+        layout = [
+            [tela_documento_verificado.Text('Selecione os documentos desejados:')],
+        ]
+
+        # Adicionar checkboxes para cada documento na lista
+        for documento in lista_documentos:
+            layout.append([tela_documento_verificado.Checkbox(documento, key=documento)])
+        layout.append([tela_documento_verificado.Button('Confirmar'), tela_documento_verificado.Cancel('Retornar')])
+        self.__window = tela_documento_verificado.Window('Tela Documentos Verificados').Layout(layout)
         button, values = self.__window.Read()
-        # iterar pelo dicionario values e popular os dicionarios com {nome: nome, id: id, preenchido}
-        self.close()
-        return values_preenchidos  # é uma lista de dicts
+        docs = []
+        return values # é uma lista de dicts

@@ -7,7 +7,7 @@ class GerenteDAO():
         self.cursor = self.banco.cursor()
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS gerente (
-                cpf INTEGER NOT NULL PRIMARY KEY,
+                cpf TEXT NOT NULL PRIMARY KEY,
                 nome TEXT NOT NULL,
                 senha TEXT NOT NULL,
                 consulado TEXT NOT NULL
@@ -33,7 +33,7 @@ class GerenteDAO():
         self.cursor.execute(f"SELECT * FROM gerente WHERE cpf = {cpf}")
         row = self.cursor.fetchone()
         if row is not None:
-            cpf, nome, senha, consulado = row
+            senha, nome, cpf, consulado = row
             gerente = Gerente(cpf=cpf, nome=nome, senha=senha, consulado=consulado)
             return gerente
         else:
@@ -52,4 +52,3 @@ class GerenteDAO():
             print("Dados excluídos com sucesso")
         except sqlite3.Error as erro:
             print("Erro ao excluir: ", erro)
-

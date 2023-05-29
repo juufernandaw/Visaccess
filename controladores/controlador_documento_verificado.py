@@ -10,7 +10,10 @@ class ControladorDocumentoVerificado:
 
     def abre_tela_documento_verificado(self, documentos, id_solicitacao_visto):
         docs_preenchidos = self.__tela_documento_verificado.tela_documento_verificado(lista_documentos=documentos)
-        for doc in docs_preenchidos:
-            self.__documento_verificado_DAO.create_documento_verificado(id_solicitacao_visto=id_solicitacao_visto, preenchido=doc.preenchido)
-            # instanciar aqui a classe documento verificado para cada documento verificado e salvar no BD
-        return
+        docs = []
+        for k, v in docs_preenchidos.items():
+            preenchido = 1 if v else 0
+            doc_verificado =self.__documento_verificado_DAO.create_documento_verificado(id_solicitacao_visto=id_solicitacao_visto, preenchido=preenchido,
+                                                                        documento=k)
+            docs.append(doc_verificado)
+        return docs

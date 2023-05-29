@@ -15,38 +15,34 @@ class ControladorSolicitacaoVisto:
 
         solicitacao_valida = self.validar_infos_solicitacao(passaporte=passaporte)
         if solicitacao_valida:
-            # abrir tela para verificar documentos
-            lista_documentos = self.__controlador_sistema.controlador_tipo_visto.tipo_vistoDAO.get_documentos_from_tipo_visto(tipo_visto=id_tipo_visto)
-
-            solicitacao_visto = self.__solicitacao_de_visto_DAO.\
+            lista_documentos = self.__controlador_sistema.get_controlador_tipos_visto.tipos_vistoDAO.buscar_documentos_por_visto(visa_name=nome_tipo_visto)
+            solicitacao_visto, id_solicitacao_visto = self.__solicitacao_de_visto_DAO.\
                 create_solicitacao_visto(data_solicitacao=data, passaporte_estrangeiro=passaporte,
-                                         status="aprovacao_pendente")
-            # aqui retorna a instancia da classe solicitação de visto
-            # mudar de composição p/ agregação
-            # aqui embaixo vai instanciar e salvar no BD o documentopreenchido e vai vincular o id da solicitacao de visto com os documentos verificados
-            self.__controlador_sistema.controlador_documento_verificado.\
-                abre_tela_documento_verificado(documentos=lista_documentos, id_solicitacao=id_solicitacao_visto)
+                                         status="aprovacao_pendente", nome_visto=nome_tipo_visto)
+            docs_verificados = self.__controlador_sistema.controlador_documento_verificado.\
+                abre_tela_documento_verificado(documentos=lista_documentos, id_solicitacao_visto=id_solicitacao_visto)
+            # AQUI TEM Q CHAMAR ATUALIZAR O ID DA SOLICITACAO COM BASE NOS DOCS VERIFICADOS
 
     def validar_infos_solicitacao(self, passaporte: str):
-        # validar se o passaporte consta na blacklist
         estrangeiro_na_blacklist = self.__controlador_sistema.controlador_blacklist.validar_estrangeiro_blacklist(passaporte=passaporte)
         if estrangeiro_na_blacklist:
+            self.__controlador_sistema.controlador_estrangeiro.tela_estrangeiro.mostra_mensagem("Estrangeiro na blacklist n pode ter solicitacao de visto")
             return False
-        # validar se o estrangeiro está cadastrado no sistema já. Retorna um dict se sim; senão retorna None
-        estrangeiro_cadastrado = self.__controlador_sistema.controlador_estrangeiro.estrangeiroDAO.buscar_estrangeiro_por_passaporte(passaporte=passaporte)
-        if not estrangeiro_cadastrado:   # retorna None se não tiver estrangeiro cadastrado
+        estrangeiro_cadastrado = self.__controlador_sistema.controlador_estrangeiro.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte=passaporte)
+        if not estrangeiro_cadastrado:
+            self.__controlador_sistema.controlador_estrangeiro.tela_estrangeiro.mostra_mensagem("Estrangeiro nao ta cadastrado!!")
             return False
-        # validar se o estrangeiro já possui visto, e se sim, se é do tipo permanente ou se está expirado o visto
         lista_solicitacoes_visto = self.__solicitacao_de_visto_DAO.find_solicitacao_para_passaporte(passaporte=passaporte)
         if lista_solicitacoes_visto == []:
             return True
         else:
             for solicitacao in lista_solicitacoes_visto:
-                if solicitacao["visto"] == "permanente":
+                print("opa entrei")
+                print(solicitacao["visto"])
+                if (solicitacao["visto"]).upper() == "PERMANENTE":
+                    self.__tela_solicitacao_visto.mostrar_mtela_solicitacao_visto(
+                        "Estrangeiro com solicitacao de visto do tipo permanente n pode solicitar outro")
                     return False
                 # reformular esse if
                 if solicitacao["status"] == "expirado":
                     return True
-
-
-
