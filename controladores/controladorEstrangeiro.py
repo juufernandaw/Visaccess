@@ -140,8 +140,8 @@ class ControladorEstrangeiro:
                             3] != '' and dados_novos[4] != '' and dados_novos[5] != '' and dados_novos[6] != '' and \
                                 dados_novos[7] != '' and dados_novos[8] != '':
                                     #busca pelo passaporte o estrangeiro
-                            passaporteAlterar = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(dados_novos[0])
-                            if passaporteAlterar == None:
+                            passaporte = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(dados_novos[0])
+                            if passaporte == None:
                                 print(estrangeiro['passaporte'])
                                 self.estrangeiro_dao.atualizar_estrangeiro(
                                     dados_novos[0],
