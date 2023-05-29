@@ -68,6 +68,8 @@ class ControladorEstrangeiro:
         try:
             # IR PARA TELA
             informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro()
+            if informacoes == 0:
+                self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
             if informacoes != None:
                 if informacoes[0] != '' and informacoes[1] != '' and informacoes[2] != '' and informacoes[3] != '' and \
                         informacoes[4] != '' and informacoes[5] != '' and informacoes[6] != '' and informacoes[
@@ -107,7 +109,9 @@ class ControladorEstrangeiro:
 
     def excluir_estrangeiro(self):
         passaporte = self.tela_estrangeiro.tela_excluir_estrangeiro()
-        if passaporte != None:
+        if passaporte != None or passaporte != 0:
+            if passaporte == 0 or estrangeiro == 0:
+                self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
             estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte[0])
             if estrangeiro != None:
                 self.estrangeiro_dao.excluir_estrangeiro(passaporte[0])
@@ -116,14 +120,13 @@ class ControladorEstrangeiro:
             else:
                 self.tela_estrangeiro.mostra_mensagem('Estrangeiro Não está cadastrado!')
                 return self.excluir_estrangeiro()
-        if passaporte == 0:
-            self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
+        
 
     def listar_estrangeiro(self):
         estrangeiro = self.estrangeiro_dao.buscar_todos_estrangeiros()
         opcao = self.tela_estrangeiro.tela_listar_estrangeiro(estrangeiro)
-        if opcao == 'Voltar':
-            return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
+        if opcao == 0:
+            self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
 
     def modificar_estrangeiro(self):
         passaporte = self.tela_estrangeiro.tela_modificar_estrangeiro()
@@ -131,6 +134,8 @@ class ControladorEstrangeiro:
             self.__tela_estrangeiro.mostra_mensagem('Passaporte não localizado')
             self.abre_tela_inicial_estrangeiro()
         try:
+            if passaporte == 0:
+                self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
             if passaporte != None:
                 estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte[0])
                 if estrangeiro != None:
@@ -142,7 +147,6 @@ class ControladorEstrangeiro:
                                     #busca pelo passaporte o estrangeiro
                             passaporte = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(dados_novos[0])
                             if passaporte == None:
-                                print(estrangeiro['passaporte'])
                                 self.estrangeiro_dao.atualizar_estrangeiro(
                                     dados_novos[0],
                                     dados_novos[1],
@@ -158,6 +162,7 @@ class ControladorEstrangeiro:
                                 self.tela_estrangeiro.mostra_mensagem('Estrangeiro Modificado!')
                                 return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
                             else:
+                                self.tela_estrangeiro.mostra_mensagem('Passaporte já consta no sistema!')
                                 self.modificar_estrangeiro()
                         else:
                             self.tela_estrangeiro.mostra_mensagem('Preencha todos os campos!')
@@ -168,7 +173,7 @@ class ControladorEstrangeiro:
                 self.tela_estrangeiro.mostra_mensagem('Passaporte não encontrado!')
                 self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
         except:
-            self.modificar_estrangeiro()
+            self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
 
     def encontra_passageiro(self, passaporte: str):
         passageiro_encontrado = self.__estrangeiro_dao.get_estrangeiro_by_passaporte(passaporte=passaporte)
