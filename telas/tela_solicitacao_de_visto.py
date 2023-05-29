@@ -25,29 +25,33 @@ class TelaSolicitacaoVisto:
             [tela_solicitacao_visto.Input(key='data', enable_events=False, readonly=True),
              tela_solicitacao_visto.CalendarButton('Choose', target='data', format='%Y-%m-%d')],
             [tela_solicitacao_visto.Text('Passaporte'), tela_solicitacao_visto.InputText('', key="passaporte")],
-            [tela_solicitacao_visto.Button('Confirmar'), tela_solicitacao_visto.Cancel('Retornar')]
+            [tela_solicitacao_visto.Button('Confirmar')]
         ]
         self.__window = tela_solicitacao_visto.Window("Cria solicitacao de visto").Layout(layout)
         button, values = self.__window.Read()
-        if button in (None, 'Retornar'):
-            self.close()
+
         algum_erro = False
         if values["data"] == "" or values["passaporte"] == "" or True not in values.values():
             algum_erro = True
             msg_erro = "É necessário preencher todos os campos"
-        data = values["data"]
-        formato_valido = re.match(r'^\d{4}-\d{2}-\d{2}$', data) is not None
-        if not formato_valido:
-            msg_erro = "Data inválida. Favor seguir o padrão de data AAAA-MM-DD"
 
-        data_dt_time = datetime.strptime(data, '%Y-%m-%d')
-        if data_dt_time < datetime.now():
-            msg_erro = "Data inválida. Favor seguir o padrão de data AAAA-MM-DD"
+        if not algum_erro:
+            data = values["data"]
+            formato_valido = re.match(r'^\d{4}-\d{2}-\d{2}$', data) is not None
+            if not formato_valido:
+                algum_erro = True
+                msg_erro = "Data inválida. Favor seguir o padrão de data AAAA-MM-DD"
+
+            data_dt_time = datetime.strptime(data, '%Y-%m-%d')
+            if data_dt_time < datetime.now():
+                algum_erro = True
+                msg_erro = "Data inválida. A data precisa ser mais futura que a data atual."
 
         if algum_erro:
             self.mostrar_mtela_solicitacao_visto(msg_erro)
             self.tela_solicitacao_visto_inicial(lista_tipos_visto=lista_tipos_visto)
         else:
+            data = values["data"]
             for k, v in values.items():
                 if v:
                     escolha_tipo_visto = k

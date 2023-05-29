@@ -12,7 +12,6 @@ class ControladorSolicitacaoVisto:
         lista_tipos_visto = self.__controlador_sistema.get_controlador_tipos_visto.tipos_vistoDAO.buscar_todos_tipos_visto()
         nome_tipo_visto, passaporte, data = self.__tela_solicitacao_visto.tela_solicitacao_visto_inicial\
             (lista_tipos_visto=lista_tipos_visto)
-
         solicitacao_valida = self.validar_infos_solicitacao(passaporte=passaporte)
         if solicitacao_valida:
             lista_documentos = self.__controlador_sistema.get_controlador_tipos_visto.tipos_vistoDAO.buscar_documentos_por_visto(visa_name=nome_tipo_visto)
@@ -22,6 +21,8 @@ class ControladorSolicitacaoVisto:
             docs_verificados = self.__controlador_sistema.controlador_documento_verificado.\
                 abre_tela_documento_verificado(documentos=lista_documentos, id_solicitacao_visto=id_solicitacao_visto)
             solicitacao_visto.documentos_verificados = docs_verificados
+            self.__tela_solicitacao_visto.mostrar_mtela_solicitacao_visto("Solicitação de visto enviada para aprovação!")
+            return
         else:
             self.abrir_tela_solicitacao()
 
