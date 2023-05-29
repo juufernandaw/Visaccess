@@ -68,11 +68,6 @@ class ControladorEstrangeiro:
         try:
             # IR PARA TELA
             informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro()
-            print(informacoes)
-            # if informacoes[2] == 'Sim':
-            #     informacoes[8] = True
-            # elif informacoes[8]['nao']:
-            #     informacoes[8] = False
             if informacoes != None:
                 if informacoes[0] != '' and informacoes[1] != '' and informacoes[2] != '' and informacoes[3] != '' and \
                         informacoes[4] != '' and informacoes[5] != '' and informacoes[6] != '' and informacoes[
@@ -81,11 +76,10 @@ class ControladorEstrangeiro:
                             informacoes[4] == '' or informacoes[5] == '' or informacoes[6] == '' or informacoes[
                         7] == '' or informacoes[8] == '':
                         raise CampoVazioException
+                    #converte data str --> date
+                    data_nascimento_string = informacoes[2] 
+                    informacoes[2] =  datetime.strptime(data_nascimento_string, '%d/%m/%Y').date()
                     # buscar estrangeiro por passporte. Primeira opcao do dict
-                    data_nascimento_string = informacoes[2]
-                    formato_data = '%d/%m/%Y'
-                    data_convertida = datetime.strptime(data_nascimento_string, formato_data).date()
-                    informacoes[2] = data_convertida
                     estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(informacoes[0])
                     if estrangeiro != None:
                         self.tela_estrangeiro.mostra_mensagem('Este estrangeiro já está cadastrado!')
@@ -133,6 +127,9 @@ class ControladorEstrangeiro:
 
     def modificar_estrangeiro(self):
         passaporte = self.tela_estrangeiro.tela_modificar_estrangeiro()
+        if passaporte == '':
+            self.__tela_estrangeiro.mostra_mensagem('Passaporte não localizado')
+            self.abre_tela_inicial_estrangeiro()
         try:
             if passaporte != None:
                 estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte[0])
@@ -142,10 +139,11 @@ class ControladorEstrangeiro:
                         if dados_novos[0] != '' and dados_novos[1] != '' and dados_novos[2] != '' and dados_novos[
                             3] != '' and dados_novos[4] != '' and dados_novos[5] != '' and dados_novos[6] != '' and \
                                 dados_novos[7] != '' and dados_novos[8] != '':
+                                    #busca pelo passaporte o estrangeiro
                             passaporte = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(dados_novos[0])
-                            if passaporte != None:
+                            if passaporte == None:
+                                print(estrangeiro['passaporte'])
                                 self.estrangeiro_dao.atualizar_estrangeiro(
-                                    estrangeiro['passaporte'],
                                     dados_novos[0],
                                     dados_novos[1],
                                     dados_novos[2],
@@ -155,9 +153,12 @@ class ControladorEstrangeiro:
                                     dados_novos[6],
                                     dados_novos[7],
                                     dados_novos[8],
+                                    estrangeiro['passaporte'],
                                 )
                                 self.tela_estrangeiro.mostra_mensagem('Estrangeiro Modificado!')
                                 return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
+                            else:
+                                self.modificar_estrangeiro()
                         else:
                             self.tela_estrangeiro.mostra_mensagem('Preencha todos os campos!')
                             return self.modificar_estrangeiro()

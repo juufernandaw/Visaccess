@@ -9,7 +9,7 @@ class EstrangeiroDAO:
         self.cursor = self.conn.cursor()
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS estrangeiro (
-                passaporte TEXT PRIMARY KEY,
+                passaporte TEXT PRIMARY KEY NOT NULL,
                 nome TEXT,
                 data_nasc DATE,
                 estado_civil TEXT,
@@ -48,8 +48,8 @@ class EstrangeiroDAO:
             estrangeiros.append(agente)
         return estrangeiros
 
-    def atualizar_estrangeiro(self, passaporte_antigo, passaporte_novo, nome, data_nasc, estado_civil, pais, estado,
-                              cidade, trabalho, profissao):
+    def atualizar_estrangeiro(self, passaporte_novo, nome, data_nasc, estado_civil, pais, estado,
+                              cidade, trabalho, profissao, passaporte_antigo):
         self.cursor.execute(
             "UPDATE estrangeiro SET passaporte=?, nome=?, data_nasc=?, estado_civil=?, pais=?, estado=?, cidade=?, trabalho=?, profissao=? WHERE passaporte=?",
             (passaporte_novo, nome, data_nasc, estado_civil, pais, estado, cidade, trabalho, profissao,
