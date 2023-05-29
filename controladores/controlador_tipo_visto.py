@@ -72,7 +72,7 @@ class ControladorTiposVisto:
         visa_nome = self.tela_tipos_vistos.tela_modificar_tipos_visto()
 
         if visa_nome != None:
-            docs = self.teste_dao.buscar_todos_testes()
+            docs = self.controlador_sistema.controlador_documento.documento_DAO.get_all_documentos()
             visa = self.tipos_vistoDAO.buscar_visto_por_nome(visa_nome[0])
             if visa != None:
                 dados_novos = self.tela_tipos_vistos.tela_atualizar_tipos_visto(docs)
