@@ -23,6 +23,7 @@ class DocumentoDAO:
         documentos = []
         for row in rows:
             documento = {'nome': row[0], 'regra': row[1]}
+            documento_entidade = Documento(nome=row[0], regra=row[1])
             documentos.append(documento)
         return documentos
 
