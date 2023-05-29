@@ -1,5 +1,4 @@
 from telas.tela_documento import TelaDocumento
-from entidades.documento import Documento
 from persistencia.documentoDAO import DocumentoDAO
 from excecoes.valueErrorException import ValueErrorException
 
@@ -104,9 +103,10 @@ class ControladorDocumento:
                     else:
                         self.__tela_documento.exibe_mensagem_erro('As informações não podem estar vazias')
                         return self.altera_documento()
+
             else:
                 self.__tela_documento.exibe_mensagem_erro("Este documento NÃO consta no sistema!")
-                return self.abre_tela_cadastro_documentos()
+                return self.altera_documento()
 
     def exclui_documento(self):
         botao, nome_documento = self.__tela_documento.excluir_documento()
@@ -117,7 +117,7 @@ class ControladorDocumento:
                 # self.__consulado_tela.mostrar_msg("Este consulado consta no sistema! Podemos excluir!")
                 self.__documento_DAO.remove_documento(nome_documento['nome'])
                 self.__tela_documento.exibe_mensagem_sucesso('Documento removido com sucesso')
-                return self.abre_tela_cadastro_documentos()
+                return self.exclui_documento()
             else:
                 self.__tela_documento.exibe_mensagem_erro("Este documento NÃO consta no sistema!")
                 return self.abre_tela_cadastro_documentos()

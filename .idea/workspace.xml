@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33e457d1-915d-4cd3-9bac-ddce9f263fe8" name="Changes" comment="fix: botao voltarr">
-      <change beforePath="$PROJECT_DIR$/controladores/controladorEstrangeiro.py" beforeDir="false" afterPath="$PROJECT_DIR$/controladores/controladorEstrangeiro.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controladores/controlador_documento_verificado.py" beforeDir="false" afterPath="$PROJECT_DIR$/controladores/controlador_documento_verificado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/telas/tela_documento_verificado.py" beforeDir="false" afterPath="$PROJECT_DIR$/telas/tela_documento_verificado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/telas/tela_estrangeiro.py" beforeDir="false" afterPath="$PROJECT_DIR$/telas/tela_estrangeiro.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visaccess.db" beforeDir="false" afterPath="$PROJECT_DIR$/visaccess.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controladores/controlador_documento.py" beforeDir="false" afterPath="$PROJECT_DIR$/controladores/controlador_documento.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
