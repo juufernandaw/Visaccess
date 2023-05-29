@@ -21,7 +21,6 @@ class ControladorSolicitacaoVisto:
                                          status="aprovacao_pendente", nome_visto=nome_tipo_visto)
             docs_verificados = self.__controlador_sistema.controlador_documento_verificado.\
                 abre_tela_documento_verificado(documentos=lista_documentos, id_solicitacao_visto=id_solicitacao_visto)
-            # AQUI TEM Q CHAMAR ATUALIZAR O ID DA SOLICITACAO COM BASE NOS DOCS VERIFICADOS
             solicitacao_visto.documentos_verificados = docs_verificados
         else:
             self.abrir_tela_solicitacao()
@@ -41,14 +40,13 @@ class ControladorSolicitacaoVisto:
         if lista_solicitacoes_visto == []:
             return True
         else:
-            for solicitacao in lista_solicitacoes_visto:
-                print(solicitacao["visto"])
-                if (solicitacao["visto"]).upper() == "PERMANENTE":
+            for passageiro, visto, status in lista_solicitacoes_visto:
+                if visto.upper() == "PERMANENTE":
                     self.__tela_solicitacao_visto.mostrar_mtela_solicitacao_visto(
                         "Não é possível cadastrar outra solicitação de visto para esse passaporte,"
                         " pois o mesmo já possui um visto do tipo permanente")
                     return False
-                if (solicitacao["status"]).upper != "expirado":
+                if status != "expirado":
                     self.__tela_solicitacao_visto.mostrar_mtela_solicitacao_visto(
                         "Não é possível cadastrar outra solicitação de visto para esse passaporte, "
                         "pois o mesmo já possui outro visto com status válido")

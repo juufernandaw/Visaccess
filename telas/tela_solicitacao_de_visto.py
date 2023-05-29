@@ -48,7 +48,9 @@ class TelaSolicitacaoVisto:
             self.mostrar_mtela_solicitacao_visto(msg_erro)
             self.tela_solicitacao_visto_inicial(lista_tipos_visto=lista_tipos_visto)
         else:
-            # escolha_tipo_visto =
-            # aqui tenho q dar um jeito de pegar o valor true
+            for k, v in values.items():
+                if v:
+                    escolha_tipo_visto = k
+                    break
             passaporte = values["passaporte"]
             return escolha_tipo_visto, passaporte, data

@@ -24,5 +24,4 @@ class TelaDocumentoVerificado:
         layout.append([tela_documento_verificado.Button('Confirmar'), tela_documento_verificado.Cancel('Retornar')])
         self.__window = tela_documento_verificado.Window('Tela Documentos Verificados').Layout(layout)
         button, values = self.__window.Read()
-        docs = []
         return values # é uma lista de dicts
