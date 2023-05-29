@@ -9,13 +9,11 @@ class ControladorSolicitacaoVisto:
         self.__solicitacao_de_visto_DAO = SolicitacaoDeVistoDAO()
 
     def abrir_tela_solicitacao(self):
-        # tipos_visto -> vai ter que pegar os tipos de visto cadastrados
-        # abaixo retorna uma lista com dicts com objetos da classe tipo de visto
-        lista_tipos_visto = self.__controlador_sistema.controlador_tipo_visto.tipo_vistoDAO.get_all_tipos_visto()
-        id_tipo_visto, data, passaporte = self.__tela_solicitacao_visto.tela_solicitacao_visto_inicial\
+        lista_tipos_visto = self.__controlador_sistema.get_controlador_tipos_visto.tipos_vistoDAO.buscar_todos_tipos_visto()
+        nome_tipo_visto, passaporte, data = self.__tela_solicitacao_visto.tela_solicitacao_visto_inicial\
             (lista_tipos_visto=lista_tipos_visto)
 
-        solicitacao_valida = self.validar_infos_solicitacao(tipo_visto=id_tipo_visto, passaporte=passaporte)
+        solicitacao_valida = self.validar_infos_solicitacao(passaporte=passaporte)
         if solicitacao_valida:
             # abrir tela para verificar documentos
             lista_documentos = self.__controlador_sistema.controlador_tipo_visto.tipo_vistoDAO.get_documentos_from_tipo_visto(tipo_visto=id_tipo_visto)
@@ -34,8 +32,8 @@ class ControladorSolicitacaoVisto:
         estrangeiro_na_blacklist = self.__controlador_sistema.controlador_blacklist.validar_estrangeiro_blacklist(passaporte=passaporte)
         if estrangeiro_na_blacklist:
             return False
-        # validar se o estrangeiro está cadastrado no sistema já
-        estrangeiro_cadastrado = self.__controlador_sistema.controlador_estrangeiro.estrangeiroDAO.encontra_estrangeiro_por_passaporte(passaporte=passaporte)
+        # validar se o estrangeiro está cadastrado no sistema já. Retorna um dict se sim; senão retorna None
+        estrangeiro_cadastrado = self.__controlador_sistema.controlador_estrangeiro.estrangeiroDAO.buscar_estrangeiro_por_passaporte(passaporte=passaporte)
         if not estrangeiro_cadastrado:   # retorna None se não tiver estrangeiro cadastrado
             return False
         # validar se o estrangeiro já possui visto, e se sim, se é do tipo permanente ou se está expirado o visto

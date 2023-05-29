@@ -77,7 +77,3 @@ class Tipos_VistoDAO:
     #     #  e retornar os documentos atrelados a ao tipo de visto em formato de lista de dicts {"nome": nome, "id": id}
     #     return list[dict, dict,...]
     #
-    # def get_all_tipos_visto(self):
-    #     # aqui vai fazer uma busca na tabela tipos de visto
-    #     # e depois vai transformar em dicts e colocar em uma lista composta por dicts
-    #     return list[dict, dict,...]
