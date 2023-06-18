@@ -34,7 +34,7 @@ class ControladorGerente:
             elif opcao == 4:
                 self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro('gerente')
             elif opcao == 5:
-                self.__tela_gerente.mostra_mensagem('Emitir Relatório de Solicitações Aprovadas')
+                self.__controlador_sistema.controlador_relatorio.abre_tela_relatorios()
             elif opcao == 0:
                 self.__controlador_sistema.iniciar_tela_sistema()
 

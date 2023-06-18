@@ -11,6 +11,7 @@ from controladores.controlador_documento_verificado import ControladorDocumentoV
 from controladores.controlador_tipo_visto import ControladorTiposVisto
 from controladores.controladorEstrangeiro import ControladorEstrangeiro
 from controladores.controlador_documento import ControladorDocumento
+from controladores.controlador_relatorio import ControladorRelatorio
 
 
 class ControladorSistema:
@@ -26,6 +27,7 @@ class ControladorSistema:
         self.__controlador_estrangeiro = ControladorEstrangeiro(self)
         self.__controlador_documento_verificado = ControladorDocumentoVerificado(self)
         self.__controlador_documento = ControladorDocumento(self)
+        self.__controlador_relatorio = ControladorRelatorio(self)
         self.__tela_sistema = TelaSistema()
 
     @property
@@ -47,6 +49,10 @@ class ControladorSistema:
     @property
     def controlador_documento(self):
         return self.__controlador_documento
+    
+    @property
+    def controlador_relatorio(self):
+        return self.__controlador_relatorio
 
     @property
     def controlador_consul(self):
