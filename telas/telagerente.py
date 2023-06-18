@@ -171,3 +171,4 @@ class TelaGerente:
         self.close()
 
         return opcao
+

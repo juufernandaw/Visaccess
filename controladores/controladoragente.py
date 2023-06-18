@@ -108,15 +108,17 @@ class ControladorAgente:
     def verificar_login_senha_sqlite(self, cpf, senha):  # VERIFICAR o cpf e senha pelo sqlite.
         if isinstance(cpf, str) and isinstance(senha, str):
             try:
-              agente = self.__agente_dao.buscar_agente_por_cpf(cpf)
-              senha_digitada = senha
-              senha_conferir = str(agente['senha'])
-              if agente is not None and senha_conferir == senha_digitada:
-                  return True
-              elif agente is None:
-                  raise UsuarioInexistenteException
-              elif agente['senha'] != senha:
-                  raise LoginSenhaException
+                if cpf == '' or senha == '':
+                    raise UsuarioInexistenteException
+                agente = self.__agente_dao.buscar_agente_por_cpf(cpf)
+                senha_digitada = senha
+                senha_conferir = str(agente['senha'])
+                if agente is not None and senha_conferir == senha_digitada:
+                    return True
+                elif agente is None:
+                    raise UsuarioInexistenteException
+                elif agente['senha'] != senha:
+                    raise LoginSenhaException
             except LoginSenhaException as e:
                 self.__tela_sistema.mostrar_msg(e)
             except UsuarioInexistenteException as e:
@@ -125,23 +127,23 @@ class ControladorAgente:
                 return False
 
     def abre_tela_inicial(self):  # abre a tela
-        try:
-            mexer_agente_opcoes = {1: self.voltar_tela_sistema,
-                                  2: self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro, #cadastrar estrangeiro
-                                  0: self.voltar_tela_sistema
-                                  }
-            while True:
-                opcao_escolhida = self.__tela_agente.tela_agente_inicial()
-                if opcao_escolhida != 1 and opcao_escolhida != 2 and opcao_escolhida != 0:
-                    raise ValueErrorException
-                else:
-                    funcao_escolhida = mexer_agente_opcoes[opcao_escolhida]
-                    if funcao_escolhida == self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro:
-                        return funcao_escolhida('agente')
-                    return funcao_escolhida()
-        except ValueErrorException as e:
-            self.__tela_sistema.mostrar_msg(e)
-            self.abre_tela_inicial()
+            try:
+                mexer_agente_opcoes = {1: self.__controlador_sistema.controlador_solicitacao_visto.abrir_tela_solicitacao,
+                                    2: self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro, #cadastrar estrangeiro
+                                    0: self.voltar_tela_sistema
+                                    }
+                while True:
+                    opcao_escolhida = self.__tela_agente.tela_agente_inicial()
+                    if opcao_escolhida != 1 and opcao_escolhida != 2 and opcao_escolhida != 0:
+                        raise ValueErrorException
+                    else:
+                        funcao_escolhida = mexer_agente_opcoes[opcao_escolhida]
+                        if funcao_escolhida == self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro:
+                            return funcao_escolhida('agente')
+                        return funcao_escolhida()
+            except ValueErrorException as e:
+                self.__tela_sistema.mostrar_msg(e)
+                self.abre_tela_inicial()
 
     def voltar_tela_sistema(self):
         return self.__controlador_sistema.iniciar_tela_sistema()

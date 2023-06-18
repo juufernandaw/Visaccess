@@ -1,8 +1,8 @@
-from documento import Documento
+from entidades.documento import Documento
 
 
 class DocumentoVerificado:
 
-    def __init__(self, documento: Documento, verificado: bool):
+    def __init__(self, documento: Documento, preenchido: bool):
         self.documento = documento
-        self.verificado = verificado
+        self.preenchido = preenchido

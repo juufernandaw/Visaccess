@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33e457d1-915d-4cd3-9bac-ddce9f263fe8" name="Changes" comment="fix: botao voltarr">
-      <change afterPath="$PROJECT_DIR$/controladores/controlador_solicitacao_de_visto.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/telas/tela_solicitacao_de_visto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entidades/solicitacao_de_visto.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidades/solicitacao_de_visto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controladores/controlador_solicitacao_de_visto.py" beforeDir="false" afterPath="$PROJECT_DIR$/controladores/controlador_solicitacao_de_visto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controladores/controladoragente.py" beforeDir="false" afterPath="$PROJECT_DIR$/controladores/controladoragente.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/telas/tela_solicitacao_de_visto.py" beforeDir="false" afterPath="$PROJECT_DIR$/telas/tela_solicitacao_de_visto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visaccess.db" beforeDir="false" afterPath="$PROJECT_DIR$/visaccess.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,14 +32,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Julia/visaccess",
-    "settings.editor.selected.configurable": "configurable.group.editor"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Julia/visaccess&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Julia\visaccess" />
@@ -312,6 +314,36 @@
           <url>file://$PROJECT_DIR$/config/conexao_bd.py</url>
           <line>22</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/persistencia/tipos_vistoDAO.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/controladores/controlador_solicitacao_de_visto.py</url>
+          <line>48</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/controladores/controlador_solicitacao_de_visto.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/controladores/controlador_solicitacao_de_visto.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/controladores/controlador_solicitacao_de_visto.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/controladores/controlador_solicitacao_de_visto.py</url>
+          <line>33</line>
+          <option name="timeStamp" value="81" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

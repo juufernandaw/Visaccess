@@ -2,19 +2,15 @@ from excecoes.loginsenhaException import LoginSenhaException
 from excecoes.valueErrorException import ValueErrorException
 from excecoes.usuarioinexistenteException import UsuarioInexistenteException
 from persistencia.gerenteDAO import GerenteDAO
-from persistencia.agenteDAO import AgenteDAO
 from telas.telagerente import TelaGerente
-from entidades.agente import Agente
 from entidades.gerente import Gerente
-import sqlite3
+
 
 class ControladorGerente:
     def __init__(self, controlador_sistema):
         self.__gerente_dao = GerenteDAO()
-        self.__agente_DAO = AgenteDAO()
         self.__controlador_sistema = controlador_sistema
         self.__tela_gerente = TelaGerente()
-
 
 # ---------- TELA GERENTE ABAIXO -----------------------
 
@@ -22,11 +18,15 @@ class ControladorGerente:
     def tela_sistema(self):
         return self.__tela_gerente
 
-    def abre_tela_inicial(self):
+    @property
+    def controlador_sistema(self):
+        return self.__controlador_sistema
+
+    def iniciar_tela_gerente(self):
         while True:
             opcao = self.__tela_gerente.tela_gerente_inicial()
             if opcao == 1:
-                self.__tela_gerente.mostra_mensagem('Cadastrar Solicitação de Visto')
+                self.__controlador_sistema.controlador_solicitacao_visto.abrir_tela_solicitacao()
             elif opcao == 2:
                 self.__tela_gerente.mostra_mensagem('Aprovar Solicitação de Visto')
             elif opcao == 3:
@@ -34,9 +34,10 @@ class ControladorGerente:
             elif opcao == 4:
                 self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro('gerente')
             elif opcao == 5:
-                self.__tela_gerente.mostra_mensagem('Emitir Relatório de Solicitações Aprovadas')
+                self.__controlador_sistema.controlador_relatorio.abre_tela_relatorios()
             elif opcao == 0:
                 self.__controlador_sistema.iniciar_tela_sistema()
+
 
 #--------------------- CADASTRO DE GERENTE -----------------------
 
@@ -141,20 +142,37 @@ class ControladorGerente:
 
 #--------------------- VERIFICAÇÃO LOGIN -----------------------
 
+    # def verificar_login_senha(self, cpf, senha):  # VERIFICAR o cpf e senha.
+    #     if isinstance(cpf, str) and isinstance(senha, str):
+    #         try:
+    #             for gerente in self.__gerente_dao.get_all():
+    #                 if (gerente.cpf == cpf) and (gerente.senha == senha):
+    #                     return True, gerente  # gerente q achou retornar
+    #                 if gerente.cpf != cpf or not gerente.senha != senha:
+    #                     raise LoginSenhaException
+    #         except LoginSenhaException as e: #exception para login e senha errada
+    #             self.__tela_sistema.mostrar_msg(e)
+    #             self.__controlador_sistema.iniciar_tela_sistema() #voltar para a inicial do sistema
+    #         else:
+    #             return False
+
     def verificar_login_senha_sqlite(self, cpf, senha):  # VERIFICAR o cpf e senha pelo sqlite.
         if isinstance(cpf, str) and isinstance(senha, str):
             try:
-              gerente = self.__gerente_dao.buscar_gerente_por_cpf(cpf)
               senha_digitada = senha
+              if cpf == '' and senha_digitada == '':
+                  raise UsuarioInexistenteException
+              gerente = self.__gerente_dao.buscar_gerente_por_cpf(cpf)
+              if gerente is None:
+                  raise UsuarioInexistenteException
               senha_conferir = str(gerente.senha)
               if gerente is not None and senha_conferir == senha_digitada:
                   return True
-              elif gerente is None:
-                  raise UsuarioInexistenteException
             except LoginSenhaException as e:
-                self.__tela_sistema.mostrar_msg(e)
+                self.__controlador_sistema.tela_sistema.mostrar_msg(e)
             except UsuarioInexistenteException as e:
-                self.__tela_sistema.mostrar_msg(e)
+                self.__controlador_sistema.tela_sistema.mostrar_msg(e)
+                self.__controlador_sistema.iniciar_tela_sistema()
             else:
                 return False
 
