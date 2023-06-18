@@ -129,8 +129,8 @@ class ControladorEstrangeiro:
     def modificar_estrangeiro(self):
         passaporte = self.tela_estrangeiro.tela_modificar_estrangeiro()
         if passaporte == '':
-            self.__tela_estrangeiro.mostra_mensagem('Passaporte não localizado')
-            self.abre_tela_inicial_estrangeiro()
+            self.__tela_estrangeiro.mostra_mensagem('Passaporte Inexistente')
+            self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
         try:
             if passaporte == 0:
                 self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
@@ -164,7 +164,10 @@ class ControladorEstrangeiro:
                                 self.modificar_estrangeiro()
                         else:
                             self.tela_estrangeiro.mostra_mensagem('Preencha todos os campos!')
-                            return self.modificar_estrangeiro()
+                            return self.modificar_estrangeiro()        
+                else:
+                    self.tela_estrangeiro.mostra_mensagem('Passaporte não existente!')
+                    self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
             elif passaporte == 0:
                 self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
             else:
