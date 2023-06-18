@@ -13,7 +13,7 @@ class RelatorioDAO():
         FROM solicitacaoDeVisto s
         inner JOIN estrangeiro e
         on s.estrangeiro = e.passaporte
-        where s.status = 'aprovacao_pendente'
+        where s.status = 'aprovado'
         GROUP BY e.pais HAVING COUNT(e.pais) > 1 ORDER BY count(e.pais) DESC
         """)
         rows = self.cursor.fetchall()
