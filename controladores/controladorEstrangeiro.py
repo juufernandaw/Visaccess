@@ -166,7 +166,7 @@ class ControladorEstrangeiro:
                             self.tela_estrangeiro.mostra_mensagem('Preencha todos os campos!')
                             return self.modificar_estrangeiro()        
                 else:
-                    self.tela_estrangeiro.mostra_mensagem('Passaporte não existente!')
+                    self.tela_estrangeiro.mostra_mensagem('Passaporte não localizado ou Passaporte não existente!')
                     self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
             elif passaporte == 0:
                 self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
