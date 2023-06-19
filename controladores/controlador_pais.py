@@ -1,42 +1,34 @@
-from entidades.estrangeiro import Estrangeiro
-from persistencia.estrangeiroDAO import EstrangeiroDAO
-from excecoes.loginsenhaException import LoginSenhaException
+from persistencia.paisDAO import PaisDAO
+from entidades.pais import Pais
+from telas.tela_pais import TelaPais
 from excecoes.valueErrorException import ValueErrorException
-from excecoes.usuarioinexistenteException import UsuarioInexistenteException
 from excecoes.campovazioexception import CampoVazioException
-from telas.tela_estrangeiro import TelaEstrangeiro
-import sqlite3
 
+class pais:
 
-class ControladorEstrangeiro:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
-        self.__estrangeiro_dao = EstrangeiroDAO()
-        self.__tela_estrangeiro = TelaEstrangeiro()
-        self.__gerente_agente = None
+        self.__pais_DAO = PaisDAO()
+        self.__tela_pais = TelaPais()
 
     @property
-    def estrangeiro_dao(self):
-        return self.__estrangeiro_dao
+    def pais_dao(self):
+        return self.__pais_DAO
 
     @property
-    def tela_estrangeiro(self):
-        return self.__tela_estrangeiro
+    def tela_pais(self):
+        return self.__tela_pais
     
     @property
     def controlador_sistema(self):
         return self.__controlador_sistema
 
-    @property
-    def gerente_agente(self):
-        return self.__gerente_agente
-
-    def abre_tela_inicial_estrangeiro(self, gerente_agente:str):  # abre a tela para cadastrar estrangeiro voltar agente/gerente
+    def abre_tela_inicial_pais(self, gerente_agente:str):  # abre a tela para cadastrar pais
         try:
-            mexer_agente_opcoes = {1: self.adicionar_estrangeiro,
-                                  2: self.excluir_estrangeiro,
-                                  3: self.listar_estrangeiro,
-                                  4: self.modificar_estrangeiro,
+            mexer_agente_opcoes = {1: self.adicionar_pais,
+                                  2: self.excluir_pais,
+                                  3: self.listar_pais,
+                                  4: self.modificar_pais,
                                   0: self.voltar_tela
                                   }
             while True:
@@ -52,8 +44,8 @@ class ControladorEstrangeiro:
                         return self.voltar_tela('gerente')
                     return funcao_escolhida()
         except ValueErrorException as e:
-            self.__tela_estrangeiro.mostra_mensagem("Tente novamente")
-            self.abre_tela_inicial_estrangeiro()
+            self.__tela_pais.mostra_mensagem("Tente novamente")
+            self.abre_tela_inicial_pais()
 
     def voltar_tela(self, escolha:str):
         if escolha == 'agente':
@@ -61,7 +53,7 @@ class ControladorEstrangeiro:
         elif escolha == 'gerente':
             return self.__controlador_sistema.controlador_gerente.iniciar_tela_gerente()
 
-    def adicionar_estrangeiro(self):
+    def adicionar_pais(self):
         try:
             #IR PARA TELA
             informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro()
@@ -89,25 +81,25 @@ class ControladorEstrangeiro:
             self.tela_estrangeiro.mostra_mensagem(e)
             self.abre_tela_inicial_estrangeiro(self.__gerente_agente)             
 
-    def excluir_estrangeiro(self):
-        passaporte = self.tela_estrangeiro.tela_excluir_estrangeiro()
-        if passaporte != None:
-            estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte[0])
-            if estrangeiro != None:
-                self.estrangeiro_dao.excluir_estrangeiro(passaporte[0])
-                self.tela_estrangeiro.mostra_mensagem('Estrangeiro Excluído!')
-                return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
+    def excluir_pais(self):
+        exclui_pais = self.tela_pais.tela_excluir_pais()
+        if exclui_pais != None:
+            pais = self.pais_dao.buscar_pais_por_nome(exclui_pais[0])
+            if pais != None:
+                self.pais_dao.excluir_pais(pais[0])
+                self.tela_pais.mostra_mensagem('País Excluído!')
+                return self.abre_tela_inicial_pais()
             else:
-                self.tela_estrangeiro.mostra_mensagem('Estrangeiro Não está cadastrado!')
-                return self.excluir_estrangeiro()
+                self.tela_pais.mostra_mensagem('País não está cadastrado!')
+                return self.excluir_pais()
 
-    def listar_estrangeiro(self):
-        estrangeiro = self.estrangeiro_dao.buscar_todos_estrangeiros()
-        opcao = self.tela_estrangeiro.tela_listar_estrangeiro(estrangeiro)
+    def listar_pais(self):
+        pais = self.pais_dao.buscar_todos_paises()
+        opcao = self.tela_pais.tela_listar_pais(pais)
         if opcao == 'Voltar':
-            return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
+            return self.abre_tela_inicial_pais(self.__gerente_agente)
         
-    def modificar_estrangeiro(self):
+    def modificar_pais(self):
         passaporte = self.tela_estrangeiro.tela_modificar_estrangeiro()
         try:
             if passaporte != None:
