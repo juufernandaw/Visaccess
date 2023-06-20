@@ -2,7 +2,6 @@ from entidades.consul_geral import Consul
 from excecoes.valueErrorException import ValueErrorException
 from telas.telasistema import TelaSistema
 from telas.telaconsul import TelaConsul
-# from controladores.controladorgerente import ControladorGerente
 
 
 class ControladorConsul:
@@ -22,7 +21,7 @@ class ControladorConsul:
             mexer_consul_opcoes = {1: self.__controlador_sistema.controlador_consulado.abre_tela_consulados,
                                    2: self.__controlador_sistema.controlador_gerente.abrir_tela_cadastro_gerente,
                                    3: self.abre_tela_inicial,
-                                   4: self.abre_tela_inicial,
+                                   4: self.__controlador_sistema.controlador_blacklist.abre_tela_blacklist,
                                    5: self.__controlador_sistema.controlador_documento.abre_tela_cadastro_documentos,
                                    6: self.__controlador_sistema.get_controlador_tipos_visto.abrir_tela_cadastro,
                                    0: self.__controlador_sistema.iniciar_tela_sistema

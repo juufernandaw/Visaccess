@@ -33,10 +33,10 @@ class ControladorConsulado:
         botao, dados_consulado = self.__consulado_tela.pegar_dados_consulado()
         if botao == 'Voltar':
             return self.abre_tela_consulados()
-        for consulado in self.__consulado_DAO.get_all_consulados():
-            if dados_consulado == consulado:
-                self.__consulado_tela.mostrar_msg("Este consulado já consta no sistema!")
-                return self.incluir_consulado()
+        consulado_existente = self.__consulado_DAO.get_consulado_by_sede(sede=dados_consulado)
+        if consulado_existente:
+            self.__consulado_tela.mostrar_msg("Este consulado já consta no sistema!")
+            return self.incluir_consulado()
         else:
             if dados_consulado == "":
                 self.__consulado_tela.mostrar_msg("O nome da sede não pode ser vazio!")
@@ -72,12 +72,11 @@ class ControladorConsulado:
         botao, consulado_excluir = self.__consulado_tela.componentes_tela_excluir_consulado()
         if botao == 'Voltar':
             return self.abre_tela_consulados()
-        for consulado in self.__consulado_DAO.get_all_consulados():
-            if consulado_excluir["sede"] == consulado:
-                # self.__consulado_tela.mostrar_msg("Este consulado consta no sistema! Podemos excluir!")
-                self.__consulado_DAO.delete_consulado(sede=consulado)
-                self.__consulado_tela.mostrar_msg("Consulado excluído com sucesso!")
-                return self.abre_tela_consulados()
+        consulado_existente = self.__consulado_DAO.get_consulado_by_sede(sede=consulado_excluir["sede"])
+        if consulado_existente:
+            self.__consulado_DAO.delete_consulado(sede=consulado_excluir["sede"])
+            self.__consulado_tela.mostrar_msg("Consulado excluído com sucesso!")
+            return self.abre_tela_consulados()
         else:
             self.__consulado_tela.mostrar_msg("Este consulado NÃO consta no sistema!")
             return self.abre_tela_consulados()

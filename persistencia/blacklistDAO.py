@@ -1,5 +1,4 @@
 import sqlite3
-from entidades.blacklist import Blacklist
 
 
 class BlacklistDAO:
@@ -28,10 +27,9 @@ class BlacklistDAO:
         rows = self.cursor.fetchall()
         blacklists = []
         for row in rows:
-            blacklist = Blacklist(nome=row[1], passaporte=row[0])
-            blacklists.append({"nome": blacklist.nome, "passaporte": blacklist.passaporte})
+            blacklists.append({"nome": row[1], "passaporte": row[0]})
         return blacklists
 
     def delete_blacklist(self, passaporte: str):
-        self.cursor.execute("DELETE FROM blacklist WHERE passaporte=?", [passaporte])
+        self.cursor.execute("DELETE FROM blacklist WHERE passaporte=?", [passaporte,])
         self.conn.commit()

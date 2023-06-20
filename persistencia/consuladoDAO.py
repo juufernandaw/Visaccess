@@ -1,6 +1,5 @@
 import sqlite3
 from entidades.consulado import Consulado
-# validar porque acho que entidade e DAO não podem conversar
 
 
 class ConsuladoDAO:
@@ -13,7 +12,7 @@ class ConsuladoDAO:
     def close(self):
         self.conn.close()
 
-    def create_consulado(self, sede):
+    def create_consulado(self, sede: str):
         self.cursor.execute("INSERT INTO consulado (sede) VALUES (?)", [sede])
         self.conn.commit()
 
@@ -26,17 +25,17 @@ class ConsuladoDAO:
             consulados.append(consulado.sede)
         return consulados
 
-    # def get_consulado_by_sede(self, sede):
-    #     self.cursor.execute("SELECT * FROM consulado WHERE sede=?", sede)
-    #     row = self.cursor.fetchone()
-    #     if row is None:
-    #         return None
-    #     return {'sede': row[1]}
+    def get_consulado_by_sede(self, sede: str):
+        self.cursor.execute("SELECT * FROM consulado WHERE sede=?", [sede,])
+        row = self.cursor.fetchone()
+        if row is None:
+            return None
+        return {'sede': row}
 
     def delete_consulado(self, sede):
         self.cursor.execute("DELETE FROM consulado WHERE sede=?", [sede])
         self.conn.commit()
 
-    def update_consulado(self, nova_sede, velha_sede):
+    def update_consulado(self, nova_sede: str, velha_sede: str):
         self.cursor.execute(f"UPDATE consulado SET sede='{nova_sede}' WHERE sede=?", [velha_sede])
         self.conn.commit()
