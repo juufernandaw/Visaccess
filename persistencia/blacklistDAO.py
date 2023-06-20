@@ -1,4 +1,5 @@
 import sqlite3
+from entidades.blacklist import Blacklist
 
 
 class BlacklistDAO:
@@ -11,19 +12,26 @@ class BlacklistDAO:
     def close(self):
         self.conn.close()
 
-    def create_tuple_blacklist(self, passaporte, nome):
+    def create_tuple_blacklist(self, passaporte: str, nome: str):
         self.cursor.execute("INSERT INTO blacklist (passaporte, nome) VALUES (?, ?)", [passaporte, nome])
         self.conn.commit()
 
-    def encontra_passaporte(self, passaporte):
-        # self.cursor.execute("INSERT INTO blacklist (passaporte, nome) VALUES (?, ?)", ['1', 'HENRIQUE'])
-        # self.conn.commit()
-        # self.cursor.execute("INSERT INTO blacklist (passaporte, nome) VALUES (?, ?)", ['2', 'JULIO'])
-        # self.conn.commit()
-        # self.cursor.execute("SELECT * FROM blacklist")
-        # rows = self.cursor.fetchall()
+    def encontra_passaporte(self, passaporte: str):
         self.cursor.execute("SELECT * FROM blacklist WHERE passaporte=?", (passaporte,))
         row = self.cursor.fetchone()
         if row is None:
             return False
         return True
+
+    def get_all_blacklist(self):
+        self.cursor.execute("SELECT * FROM blacklist")
+        rows = self.cursor.fetchall()
+        blacklists = []
+        for row in rows:
+            blacklist = Blacklist(nome=row[1], passaporte=row[0])
+            blacklists.append({"nome": blacklist.nome, "passaporte": blacklist.passaporte})
+        return blacklists
+
+    def delete_blacklist(self, passaporte: str):
+        self.cursor.execute("DELETE FROM blacklist WHERE passaporte=?", [passaporte])
+        self.conn.commit()
