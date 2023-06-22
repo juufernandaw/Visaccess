@@ -37,10 +37,10 @@ class TelaSolicitacaoVisto:
 
         if not algum_erro:
             data = values["data"]
-            formato_valido = re.match(r'^\d{4}-\d{2}-\d{2}$', data) is not None
-            if not formato_valido:
-                algum_erro = True
-                msg_erro = "Data inválida. Favor seguir o padrão de data AAAA-MM-DD"
+            # formato_valido = re.match(r'^\d{4}-\d{2}-\d{2}$', data) is not None
+            # if not formato_valido:
+            #     algum_erro = True
+            #     msg_erro = "Data inválida. Favor seguir o padrão de data AAAA-MM-DD"
 
             data_dt_time = datetime.strptime(data, '%Y-%m-%d')
             if data_dt_time < datetime.now():
