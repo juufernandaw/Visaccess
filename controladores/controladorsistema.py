@@ -39,43 +39,43 @@ class ControladorSistema:
         return self.__controlador_tipo_visto
 
     @property
-    def controlador_estrangeiro(self):
+    def get_controlador_estrangeiro(self):
         return self.__controlador_estrangeiro
 
     @property
-    def controlador_documento_verificado(self):
+    def get_controlador_documento_verificado(self):
         return self.__controlador_documento_verificado
 
     @property
-    def controlador_documento(self):
+    def get_controlador_documento(self):
         return self.__controlador_documento
     
     @property
-    def controlador_relatorio(self):
+    def get_controlador_relatorio(self):
         return self.__controlador_relatorio
 
     @property
-    def controlador_consul(self):
+    def get_controlador_consul(self):
         return self.__controlador_consul
 
     @property
-    def controlador_gerente(self):
+    def get_controlador_gerente(self):
         return self.__controlador_gerente
 
     @property
-    def controlador_consulado(self):
+    def get_controlador_consulado(self):
         return self.__controlador_consulado
 
     @property
-    def controlador_agente(self):
+    def get_controlador_agente(self):
         return self.__controlador_agente
 
     @property
-    def controlador_solicitacao_visto(self):
+    def get_controlador_solicitacao_visto(self):
         return self.__controlador_solicitacao_visto
 
     @property
-    def controlador_blacklist(self):
+    def get_controlador_blacklist(self):
         return self.__controlador_blacklist
 
     @property

@@ -26,15 +26,15 @@ class ControladorGerente:
         while True:
             opcao = self.__tela_gerente.tela_gerente_inicial()
             if opcao == 1:
-                self.__controlador_sistema.controlador_solicitacao_visto.abrir_tela_solicitacao()
+                self.__controlador_sistema.get_controlador_solicitacao_visto.abrir_tela_solicitacao()
             elif opcao == 2:
                 self.__tela_gerente.mostra_mensagem('Aprovar Solicitação de Visto')
             elif opcao == 3:
-                self.__controlador_sistema.controlador_agente.abrir_tela_cadastro()
+                self.__controlador_sistema.get_controlador_agente.abrir_tela_cadastro()
             elif opcao == 4:
-                self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro('gerente')
+                self.__controlador_sistema.get_controlador_estrangeiro.abre_tela_inicial_estrangeiro('gerente')
             elif opcao == 5:
-                self.__controlador_sistema.controlador_relatorio.abre_tela_relatorios()
+                self.__controlador_sistema.get_controlador_relatorio.abre_tela_relatorios()
             elif opcao == 0:
                 self.__controlador_sistema.iniciar_tela_sistema()
 

@@ -70,14 +70,6 @@ class Estrangeiro:
         self.__cidade = cidade
 
     @property
-    def estado(self):
-        return self.__estado
-
-    @estado.setter
-    def estado(self, estado: str):
-        self.__estado = estado
-
-    @property
     def trabalho(self):
         return self.__trabalho
 

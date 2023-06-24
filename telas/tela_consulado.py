@@ -100,4 +100,3 @@ class TelaConsulado:
         sede = values['sede']
         self.close()
         return button, sede
-

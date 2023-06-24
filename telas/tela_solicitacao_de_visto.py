@@ -11,7 +11,7 @@ class TelaSolicitacaoVisto:
     def close(self):
         self.__window.Close()
 
-    def mostrar_mtela_solicitacao_visto(self, mtela_solicitacao_visto):
+    def mostrar_msg_tela(self, mtela_solicitacao_visto):
         tela_solicitacao_visto.popup_ok(mtela_solicitacao_visto)
 
     def tela_solicitacao_visto_inicial(self, lista_tipos_visto: list):
@@ -30,25 +30,21 @@ class TelaSolicitacaoVisto:
         self.__window = tela_solicitacao_visto.Window("Cria solicitacao de visto").Layout(layout)
         button, values = self.__window.Read()
 
-        algum_erro = False
+        error = False
         if values["data"] == "" or values["passaporte"] == "" or True not in values.values():
-            algum_erro = True
+            error = True
             msg_erro = "É necessário preencher todos os campos"
 
-        if not algum_erro:
+        if not error:
             data = values["data"]
-            # formato_valido = re.match(r'^\d{4}-\d{2}-\d{2}$', data) is not None
-            # if not formato_valido:
-            #     algum_erro = True
-            #     msg_erro = "Data inválida. Favor seguir o padrão de data AAAA-MM-DD"
 
             data_dt_time = datetime.strptime(data, '%Y-%m-%d')
             if data_dt_time < datetime.now():
-                algum_erro = True
+                error = True
                 msg_erro = "Data inválida. A data precisa ser mais futura que a data atual."
 
-        if algum_erro:
-            self.mostrar_mtela_solicitacao_visto(msg_erro)
+        if error:
+            self.mostrar_msg_tela(msg_erro)
             self.tela_solicitacao_visto_inicial(lista_tipos_visto=lista_tipos_visto)
         else:
             data = values["data"]

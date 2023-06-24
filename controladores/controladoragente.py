@@ -41,7 +41,7 @@ class ControladorAgente:
             elif opcao == 4:
                 self.modificar_agente()
             elif opcao == 0:
-                self.controlador_sistema.controlador_gerente.iniciar_tela_gerente()
+                self.controlador_sistema.get_controlador_gerente.iniciar_tela_gerente()
 
     def adicionar_agente(self):
         data = self.tela_agente.tela_adicionar_agentes()
@@ -128,8 +128,8 @@ class ControladorAgente:
 
     def abre_tela_inicial(self):  # abre a tela
             try:
-                mexer_agente_opcoes = {1: self.__controlador_sistema.controlador_solicitacao_visto.abrir_tela_solicitacao,
-                                    2: self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro, #cadastrar estrangeiro
+                mexer_agente_opcoes = {1: self.__controlador_sistema.get_controlador_solicitacao_visto.abrir_tela_solicitacao,
+                                    2: self.__controlador_sistema.get_controlador_estrangeiro.abre_tela_inicial_estrangeiro, #cadastrar estrangeiro
                                     0: self.voltar_tela_sistema
                                     }
                 while True:
@@ -138,7 +138,7 @@ class ControladorAgente:
                         raise ValueErrorException
                     else:
                         funcao_escolhida = mexer_agente_opcoes[opcao_escolhida]
-                        if funcao_escolhida == self.__controlador_sistema.controlador_estrangeiro.abre_tela_inicial_estrangeiro:
+                        if funcao_escolhida == self.__controlador_sistema.get_controlador_estrangeiro.abre_tela_inicial_estrangeiro:
                             return funcao_escolhida('agente')
                         return funcao_escolhida()
             except ValueErrorException as e:

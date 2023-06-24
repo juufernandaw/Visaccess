@@ -16,7 +16,7 @@ class ControladorRelatorio:
         try:
             opcoes_relatorios = {1: self.relatorio_paises,
                                  2: self.relatorio_tipos_de_visto,
-                                 0: self.__controlador_sistema.controlador_gerente.iniciar_tela_gerente}
+                                 0: self.__controlador_sistema.get_controlador_gerente.iniciar_tela_gerente}
             while True:
                 opcao_escolhida = self.__tela_relatorio.emissao_relatorios()
                 if opcao_escolhida != 1 and opcao_escolhida != 2 and opcao_escolhida != 0:

@@ -18,11 +18,11 @@ class ControladorConsul:
 
     def abre_tela_inicial(self):  # abre a tela consul pos login da tela do sistema
         try:
-            mexer_consul_opcoes = {1: self.__controlador_sistema.controlador_consulado.abre_tela_consulados,
-                                   2: self.__controlador_sistema.controlador_gerente.abrir_tela_cadastro_gerente,
+            mexer_consul_opcoes = {1: self.__controlador_sistema.get_controlador_consulado.abre_tela_consulados,
+                                   2: self.__controlador_sistema.get_controlador_gerente.abrir_tela_cadastro_gerente,
                                    3: self.abre_tela_inicial,
-                                   4: self.__controlador_sistema.controlador_blacklist.abre_tela_blacklist,
-                                   5: self.__controlador_sistema.controlador_documento.abre_tela_cadastro_documentos,
+                                   4: self.__controlador_sistema.get_controlador_blacklist.abre_tela_blacklist,
+                                   5: self.__controlador_sistema.get_controlador_documento.abre_tela_cadastro_documentos,
                                    6: self.__controlador_sistema.get_controlador_tipos_visto.abrir_tela_cadastro,
                                    0: self.__controlador_sistema.iniciar_tela_sistema
                                    }

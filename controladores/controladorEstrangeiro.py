@@ -60,9 +60,9 @@ class ControladorEstrangeiro:
 
     def voltar_tela(self, escolha: str):
         if escolha == 'agente':
-            return self.__controlador_sistema.controlador_agente.abre_tela_inicial()
+            return self.__controlador_sistema.get_controlador_agente.abre_tela_inicial()
         elif escolha == 'gerente':
-            return self.__controlador_sistema.controlador_gerente.iniciar_tela_gerente()
+            return self.__controlador_sistema.get_controlador_gerente.iniciar_tela_gerente()
 
     def adicionar_estrangeiro(self):
         try:

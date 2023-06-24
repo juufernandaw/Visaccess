@@ -4,8 +4,8 @@ class Blacklist:
         self.__nome = nome
         self.__passaporte = passaporte
 
-    def nome(self):
+    def get_nome(self):
         return self.__nome
 
-    def passaporte(self):
+    def get_passaporte(self):
         return self.__passaporte
