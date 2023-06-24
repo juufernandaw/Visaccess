@@ -40,11 +40,8 @@ class TelaPais:
         return opcao
 
     def componentes_tela_adicionar_atualizar_pais(self, tipo, lista_paises):
-        estado_civil = ["Solteiro", "Casado", "Viuvo(a)", "Namorando"]
-        # paises = ['Argentina', 'Paraguai', 'Uruguai']  # vai vim do BD ainda preciso fazer isso
         layout = [
             [tela_pais.Text('País'), tela_pais.InputText('')],
-            [tela_pais.Text('Países'), tela_pais.Combo(estado_civil)],
             [tela_pais.Text('Isento'), tela_pais.Combo([True, False])],
             [tela_pais.Button('Confirmar'), tela_pais.Button('Voltar')]
         ]

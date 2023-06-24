@@ -1,6 +1,6 @@
 class Pais:
 
-    def __init__(self, isento: str, nome: str):
+    def __init__(self, nome: str, isento: str):
         self.__isento = isento
         self.__nome = nome
 
