@@ -66,6 +66,9 @@ class ControladorEstrangeiro:
             #IR PARA TELA
             #paises = self.controlador_sistema.controlador_pais.listar_paises_cadastrados()
             informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro()
+            if informacoes == None:
+                self.tela_estrangeiro.mostra_mensagem('oi oi Campos vazios, preencha todos os campos!')
+                self.adicionar_estrangeiro()
             if informacoes != None:
                 if informacoes[0] != '' and informacoes[1] != '' and informacoes[2] != '' and informacoes[3] != '' and informacoes[4] != '' and informacoes[5] != '' and informacoes[6] != '' and informacoes[7] != '' and informacoes[8] != '':
                     if informacoes[0] == '' or informacoes[1] == '' or informacoes[2] == '' or informacoes[3] == '' or informacoes[4] == '' or informacoes[5] =='' or informacoes[6] == '' or informacoes[7] =='' or informacoes[8] == '':
@@ -82,7 +85,11 @@ class ControladorEstrangeiro:
                         self.estrangeiro_dao.cadastrar_estrangeiro(estrangeiro.passaporte, estrangeiro.nome, estrangeiro.data_nasc, estrangeiro.estado_civil, estrangeiro.pais, estrangeiro.estado, estrangeiro.cidade, estrangeiro.trabalho, estrangeiro.profissao)
                         self.tela_estrangeiro.mostra_mensagem('Estrangeiro cadastrado!')
                 else:
-                    self.tela_estrangeiro.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
+                    self.tela_estrangeiro.mostra_mensagem('ou aquiCampos vazios, preencha todos os campos!')
+                    self.adicionar_estrangeiro()
+            else:
+                self.tela_estrangeiro.mostra_mensagem(' aquiCampos vazios, preencha todos os campos!')
+                self.adicionar_estrangeiro()
         except ValueErrorException as e:
             self.tela_estrangeiro.mostra_mensagem(e)
             self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
