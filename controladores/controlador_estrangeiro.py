@@ -64,6 +64,7 @@ class ControladorEstrangeiro:
     def adicionar_estrangeiro(self):
         try:
             #IR PARA TELA
+            #paises = self.controlador_sistema.controlador_pais.listar_paises_cadastrados()
             informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro()
             if informacoes != None:
                 if informacoes[0] != '' and informacoes[1] != '' and informacoes[2] != '' and informacoes[3] != '' and informacoes[4] != '' and informacoes[5] != '' and informacoes[6] != '' and informacoes[7] != '' and informacoes[8] != '':
@@ -113,6 +114,7 @@ class ControladorEstrangeiro:
             if passaporte != None:
                 estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte[0])
                 if estrangeiro != None:
+                        #paises = self.controlador_sistema.controlador_pais.listar_paises_cadastrados()
                         dados_novos = self.tela_estrangeiro.tela_atualizar_estrangeiro()
                         if dados_novos != None:
                             if dados_novos[0]!= '' and dados_novos[1]!= '' and dados_novos[2]!= '' and dados_novos[3]!= '' and dados_novos[4]!= '' and dados_novos[5]!= '' and dados_novos[6]!= '' and dados_novos[7]!= '' and dados_novos[8] != '':

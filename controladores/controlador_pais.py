@@ -4,7 +4,7 @@ from telas.tela_pais import TelaPais
 from excecoes.valueErrorException import ValueErrorException
 from excecoes.campovazioexception import CampoVazioException
 
-class pais:
+class ControladorPais:
 
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
@@ -65,6 +65,7 @@ class pais:
                         #BANCO DE DADOS
                         self.pais_dao.cadastrar_pais(pais.nome, pais.isento)
                         self.tela_pais.mostra_mensagem('País cadastrado!')
+                        self.abre_tela_inicial_pais()
                 else:
                     self.tela_pais.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
         except CampoVazioException as e:
@@ -82,13 +83,18 @@ class pais:
             else:
                 self.tela_pais.mostra_mensagem('País não está cadastrado!')
                 return self.excluir_pais()
+        elif exclui_pais == 0:
+            return self.excluir_pais()
 
     def listar_pais(self):
         pais = self.pais_dao.buscar_todos_paises()
         opcao = self.tela_pais.tela_listar_pais(pais)
-        if opcao == 'Voltar':
-            return self.abre_tela_inicial_pais(self.__gerente_agente)
-        
+        if opcao == 0:
+            return self.abre_tela_inicial_pais()
+
+    def listar_paises_cadastrados(self):
+        return self.pais_dao.listar_todos_paises_cadastrados()
+     
     def modificar_pais(self):
         nome_pais = self.tela_pais.tela_modificar_pais()
         try:
@@ -102,15 +108,19 @@ class pais:
                                 if nome_pais != None:
                                     self.pais_dao.atualizar_pais(
                                         dados_novos[0], 
-                                        dados_novos[1], 
+                                        dados_novos[1],
+                                        pais['pais'] 
                                     )
                                     self.tela_pais.mostra_mensagem('País Modificado!')
                                     return self.abre_tela_inicial_pais()
                             else:
                                 self.tela_pais.mostra_mensagem('Preencha todos os campos!')
                                 return self.modificar_pais()
+                        else:
+                            self.tela_pais.mostra_mensagem('Preencha novamente')
+                            self.modificar_pais()
             else:
-                self.tela_pais.mostra_mensagem('Passaporte não encontrado!')
+                self.tela_pais.mostra_mensagem('País não encontrado!')
                 self.abre_tela_inicial_pais() 
         except:
             self.modificar_pais()

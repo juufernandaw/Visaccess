@@ -12,6 +12,7 @@ from controladores.controlador_tipo_visto import ControladorTiposVisto
 from controladores.controladorEstrangeiro import ControladorEstrangeiro
 from controladores.controlador_documento import ControladorDocumento
 from controladores.controlador_relatorio import ControladorRelatorio
+from controladores.controlador_pais import ControladorPais
 
 
 class ControladorSistema:
@@ -28,7 +29,12 @@ class ControladorSistema:
         self.__controlador_documento_verificado = ControladorDocumentoVerificado(self)
         self.__controlador_documento = ControladorDocumento(self)
         self.__controlador_relatorio = ControladorRelatorio(self)
+        self.__controlador_pais = ControladorPais(self)
         self.__tela_sistema = TelaSistema()
+
+    @property
+    def controlador_pais(self):
+        return self.__controlador_pais
 
     @property
     def usuario_logado(self):  # conseguir saber quem logou

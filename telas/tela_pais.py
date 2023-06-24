@@ -39,7 +39,7 @@ class TelaPais:
         self.close()
         return opcao
 
-    def componentes_tela_adicionar_atualizar_pais(self, tipo, lista_paises):
+    def componentes_tela_adicionar_atualizar_pais(self, tipo):
         layout = [
             [tela_pais.Text('País'), tela_pais.InputText('')],
             [tela_pais.Text('Isento'), tela_pais.Combo([True, False])],
@@ -75,16 +75,16 @@ class TelaPais:
             return 0
         return values
 
-    def tela_adicionar_pais(self, lista_paises):
-        self.componentes_tela_adicionar_atualizar_pais('Adicionar País', lista_paises)
+    def tela_adicionar_pais(self):
+        self.componentes_tela_adicionar_atualizar_pais('Adicionar País')
         return self.logica_tela_pais()
 
     def tela_excluir_pais(self):
         self.componentes_tela_excluir_modificar_pais('Excluir País')
         return self.logica_tela_pais()
 
-    def tela_modificar_pais(self, lista_paises):
-        self.componentes_tela_excluir_modificar_pais('Alterar País', lista_paises)
+    def tela_modificar_pais(self):
+        self.componentes_tela_excluir_modificar_pais('Alterar País')
         return self.logica_tela_pais()
 
     def tela_atualizar_pais(self):
