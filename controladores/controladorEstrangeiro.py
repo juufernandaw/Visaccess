@@ -97,7 +97,8 @@ class ControladorEstrangeiro:
                                                                    estrangeiro.cidade, estrangeiro.trabalho, estrangeiro.profissao)
                         self.tela_estrangeiro.mostra_mensagem('Estrangeiro cadastrado!')
                 else:
-                    self.tela_estrangeiro.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
+                    self.tela_estrangeiro.mostra_mensagem('Campos vazios, preencha todos os campos!')
+                    self.adicionar_estrangeiro()
             elif informacoes == 0:
                 self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
         except ValueErrorException as e:

@@ -67,7 +67,7 @@ class ControladorPais:
                         self.tela_pais.mostra_mensagem('País cadastrado!')
                         self.abre_tela_inicial_pais()
                 else:
-                    self.tela_pais.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
+                    self.tela_pais.mostra_mensagem('Dados Incorretos, preencha corretamente os campos pais e isento!')
         except CampoVazioException as e:
             self.tela_pais.mostra_mensagem(e)
             self.abre_tela_inicial_pais()             
