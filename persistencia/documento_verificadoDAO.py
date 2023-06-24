@@ -2,6 +2,7 @@ import sqlite3
 from entidades.documento_verificado import DocumentoVerificado
 from entidades.documento import Documento
 
+
 class DocumentoVerificadoDAO:
 
     def __init__(self):

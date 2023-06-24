@@ -8,12 +8,16 @@ class ControladorDocumentoVerificado:
         self.__tela_documento_verificado = TelaDocumentoVerificado()
         self.__documento_verificado_DAO = DocumentoVerificadoDAO()
 
+    def get_documento_verificadoDAO(self):
+        return self.__documento_verificado_DAO
+
     def abre_tela_documento_verificado(self, documentos, id_solicitacao_visto):
         docs_preenchidos = self.__tela_documento_verificado.tela_documento_verificado(lista_documentos=documentos)
         docs = []
         for k, v in docs_preenchidos.items():
             preenchido = 1 if v else 0
-            doc_verificado = self.__documento_verificado_DAO.create_documento_verificado(id_solicitacao_visto=id_solicitacao_visto, preenchido=preenchido,
+            doc_verificado = self.get_documento_verificadoDAO().\
+                create_documento_verificado(id_solicitacao_visto=id_solicitacao_visto, preenchido=preenchido,
                                                                         documento=k)
             docs.append(doc_verificado)
         return docs
