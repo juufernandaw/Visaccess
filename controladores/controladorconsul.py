@@ -20,7 +20,7 @@ class ControladorConsul:
         try:
             mexer_consul_opcoes = {1: self.__controlador_sistema.get_controlador_consulado.abre_tela_consulados,
                                    2: self.__controlador_sistema.get_controlador_gerente.abrir_tela_cadastro_gerente,
-                                   3: self.abre_tela_inicial,
+                                   3: self.__controlador_sistema.get_controlador_pais.abre_tela_inicial_pais,
                                    4: self.__controlador_sistema.get_controlador_blacklist.abre_tela_blacklist,
                                    5: self.__controlador_sistema.get_controlador_documento.abre_tela_cadastro_documentos,
                                    6: self.__controlador_sistema.get_controlador_tipos_visto.abrir_tela_cadastro,
