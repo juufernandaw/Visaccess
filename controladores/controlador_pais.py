@@ -45,7 +45,7 @@ class ControladorPais:
             self.abre_tela_inicial_pais()
 
     def voltar_tela(self):
-            return self.__controlador_sistema.controlador_consul.abre_tela_inicial()
+            return self.__controlador_sistema.get_controlador_consul.abre_tela_inicial()
 
     def adicionar_pais(self):
         try:

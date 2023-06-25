@@ -14,73 +14,73 @@ class Estrangeiro:
         self.__profissao = profissao
 
     @property
-    def nome(self):
+    def get_nome(self):
         return self.__nome
 
-    @nome.setter
+    @get_nome.setter
     def nome(self, nome: str):
         self.__nome = nome
 
     @property
-    def passaporte(self):
+    def get_passaporte(self):
         return self.__passaporte
 
-    @passaporte.setter
+    @get_passaporte.setter
     def passaporte(self, passaporte: str):
         self.__passaporte = passaporte
 
     @property
-    def data_nasc(self):
+    def get_data_nasc(self):
         return self.__data_nasc
 
-    @data_nasc.setter
+    @get_data_nasc.setter
     def data_nasc(self, data_nasc: datetime):
         self.__data_nasc = data_nasc
 
     @property
-    def estado_civil(self):
+    def get_estado_civil(self):
         return self.__estado_civil
 
-    @estado_civil.setter
+    @get_estado_civil.setter
     def estado_civil(self, estado_civil: str):
         self.__estado_civil = estado_civil
 
     @property
-    def pais(self):
+    def get_pais(self):
         return self.__pais
 
-    @pais.setter
+    @get_pais.setter
     def pais(self, pais: str):
         self.__pais = pais
 
     @property
-    def estado(self):
+    def get_estado(self):
         return self.__estado
 
-    @estado.setter
+    @get_estado.setter
     def estado(self, estado: str):
         self.__estado = estado
 
     @property
-    def cidade(self):
+    def get_cidade(self):
         return self.__cidade
 
-    @cidade.setter
+    @get_cidade.setter
     def cidade(self, cidade: str):
         self.__cidade = cidade
 
     @property
-    def trabalho(self):
+    def get_trabalho(self):
         return self.__trabalho
 
-    @trabalho.setter
+    @get_trabalho.setter
     def trabalho(self, trabalho: bool):
         self.__trabalho = trabalho
 
     @property
-    def profissao(self):
+    def get_profissao(self):
         return self.__profissao
 
-    @profissao.setter
+    @get_profissao.setter
     def profissao(self, profissao: str):
         self.__profissao = profissao
