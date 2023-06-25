@@ -30,7 +30,7 @@ class ControladorEstrangeiro:
         return self.__gerente_agente
 
     def abre_tela_inicial_estrangeiro(self,
-                                      gerente_agente: str):  # abre a tela para cadastrar estrangeiro voltar agente
+                                      gerente_agente: str):  # abre a tela para cadastrar estrangeiro
         try:
             mexer_agente_opcoes = {1: self.adicionar_estrangeiro,
                                    2: self.excluir_estrangeiro,
@@ -97,7 +97,8 @@ class ControladorEstrangeiro:
                                                                    estrangeiro.cidade, estrangeiro.trabalho, estrangeiro.profissao)
                         self.tela_estrangeiro.mostra_mensagem('Estrangeiro cadastrado!')
                 else:
-                    self.tela_estrangeiro.mostra_mensagem('Dados Incorretos, preencha corretamente os campos!')
+                    self.tela_estrangeiro.mostra_mensagem('Campos vazios, preencha todos os campos!')
+                    self.adicionar_estrangeiro()
             elif informacoes == 0:
                 self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
         except ValueErrorException as e:
