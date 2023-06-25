@@ -51,6 +51,8 @@ class ControladorPais:
         try:
             #IR PARA TELA
             informacoes = self.get_tela_pais.tela_adicionar_pais()
+            if informacoes == 0:
+                self.abre_tela_inicial_pais()
             if informacoes != None:
                 if informacoes[0] != '' and informacoes[1] != '':
                     if informacoes[0] == '' or informacoes[1] == '':
@@ -68,23 +70,26 @@ class ControladorPais:
                         self.abre_tela_inicial_pais()
                 else:
                     self.get_tela_pais.mostra_mensagem('Dados Incorretos, preencha corretamente os campos pais e isento!')
+                    self.adicionar_pais()
+
         except CampoVazioException as e:
             self.get_tela_pais.mostra_mensagem(e)
             self.abre_tela_inicial_pais()             
 
     def excluir_pais(self):
         exclui_pais = self.get_tela_pais.tela_excluir_pais()
+        if exclui_pais == 0 or exclui_pais == 'Voltar':
+            return self.abre_tela_inicial_pais()
         if exclui_pais != None:
             pais = self.get_pais_dao.buscar_pais_por_nome(exclui_pais[0])
             if pais != None:
-                self.get_pais_dao.excluir_pais(pais[0])
+                self.get_pais_dao.excluir_pais(pais['nome'])
                 self.get_tela_pais.mostra_mensagem('País Excluído!')
                 return self.abre_tela_inicial_pais()
             else:
                 self.get_tela_pais.mostra_mensagem('País não está cadastrado!')
                 return self.excluir_pais()
-        elif exclui_pais == 0:
-            return self.excluir_pais()
+        
 
     def listar_pais(self):
         pais = self.get_pais_dao.buscar_todos_paises()
@@ -97,6 +102,8 @@ class ControladorPais:
      
     def modificar_pais(self):
         nome_pais = self.get_tela_pais.tela_modificar_pais()
+        if nome_pais == 0:
+            self.abre_tela_inicial_pais()
         try:
             if nome_pais != None:
                 pais = self.get_pais_dao.buscar_pais_por_nome(nome_pais[0])
@@ -104,12 +111,12 @@ class ControladorPais:
                         dados_novos = self.get_tela_pais.tela_atualizar_pais()
                         if dados_novos != None:
                             if dados_novos[0]!= '' and dados_novos[1]!= '':
-                                nome_pais = self.get_pais_dao.buscar_pais_por_nome(dados_novos[0])
-                                if nome_pais != None:
+                                nome_pais_teste = self.get_pais_dao.buscar_pais_por_nome(dados_novos[0])
+                                if nome_pais_teste == None:
                                     self.get_pais_dao.atualizar_pais(
                                         dados_novos[0], 
                                         dados_novos[1],
-                                        pais['pais'] 
+                                        pais['nome'] 
                                     )
                                     self.get_tela_pais.mostra_mensagem('País Modificado!')
                                     return self.abre_tela_inicial_pais()
@@ -119,6 +126,9 @@ class ControladorPais:
                         else:
                             self.get_tela_pais.mostra_mensagem('Preencha novamente')
                             self.modificar_pais()
+                if pais == None:
+                    self.get_tela_pais.mostra_mensagem('País não encontrado!')
+                    self.abre_tela_inicial_pais()
             else:
                 self.get_tela_pais.mostra_mensagem('País não encontrado!')
                 self.abre_tela_inicial_pais() 

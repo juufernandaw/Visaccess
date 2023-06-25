@@ -67,7 +67,8 @@ class ControladorEstrangeiro:
     def adicionar_estrangeiro(self):
         try:
             # IR PARA TELA
-            informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro()
+            paises_sistema = self.controlador_sistema.get_controlador_pais.listar_paises_cadastrados()
+            informacoes = self.tela_estrangeiro.tela_adicionar_estrangeiro(paises_sistema)
             if informacoes == 0:
                 self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
             if informacoes != None:
@@ -128,6 +129,7 @@ class ControladorEstrangeiro:
             self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
 
     def modificar_estrangeiro(self):
+        paises_sistema = self.controlador_sistema.get_controlador_pais.listar_paises_cadastrados()
         passaporte = self.tela_estrangeiro.tela_modificar_estrangeiro()
         if passaporte == '':
             self.__tela_estrangeiro.mostra_mensagem('Passaporte não localizado')
@@ -138,7 +140,7 @@ class ControladorEstrangeiro:
             if passaporte != None:
                 estrangeiro = self.estrangeiro_dao.buscar_estrangeiro_por_passaporte(passaporte[0])
                 if estrangeiro != None:
-                    dados_novos = self.tela_estrangeiro.tela_atualizar_estrangeiro()
+                    dados_novos = self.tela_estrangeiro.tela_atualizar_estrangeiro(paises_sistema)
                     if dados_novos != None:
                         if dados_novos[0] != '' and dados_novos[1] != '' and dados_novos[2] != '' and dados_novos[
                             3] != '' and dados_novos[4] != '' and dados_novos[5] != '' and dados_novos[6] != '' and \

@@ -41,13 +41,13 @@ class PaisDAO:
         rows = self.cursor.fetchall()
         paises = []
         for row in rows:
-            pais = {'nome': row[0]}
+            pais = row[0]
             paises.append(pais)
         return paises
 
     def atualizar_pais(self, nome_novo, isento, nome_antigo):
         self.cursor.execute(
-            "UPDATE pais SET nome=? isento=? WHERE nome=?",
+            "UPDATE pais SET nome=?, isento=? WHERE nome=?",
             (nome_novo, isento, nome_antigo)
         )
         self.conn.commit()

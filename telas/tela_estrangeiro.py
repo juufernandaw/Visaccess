@@ -39,7 +39,7 @@ class TelaEstrangeiro:
         self.close()
         return opcao
 
-    def componentes_tela_adicionar_atualizar_estrangeiro(self, tipo):
+    def componentes_tela_adicionar_atualizar_estrangeiro(self, tipo, paises_sistema):
         estado_civil = ["Solteiro", "Casado", "Viuvo(a)", "Namorando"]
         profissao = [True, False]
         # paises = ['Argentina', 'Paraguai', 'Uruguai']  # vai vim do BD ainda preciso fazer isso
@@ -48,7 +48,8 @@ class TelaEstrangeiro:
             [tela_estrangeiro.Text('Nome'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Data de Nascimento (dd/mm/aaaa)'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Estado civil'), tela_estrangeiro.Combo(estado_civil)],
-            [tela_estrangeiro.Text('País'), tela_estrangeiro.InputText('')],
+            # [tela_estrangeiro.Text('País'), tela_estrangeiro.InputText('')],
+            [tela_estrangeiro.Text('Países'), tela_estrangeiro.Combo(paises_sistema)],
             [tela_estrangeiro.Text('Estado'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Cidade'), tela_estrangeiro.InputText('')],
             [tela_estrangeiro.Text('Trabalho'), tela_estrangeiro.Combo([True, False])],
@@ -85,8 +86,8 @@ class TelaEstrangeiro:
             return 0
         return values
 
-    def tela_adicionar_estrangeiro(self):
-        self.componentes_tela_adicionar_atualizar_estrangeiro('Adicionar Estrangeiro')
+    def tela_adicionar_estrangeiro(self,paises_sistema):
+        self.componentes_tela_adicionar_atualizar_estrangeiro('Adicionar Estrangeiro',paises_sistema)
         return self.logica_tela_estrangeiro()
 
     def tela_excluir_estrangeiro(self):
@@ -97,6 +98,6 @@ class TelaEstrangeiro:
         self.componentes_tela_excluir_modificar_estrangeiro('Modificar Estrangeiro')
         return self.logica_tela_estrangeiro()
 
-    def tela_atualizar_estrangeiro(self):
-        self.componentes_tela_adicionar_atualizar_estrangeiro('Atualizar Estrangeiro')
+    def tela_atualizar_estrangeiro(self, paises_sistema):
+        self.componentes_tela_adicionar_atualizar_estrangeiro('Atualizar Estrangeiro', paises_sistema)
         return self.logica_tela_estrangeiro()
