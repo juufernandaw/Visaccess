@@ -31,3 +31,6 @@ class DocumentoVerificadoDAO:
         doc = Documento(nome=documento, regra=row)
         doc_verificado = DocumentoVerificado(documento=doc, preenchido=preenchido)
         return doc_verificado
+
+    def buscar_documentos_por_solicitacao(self, id_solicitacao):
+        print('as')

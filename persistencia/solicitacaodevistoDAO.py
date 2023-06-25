@@ -33,3 +33,12 @@ class SolicitacaoDeVistoDAO:
         if rows == []:
             return []
         return rows
+
+    def buscar_todas_solicitacoes_visto(self):
+        self.cursor.execute("SELECT * FROM solicitacaoDeVisto")
+        rows = self.cursor.fetchall()
+        solicitacoes = []
+        for row in rows:
+            solicitacao = {'estrangeiro': row[2]}
+            solicitacoes.append(solicitacao)
+        return solicitacoes

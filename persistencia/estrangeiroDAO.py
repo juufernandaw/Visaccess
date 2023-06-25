@@ -60,9 +60,9 @@ class EstrangeiroDAO:
         self.cursor.execute("DELETE FROM estrangeiro WHERE passaporte=?", (passaporte,))
         self.conn.commit()
 
-    # def encontra_passaporte(self, passaporte):
-    #     # valida se tem estrangeiro com tal passaporte
-    #     if passaporte_encontrado:
-    #         return True
-    #     else:
-    #         return False
+    def buscar_estrangeiro_por_passaporte(self, passaporte):
+        self.cursor.execute("SELECT * FROM estrangeiro WHERE passaporte=?", (passaporte,))
+        row = self.cursor.fetchone()
+        if row is None:
+            return None
+        return {'passaporte': row[0], 'nome': row[1], 'data_nasc': row[2], 'estado_civil': row[3], 'pais': row[4], 'estado': row[5], 'cidade': row[6], 'trabalho': row[7], 'profissao': row[8]}

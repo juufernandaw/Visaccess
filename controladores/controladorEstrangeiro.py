@@ -88,7 +88,7 @@ class ControladorEstrangeiro:
                         return self.abre_tela_inicial_estrangeiro(self.__gerente_agente)
                     else:
                         # CRIAR ENTIDADE
-                        estrangeiro = Estrangeiro(informacoes[0], informacoes[1], informacoes[2], informacoes[2],
+                        estrangeiro = Estrangeiro(informacoes[0], informacoes[1], informacoes[2], informacoes[3],
                                                   informacoes[4], informacoes[5], informacoes[6], informacoes[7],
                                                   informacoes[8])
                         # BANCO DE DADOS

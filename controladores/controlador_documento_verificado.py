@@ -8,6 +8,7 @@ class ControladorDocumentoVerificado:
         self.__tela_documento_verificado = TelaDocumentoVerificado()
         self.__documento_verificado_DAO = DocumentoVerificadoDAO()
 
+    @property
     def get_documento_verificadoDAO(self):
         return self.__documento_verificado_DAO
 

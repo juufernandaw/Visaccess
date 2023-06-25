@@ -1,5 +1,4 @@
 import PySimpleGUI as tela_solicitacao_visto
-import re
 from datetime import datetime
 
 
@@ -54,3 +53,33 @@ class TelaSolicitacaoVisto:
                     break
             passaporte = values["passaporte"]
             return escolha_tipo_visto, passaporte, data
+    
+    def tela_selecionar_visto_aprovar(self, lista_solicitacoes_visto: list):
+        botoes_solicitacoes_visto = []
+        for solicitacoes in lista_solicitacoes_visto:
+            botoes_solicitacoes_visto.append([tela_solicitacao_visto.Radio(solicitacoes["estrangeiro"], "RD1", key=solicitacoes["estrangeiro"])])
+        layout = [
+            [tela_solicitacao_visto.Text("Selecione o tipo de visto e preencha a data e o passaporte.", font=("Helvica", 20))],
+            botoes_solicitacoes_visto,
+            [tela_solicitacao_visto.Button('Confirmar'), tela_solicitacao_visto.Button('Voltar')]
+        ]
+
+        self.__window = tela_solicitacao_visto.Window("Aprova solicitacão de visto").Layout(layout)
+        button, data = self.__window.Read()
+
+        self.close()
+
+        if button in (None, 'Voltar'):
+
+            return None
+
+        for solicitacao in data:
+            selected = data[solicitacao]
+
+            if selected == True:
+                return solicitacao
+
+    def tela_aprovar_visto(self, estrangeiro_solicitando, lista_documentos):
+        print(estrangeiro_solicitando)
+        print(lista_documentos)
+        

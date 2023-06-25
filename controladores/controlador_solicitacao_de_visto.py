@@ -57,3 +57,22 @@ class ControladorSolicitacaoVisto:
                         "Não é possível cadastrar outra solicitação de visto para esse passaporte, "
                         "pois o mesmo já possui outro visto com status válido")
                     return False
+    def aprovar_solicitacao_visto(self):
+        lista_solicitacoes_visto = self.__solicitacao_de_visto_DAO.buscar_todas_solicitacoes_visto()
+        solicitacao_escolhida = self.__tela_solicitacao_visto.tela_selecionar_visto_aprovar(lista_solicitacoes_visto=lista_solicitacoes_visto)
+
+        if not solicitacao_escolhida:
+            return
+
+        print(solicitacao_escolhida)
+
+        # get estrangeiro
+        estrangeiro_solicitando = self.__controlador_sistema.get_controlador_estrangeiro.estrangeiro_dao.buscar_estrangeiro_por_passaporte(solicitacao_escolhida)
+        # get solicitação
+        documentos_visa_type = self.__solicitacao_de_visto_DAO.find_solicitacao_para_passaporte(solicitacao_escolhida)
+        # get documentos do visto
+        lista_documentos = self.__controlador_sistema.get_controlador_tipos_visto.get_tipos_vistoDAO.buscar_documentos_por_visto(documentos_visa_type[0][1])
+
+        self.__controlador_sistema.get_controlador_documento_verificado.get_documento_verificadoDAO.buscar_documentos_por_solicitacao(id_solicitacao)
+
+        self.__tela_solicitacao_visto.tela_aprovar_visto(estrangeiro_solicitando, lista_documentos)

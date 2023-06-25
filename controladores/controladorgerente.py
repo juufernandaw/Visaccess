@@ -28,7 +28,7 @@ class ControladorGerente:
             if opcao == 1:
                 self.__controlador_sistema.get_controlador_solicitacao_visto.abrir_tela_solicitacao()
             elif opcao == 2:
-                self.__tela_gerente.mostra_mensagem('Aprovar Solicitação de Visto')
+                self.__controlador_sistema.get_controlador_solicitacao_visto.aprovar_solicitacao_visto()
             elif opcao == 3:
                 self.__controlador_sistema.get_controlador_agente.abrir_tela_cadastro()
             elif opcao == 4:
