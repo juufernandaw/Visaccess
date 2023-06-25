@@ -28,7 +28,7 @@ class SolicitacaoDeVistoDAO:
         return obj, id
 
     def find_solicitacao_para_passaporte(self, passaporte: str):
-        self.cursor.execute("SELECT estrangeiro, visto, status FROM solicitacaoDeVisto WHERE estrangeiro=?", (passaporte,))
+        self.cursor.execute("SELECT id, estrangeiro, visto, status FROM solicitacaoDeVisto WHERE estrangeiro=?", (passaporte,))
         rows = self.cursor.fetchall()
         if rows == []:
             return []
@@ -42,3 +42,7 @@ class SolicitacaoDeVistoDAO:
             solicitacao = {'estrangeiro': row[2]}
             solicitacoes.append(solicitacao)
         return solicitacoes
+
+    def alterar_status_solicitacao(self, id, new_status):
+        self.cursor.execute("UPDATE solicitacaoDeVisto SET status=? WHERE id=?", (new_status, id))
+        self.conn.commit()

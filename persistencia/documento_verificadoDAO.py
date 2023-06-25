@@ -33,4 +33,7 @@ class DocumentoVerificadoDAO:
         return doc_verificado
 
     def buscar_documentos_por_solicitacao(self, id_solicitacao):
-        print('as')
+        self.cursor.execute("SELECT documento, preenchido FROM documentoVerificado WHERE id_solicitacao_visto=?", (id_solicitacao,))
+        rows = self.cursor.fetchall()
+
+        return rows

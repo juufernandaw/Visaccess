@@ -79,7 +79,39 @@ class TelaSolicitacaoVisto:
             if selected == True:
                 return solicitacao
 
-    def tela_aprovar_visto(self, estrangeiro_solicitando, lista_documentos):
-        print(estrangeiro_solicitando)
-        print(lista_documentos)
-        
+    def tela_aprovar_visto(self, estrangeiro_solicitando, lista_documentos: list, lista_documentos_necessarios_visto: list):
+        if estrangeiro_solicitando['trabalho'] == 0:
+            estrangeiro_solicitando['trabalho'] = 'Não'
+        else:
+            estrangeiro_solicitando['trabalho'] = 'Sim'
+
+        layout = [
+            [tela_solicitacao_visto.Text('Informações do Estrangeiro:')],
+            [tela_solicitacao_visto.Text('Passaporte:'), tela_solicitacao_visto.Text(estrangeiro_solicitando['passaporte'])],
+            [tela_solicitacao_visto.Text('Nome:'), tela_solicitacao_visto.Text(estrangeiro_solicitando['nome'])],
+            [tela_solicitacao_visto.Text('Data de Nascimento (dd/mm/aaaa):'), tela_solicitacao_visto.Text(estrangeiro_solicitando['data_nasc'])],
+            [tela_solicitacao_visto.Text('Estado civil:'), tela_solicitacao_visto.Text(estrangeiro_solicitando['estado_civil'])],
+            [tela_solicitacao_visto.Text('País:'), tela_solicitacao_visto.Text(estrangeiro_solicitando['pais'])],
+            [tela_solicitacao_visto.Text('Estado:'), tela_solicitacao_visto.Text(estrangeiro_solicitando['estado'])],
+            [tela_solicitacao_visto.Text('Cidade:'), tela_solicitacao_visto.Text(estrangeiro_solicitando['cidade'])],
+            [tela_solicitacao_visto.Text('Trabalho:'), tela_solicitacao_visto.Text(estrangeiro_solicitando['trabalho'])],
+            [tela_solicitacao_visto.Text('Profissão:'), tela_solicitacao_visto.Text(estrangeiro_solicitando['profissao'])],
+            [tela_solicitacao_visto.Text('')],
+            [tela_solicitacao_visto.Text('Documentação:')],
+        ]
+
+        for documento in lista_documentos_necessarios_visto:
+            if documento in lista_documentos:
+                layout.append([tela_solicitacao_visto.Checkbox(documento, key=documento, default=True)])
+            else:
+                layout.append([tela_solicitacao_visto.Checkbox(documento, key=documento, default=False)])
+        layout.append([tela_solicitacao_visto.Button('Aprovar'), tela_solicitacao_visto.Button('Reprovar')])
+        self.__window = tela_solicitacao_visto.Window("Aprovação de Vistos").Layout(layout)
+        button, data = self.__window.Read()
+
+        self.close()
+
+        if button in ('Reprovar'):
+            return False
+        else:
+            return True

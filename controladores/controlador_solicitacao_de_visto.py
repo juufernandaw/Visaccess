@@ -21,6 +21,7 @@ class ControladorSolicitacaoVisto:
                                          status="aprovacao_pendente", nome_visto=nome_tipo_visto)
             docs_verificados = self.__controlador_sistema.get_controlador_documento_verificado.\
                 abre_tela_documento_verificado(documentos=lista_documentos, id_solicitacao_visto=id_solicitacao_visto)
+            print(docs_verificados)
             solicitacao_visto.documentos_verificados = docs_verificados
             self.__tela_solicitacao_visto.mostrar_msg_tela("Solicitação de visto enviada para aprovação!")
             return
@@ -46,7 +47,7 @@ class ControladorSolicitacaoVisto:
         if lista_solicitacoes_visto == []:
             return True
         else:
-            for passageiro, visto, status in lista_solicitacoes_visto:
+            for id, passageiro, visto, status in lista_solicitacoes_visto:
                 if visto.upper() == "PERMANENTE":
                     self.__tela_solicitacao_visto.mostrar_msg_tela(
                         "Não é possível cadastrar outra solicitação de visto para esse passaporte,"
@@ -57,6 +58,7 @@ class ControladorSolicitacaoVisto:
                         "Não é possível cadastrar outra solicitação de visto para esse passaporte, "
                         "pois o mesmo já possui outro visto com status válido")
                     return False
+
     def aprovar_solicitacao_visto(self):
         lista_solicitacoes_visto = self.__solicitacao_de_visto_DAO.buscar_todas_solicitacoes_visto()
         solicitacao_escolhida = self.__tela_solicitacao_visto.tela_selecionar_visto_aprovar(lista_solicitacoes_visto=lista_solicitacoes_visto)
@@ -64,15 +66,26 @@ class ControladorSolicitacaoVisto:
         if not solicitacao_escolhida:
             return
 
-        print(solicitacao_escolhida)
-
         # get estrangeiro
         estrangeiro_solicitando = self.__controlador_sistema.get_controlador_estrangeiro.estrangeiro_dao.buscar_estrangeiro_por_passaporte(solicitacao_escolhida)
+
         # get solicitação
-        documentos_visa_type = self.__solicitacao_de_visto_DAO.find_solicitacao_para_passaporte(solicitacao_escolhida)
+        solicitacao_completa = self.__solicitacao_de_visto_DAO.find_solicitacao_para_passaporte(solicitacao_escolhida)
+
         # get documentos do visto
-        lista_documentos = self.__controlador_sistema.get_controlador_tipos_visto.get_tipos_vistoDAO.buscar_documentos_por_visto(documentos_visa_type[0][1])
+        lista_documentos_necessarios_visto = self.__controlador_sistema.get_controlador_tipos_visto.get_tipos_vistoDAO.buscar_documentos_por_visto(solicitacao_completa[0][2])
 
-        self.__controlador_sistema.get_controlador_documento_verificado.get_documento_verificadoDAO.buscar_documentos_por_solicitacao(id_solicitacao)
+        # get documentos da solicitação
+        documentos_aprovados = self.__controlador_sistema.get_controlador_documento_verificado.get_documento_verificadoDAO.buscar_documentos_por_solicitacao(solicitacao_completa[0][0])
+        lista_documentos = []
+        for doc in documentos_aprovados:
+            if doc[1] == 1:
+                lista_documentos.append(doc[0])
 
-        self.__tela_solicitacao_visto.tela_aprovar_visto(estrangeiro_solicitando, lista_documentos)
+        decisao = self.__tela_solicitacao_visto.tela_aprovar_visto(estrangeiro_solicitando, lista_documentos, lista_documentos_necessarios_visto)
+        print(decisao)
+        print(solicitacao_completa)
+        if decisao == True:
+            self.__solicitacao_de_visto_DAO.alterar_status_solicitacao(solicitacao_completa[0][0], 'aprovado')
+        else:
+            self.__solicitacao_de_visto_DAO.alterar_status_solicitacao(solicitacao_completa[0][0], 'recusado')
