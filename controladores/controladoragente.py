@@ -45,9 +45,9 @@ class ControladorAgente:
 
     def adicionar_agente(self):
         data = self.tela_agente.tela_adicionar_agentes()
-
+        consulados = self.controlador_sistema.get_controlador_consulado.get_consulado_DAO.get_all_consulados()
         if data != None:
-            if data[0] and data[1] and data[2] and data[3] != '':
+            if data[0] and data[1] and data[2] and data[3] in consulados:
                 agente = self.agente_dao.buscar_agente_por_cpf(data[1])
                 if agente != None:
                     self.tela_agente.mostra_mensagem('Este agente já está cadastrado!')

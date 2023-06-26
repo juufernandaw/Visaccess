@@ -8,7 +8,7 @@ class Tipos_VistoDAO:
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS tipos_visto (
                 name TEXT PRIMARY KEY,
-                validade DATE
+                validade INTEGER
             )
         ''')
 
@@ -22,8 +22,8 @@ class Tipos_VistoDAO:
         ''')
         self.conn.commit()
 
-    def cadastrar_tipos_visto(self, nome, date):
-        self.cursor.execute("INSERT INTO tipos_visto (name, validade) VALUES (?, ?)", (nome, date))
+    def cadastrar_tipos_visto(self, nome, years):
+        self.cursor.execute("INSERT INTO tipos_visto (name, validade) VALUES (?, ?)", (nome, years))
         self.conn.commit()
 
     def cadastrar_documentos_para_visto(self, docs, visa_name):
@@ -39,7 +39,7 @@ class Tipos_VistoDAO:
         rows = self.cursor.fetchall()
         tipos = []
         for row in rows:
-            visto = {'nome': row[0], 'data': row[1]}
+            visto = {'nome': row[0], 'validade': row[1]}
             tipos.append(visto)
         return tipos
 
@@ -69,6 +69,6 @@ class Tipos_VistoDAO:
         self.cursor.execute("DELETE FROM visa_documents WHERE visa_name=?", (visa_name,))
         self.conn.commit()
 
-    def atualizar_visto(self, nome_antigo, nome_novo, data):
+    def atualizar_visto(self, nome_antigo, nome_novo, years):
         # Atualiza o CPF, nome, senha e consulado na tabela 'agentes'
-        self.cursor.execute("UPDATE tipos_visto SET name=?, validade=? WHERE name=?", (nome_novo, data, nome_antigo))
+        self.cursor.execute("UPDATE tipos_visto SET name=?, validade=? WHERE name=?", (nome_novo, years, nome_antigo))

@@ -55,8 +55,7 @@ class TelaTipoVisto:
     def componentes_tela_adicionar_atualizar_tipos_visto(self, tipo, docs):
         layout = [
             [interface_tela_tipos_visto.Text('Nome'), interface_tela_tipos_visto.InputText('')],
-            [interface_tela_tipos_visto.Input(key='-DATE-', enable_events=False, readonly=True),
-             interface_tela_tipos_visto.CalendarButton('Choose', target='-DATE-', format='%Y-%m-%d')],
+            [interface_tela_tipos_visto.Text('Validade (em anos)'), interface_tela_tipos_visto.InputText('')],
             [interface_tela_tipos_visto.Listbox(docs, size=(30, 6), select_mode='extended', key='-DOCUMENTOS-')],
             [interface_tela_tipos_visto.Button('Confirmar'), interface_tela_tipos_visto.Button('Voltar')]
         ]

@@ -11,6 +11,10 @@ class ControladorConsulado:
         self.__consulado_DAO = ConsuladoDAO()
         self.__consulado_tela = TelaConsulado()
 
+    @property
+    def get_consulado_DAO(self):
+        return self.__consulado_DAO
+
     def abre_tela_consulados(self):
         try:
             # usuario = self.__controlador_sistema.usuario_logado

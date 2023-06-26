@@ -41,16 +41,23 @@ class ControladorTiposVisto:
     def novo_tipos_visto(self):
         docs = self.controlador_sistema.get_controlador_documento.documento_DAO.get_all_documentos()
         data = self.tela_tipos_vistos.tela_adicionar_tipos_visto(docs)
+        try:
+            data[1] = int(data[1])
+        except:
+            data[1] = ''
+
         if data != None:
-            if data[0] and data['-DATE-'] != '' and data['-DOCUMENTOS-'] != []:
+            if data[0] and data[1] != '' and data[1] and data['-DOCUMENTOS-'] != []:
                 check = self.get_tipos_vistoDAO.buscar_visto_por_nome(data[0])
                 if check != None:
-                    self.tela_tipos_vistos.mostra_mensagem('Este visto já está cadastrado!')
+                    self.tela_tipos_vistos.mostra_mensagem('Já há um tipo de visto com esse nome!')
                 else:
-                    tipo_visto = TipoDeVisto(data[0], data['-DATE-'], data['-DOCUMENTOS-'])
-                    self.get_tipos_vistoDAO.cadastrar_tipos_visto(data[0], data['-DATE-'])
+                    tipo_visto = TipoDeVisto(data[0], data[1], data['-DOCUMENTOS-'])
+                    self.get_tipos_vistoDAO.cadastrar_tipos_visto(data[0], data[1])
                     self.get_tipos_vistoDAO.cadastrar_documentos_para_visto(data['-DOCUMENTOS-'], data[0])
-                    self.tela_tipos_vistos.mostra_mensagem('Visto cadastrado!')
+                    self.tela_tipos_vistos.mostra_mensagem('Tipo de visto criado com sucesso!')
+            else:
+                self.tela_tipos_vistos.mostra_mensagem('Todos os Campos devem ser preenchidos corretamente')
 
     def excluir_tipos_visto(self):
         visto_nome = self.tela_tipos_vistos.tela_excluir_tipos_visto()
@@ -59,10 +66,10 @@ class ControladorTiposVisto:
             if visto != None:
                 self.get_tipos_vistoDAO.excluir_visto(visto_nome[0])
                 self.get_tipos_vistoDAO.excluir_relacao_visto_documento(visto_nome[0])
-                self.tela_tipos_vistos.mostra_mensagem('Visto Excluído!')
+                self.tela_tipos_vistos.mostra_mensagem('Tipo de visto excluído com sucesso!')
                 return self.abrir_tela_cadastro()
             else:
-                self.tela_tipos_vistos.mostra_mensagem('Visto Não está cadastrado!')
+                self.tela_tipos_vistos.mostra_mensagem('Tipo de visto não consta no sistema!')
 
     def listar_tipos_visto(self):
         tipos_visto = self.get_tipos_vistoDAO.buscar_todos_tipos_visto()
@@ -76,26 +83,31 @@ class ControladorTiposVisto:
             visa = self.get_tipos_vistoDAO.buscar_visto_por_nome(visa_nome[0])
             if visa != None:
                 dados_novos = self.tela_tipos_vistos.tela_atualizar_tipos_visto(docs)
+                try:
+                    dados_novos[1] = int(dados_novos[1])
+                except:
+                    dados_novos[1] = ''
+
                 if dados_novos != None:
-                    if dados_novos[0] and dados_novos['-DATE-'] != '' and dados_novos['-DOCUMENTOS-'] != []:
+                    if dados_novos[0] and dados_novos[1] != '' and dados_novos['-DOCUMENTOS-'] != []:
                         teste = self.get_tipos_vistoDAO.buscar_visto_por_nome(dados_novos[0])
                         if teste == None or teste['nome'] == dados_novos[0]:
                             self.get_tipos_vistoDAO.atualizar_visto(
                                 visa['nome'],
                                 dados_novos[0],
-                                dados_novos['-DATE-'],
+                                dados_novos[1],
                             )
                             self.get_tipos_vistoDAO.excluir_relacao_visto_documento(visa_nome[0])
                             self.get_tipos_vistoDAO.cadastrar_documentos_para_visto(dados_novos['-DOCUMENTOS-'],
                                                                                 dados_novos[0])
 
-                            self.tela_tipos_vistos.mostra_mensagem('Visto Modificado!')
+                            self.tela_tipos_vistos.mostra_mensagem('Tipo de Visto alterado com sucesso!')
                             return self.abrir_tela_cadastro()
                         else:
-                            self.tela_tipos_vistos.mostra_mensagem('Tipo de Visto já consta no sistema!')
+                            self.tela_tipos_vistos.mostra_mensagem('Tipo de visto já existe nos registros')
                             return self.abrir_tela_cadastro()
                     else:
-                        self.tela_tipos_vistos.mostra_mensagem('Preencha com os dados corretos!')
+                        self.tela_tipos_vistos.mostra_mensagem('Campos preenchidos incorretamente!')
                         return self.abrir_tela_cadastro()
             else:
-                self.tela_tipos_vistos.mostra_mensagem('Não há Tipos de Visto com esse cadastro!')
+                self.tela_tipos_vistos.mostra_mensagem('Este Tipo de Visto não consta no sistema')
